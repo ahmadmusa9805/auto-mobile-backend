@@ -9,7 +9,7 @@ import { User } from '../User/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
 // import { SendEmail } from '../../utils/sendEmail';
-import { OtpServices } from '../Otp/otp.service';
+// import { OtpServices } from '../Otp/otp.service';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -192,13 +192,13 @@ const forgetPassword = async (userEmail: string) => {
   // SendEmail.sendResetLinkToEmail(user.email, resetUILink);
           // console.log(newCustomer, 'newCustomer');
           if(user.role === 'admin' || user.role === 'superAdmin'){
-            const otp = await OtpServices.generateAndSendOTP(user.email);
+            // const otp = await OtpServices.generateAndSendOTP(user.email);
 
-            if (!otp) {
-              throw new AppError(httpStatus.FORBIDDEN, 'Otp not created ! !');
-            }
+            // if (!otp) {
+            //   throw new AppError(httpStatus.FORBIDDEN, 'Otp not created ! !');
+            // }
   
-            return {otp, resetToken};
+            // return {otp, resetToken};
           }
 
           return {resetToken};
