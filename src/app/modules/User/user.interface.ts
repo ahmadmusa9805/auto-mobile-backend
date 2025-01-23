@@ -2,24 +2,25 @@
 import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
-export interface TUser {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
+export type  TUser = {
+  fullName: string;
+  userName: string;
   email: string;
+  location: string;
   password: string;
   passwordChangedAt?: Date;
   contactNo: string;
   profileImg?: string;
   otpVerified: boolean;
-  role: 'client' | 'superAdmin' | 'admin';
+  skills: string[];
+  adminClientEmail: string;
+  dob: string;
+  role: 'client' | 'superAdmin' | 'admin' | 'supervisor' | 'technician';
   status?: 'active' | 'blocked';
   isDeleted: boolean;
 }
 export interface UserModel extends Model<TUser> {
   // Static methods for checking if the user exists
-    // isUserExistsByCustomEmail(email: string): Promise<TUser>;
   isUserExistsByCustomEmail(email: string): Promise<TUser | null>;
 
   // Static method for password comparison
