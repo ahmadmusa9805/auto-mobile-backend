@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-this-alias */
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
@@ -7,25 +8,18 @@ import { TUser, UserModel } from './user.interface';
 
 const userSchema = new Schema<TUser, UserModel>(
   {
-    name: {
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
-        type: String,
-        required: true,
-      },
-    },
+    fullName: { type: String, required: true },
     contactNo: {
       type: String,
       required: true,
     },
+    userName: { type: String, required: true },
     email: {
       type: String,
       required: true,
       unique: true,
     },
+    location: { type: String, required: true },
     password: {
       type: String,
       required: true,
@@ -36,9 +30,10 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     role: {
       type: String,
-      enum: ['client', 'superAdmin', 'admin'],
+      enum: ['client', 'superAdmin', 'admin', 'supervisor', 'technician'],
       default: 'client',
     },
+    dob: { type: String, required: true },
     profileImg : {
       type: String,
       default: '',
@@ -48,6 +43,15 @@ const userSchema = new Schema<TUser, UserModel>(
       default: false,
     },
     status: {
+      type: String,
+      enum: Object.values(UserStatus),
+      default: 'active',
+    },
+    skills: {
+      type: [String],
+      default: [],
+    },
+    adminClientEmail: {
       type: String,
       enum: Object.values(UserStatus),
       default: 'active',

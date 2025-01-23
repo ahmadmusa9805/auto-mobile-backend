@@ -11,16 +11,21 @@ import { UserValidation } from './user.validation';
 import { uploadFileS3 } from '../../utils/UploaderS3';
 
 const router = express.Router();
-// router.post(
-//   '/create-actor',
-//   validateRequest(createActorValidationSchema),
-//   UserControllers.createActor,
-// );
-
-
 router.post(
   '/create-user',
-  // auth(USER_ROLE.superAdmin),
+  validateRequest(UserValidation.createUserValidationSchema),
+    UserControllers.createUser,
+);
+router.post(
+  '/create-supervisor',
+  auth(USER_ROLE.client),
+  validateRequest(UserValidation.createUserValidationSchema),
+    UserControllers.createUser,
+);
+
+router.post(
+  '/create-admin',
+  auth(USER_ROLE.superAdmin),
   validateRequest(UserValidation.createUserValidationSchema),
     UserControllers.createUser,
 );
