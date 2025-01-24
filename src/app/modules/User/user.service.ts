@@ -28,6 +28,16 @@ export const createTechnicianIntoDB = async (payload: TUser) => {
      return newUser;
 };
 
+export const createAdminIntoDB = async (payload: TUser) => {	
+
+  payload.role = 'admin'
+ const newUser = await User.create(payload);
+ if (!newUser) throw new Error('Failed to create admin');
+
+     return newUser;
+};
+
+
 
 const getMe = async (userEmail: string) => {
   const result = await User.findOne({ email: userEmail });
