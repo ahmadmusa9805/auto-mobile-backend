@@ -5,14 +5,47 @@ import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
 // import sendImageToCloudinary from '../../utils/cloudinary';
 
-const createUser = catchAsync(async (req, res) => {
-  const { user: userData } = req.body;
-  const result = await UserServices.createUserIntoDB(userData);
+const createClient = catchAsync(async (req, res) => {
+  const { User: userData } = req.body;
+  const result = await UserServices.createClientIntoDB(userData);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User is created succesfully',
+    message: 'Client is created succesfully',
+    data: result,
+  });
+});
+const createTechnician = catchAsync(async (req, res) => {
+  const { User: userData } = req.body;
+  const result = await UserServices.createTechnicianIntoDB(userData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Technician is created succesfully',
+    data: result,
+  });
+});
+const createAdmin = catchAsync(async (req, res) => {
+  const { User: userData } = req.body;
+  const result = await UserServices.createAdminIntoDB(userData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Admin is created succesfully',
+    data: result,
+  });
+});
+const createSuperVisor = catchAsync(async (req, res) => {
+  const { User: userData } = req.body;
+  const result = await UserServices.createSuperVisorIntoDB(userData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'supervisor is created succesfully',
     data: result,
   });
 });
@@ -118,12 +151,15 @@ const deleteUser = catchAsync(async (req, res) => {
 });
 
 export const UserControllers = {
+  createClient,
+  createTechnician,
+  createAdmin,
   getAllAdminUsers,
+  createSuperVisor,
   getSingleUser,
   getUsersMonthly,
   deleteUser,
   updateUser,
-  createUser,
   getMe,
   changeStatus,
   getAllUsers

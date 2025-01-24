@@ -10,27 +10,8 @@ import { usersSearchableFields } from './user.constant';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
-import { Quote } from '../Quote/quote.model';
 
-export const createUserIntoDB = async (payload: TUser) => {
 
-if(payload.role === 'client'){
-  if(!payload.password){
-    payload.password = 'client12345';
-   }
-
-}
-if(payload.role === 'admin'){
-  if(!payload.password){
-    payload.password = 'admin12345';
-   }
-}
-    const newUser = await User.create(payload);
-    if (!newUser) throw new Error('Failed to create user');
-
-    
-        return newUser;
-};
 
 const getMe = async (userEmail: string) => {
   const result = await User.findOne({ email: userEmail });
@@ -143,15 +124,16 @@ const changeStatus = async (id: string, payload: { status: string }) => {
 
 
 const updateUserIntoDB = async (id: string, payload: Partial<TUser>, file?: any) => {
-  const { name, ...userData } = payload;
+  const {  ...userData } = payload;
+  // const { fullName, ...userData } = payload;
 
   const modifiedUpdatedData: Record<string, unknown> = { ...userData };
 
-  if (name && Object.keys(name).length) {
-    for (const [key, value] of Object.entries(name)) {
-      modifiedUpdatedData[`name.${key}`] = value;
-    }
-  }
+  // if (name && Object.keys(name).length) {
+  //   for (const [key, value] of Object.entries(name)) {
+  //     modifiedUpdatedData[`name.${key}`] = value;
+  //   }
+  // }
 
   // Handle file upload if present
   if (file) {
@@ -187,7 +169,7 @@ const deleteUserFromDB = async (id: string) => {
     }
 
     // Step 2: Soft-delete the associated quote
-    const deletedQuote = await Quote.findOneAndUpdate(
+    const deletedQuote = await User.findOneAndUpdate(
       { userId: id }, // Find the single quote associated with the user
       { isDeleted: true }, // Set isDeleted to true
       { new: true, session } // Pass the session
@@ -212,11 +194,14 @@ const deleteUserFromDB = async (id: string) => {
 };
 
 export const UserServices = {
+  // createClientIntoDB,
+  // createAdminIntoDB,
+  // createSuperVisorIntoDB,
+  // createTechnicianIntoDB,
   getAllAdminUsersFromDB,
   getSingleUserIntoDB,
   getUsersMonthlyFromDB, 
   deleteUserFromDB,
-  createUserIntoDB,
   getMe,
   changeStatus,
   getAllUsersFromDB,

@@ -2,8 +2,6 @@
 
 import express, { NextFunction, Response, Request } from 'express';
 import auth from '../../middlewares/auth';
-// import { createActorValidationSchema } from '../Client/actor.validation';
-// import { createAdminValidationSchema } from '../Admin/admin.validation';
 import { USER_ROLE } from './user.constant';
 import { UserControllers } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
@@ -12,45 +10,51 @@ import { uploadFileS3 } from '../../utils/UploaderS3';
 
 const router = express.Router();
 router.post(
-  '/create-user',
+  '/create-client', //create client or technician
   validateRequest(UserValidation.createUserValidationSchema),
-    UserControllers.createUser,
+    UserControllers.createClient,
 );
 router.post(
-  '/create-supervisor',
-  auth(USER_ROLE.client),
+  '/create-technician', //create client or technician
   validateRequest(UserValidation.createUserValidationSchema),
-    UserControllers.createUser,
+    UserControllers.createClient,
+);
+
+router.post(
+  '/create-supervisor',
+  // auth(USER_ROLE.client),
+  validateRequest(UserValidation.createUserValidationSchema),
+    UserControllers.createSuperVisor,
 );
 
 router.post(
   '/create-admin',
-  auth(USER_ROLE.superAdmin),
+  // auth(USER_ROLE.superAdmin),
   validateRequest(UserValidation.createUserValidationSchema),
-    UserControllers.createUser,
+    UserControllers.createAdmin,
 );
 
 router.get(
   '/me',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client, USER_ROLE.supervisor, USER_ROLE.technician),
   UserControllers.getMe,
 );
 
 router.get(
   '/admin',
-  // auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  auth(USER_ROLE.superAdmin),
   UserControllers.getAllAdminUsers,
 );
 
 router.get(
   '/users-monthly',
-  // auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   UserControllers.getUsersMonthly,
 );
 
 router.get(
   '/:id',
-  // auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
   UserControllers.getSingleUser,
 );
 
@@ -63,19 +67,19 @@ router.post(
 
 router.get(
   '/',
-  // auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  // auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   UserControllers.getAllUsers,
 );
 
 router.delete(
   '/:id',
-  // auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   UserControllers.deleteUser,
 );
 
 router.patch(
   '/:id',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client, USER_ROLE.supervisor, USER_ROLE.technician),
   uploadFileS3(true).single('file'),
   (req: Request, res: Response, next: NextFunction) => {
     if (req.body.data) {
