@@ -19,6 +19,15 @@ export const createClientIntoDB = async (payload: TUser) => {
         return newUser;
 };
 
+export const createTechnicianIntoDB = async (payload: TUser) => {
+
+  payload.role = 'technician'
+ const newUser = await User.create(payload);
+ if (!newUser) throw new Error('Failed to create technician');
+ 
+     return newUser;
+};
+
 
 const getMe = async (userEmail: string) => {
   const result = await User.findOne({ email: userEmail });
