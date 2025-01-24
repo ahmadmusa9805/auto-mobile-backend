@@ -13,38 +13,38 @@ import mongoose from 'mongoose';
 
 export const createClientIntoDB = async (payload: TUser) => {
   payload.role = 'client'
-    const newUser = await User.create(payload);
-    if (!newUser) throw new Error('Failed to create user');
+    const newClient = await User.create(payload);
+    if (!newClient) throw new Error('Failed to create user');
     
-        return newUser;
+        return newClient;
 };
 
 export const createTechnicianIntoDB = async (payload: TUser) => {
 
   payload.role = 'technician'
- const newUser = await User.create(payload);
- if (!newUser) throw new Error('Failed to create technician');
+ const newTechnician = await User.create(payload);
+ if (!newTechnician) throw new Error('Failed to create technician');
  
-     return newUser;
+     return newTechnician;
 };
 
 
 export const createSuperVisorIntoDB = async (payload: TUser) => {	
 
   payload.role = 'supervisor'
- const newUser = await User.create(payload);
- if (!newUser) throw new Error('Failed to create user');
+ const newSupervisor = await User.create(payload);
+ if (!newSupervisor) throw new Error('Failed to create user');
 
-     return newUser;
+     return newSupervisor;
 };
 
 export const createAdminIntoDB = async (payload: TUser) => {	
 
   payload.role = 'admin'
- const newUser = await User.create(payload);
- if (!newUser) throw new Error('Failed to create admin');
+ const newAdmin = await User.create(payload);
+ if (!newAdmin) throw new Error('Failed to create admin');
 
-     return newUser;
+     return newAdmin;
 };
 
 
@@ -231,9 +231,9 @@ const deleteUserFromDB = async (id: string) => {
 
 export const UserServices = {
   createClientIntoDB,
-  // createAdminIntoDB,
-  // createSuperVisorIntoDB,
-  // createTechnicianIntoDB,
+  createAdminIntoDB,
+  createSuperVisorIntoDB,
+  createTechnicianIntoDB,
   getAllAdminUsersFromDB,
   getSingleUserIntoDB,
   getUsersMonthlyFromDB, 
