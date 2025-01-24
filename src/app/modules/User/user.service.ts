@@ -11,6 +11,13 @@ import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 
+export const createClientIntoDB = async (payload: TUser) => {
+  payload.role = 'client'
+    const newUser = await User.create(payload);
+    if (!newUser) throw new Error('Failed to create user');
+    
+        return newUser;
+};
 
 
 const getMe = async (userEmail: string) => {
@@ -194,7 +201,7 @@ const deleteUserFromDB = async (id: string) => {
 };
 
 export const UserServices = {
-  // createClientIntoDB,
+  createClientIntoDB,
   // createAdminIntoDB,
   // createSuperVisorIntoDB,
   // createTechnicianIntoDB,
