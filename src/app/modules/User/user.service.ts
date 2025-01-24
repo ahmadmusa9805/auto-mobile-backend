@@ -28,6 +28,16 @@ export const createTechnicianIntoDB = async (payload: TUser) => {
      return newUser;
 };
 
+
+export const createSuperVisorIntoDB = async (payload: TUser) => {	
+
+  payload.role = 'supervisor'
+ const newUser = await User.create(payload);
+ if (!newUser) throw new Error('Failed to create user');
+
+     return newUser;
+};
+
 export const createAdminIntoDB = async (payload: TUser) => {	
 
   payload.role = 'admin'
