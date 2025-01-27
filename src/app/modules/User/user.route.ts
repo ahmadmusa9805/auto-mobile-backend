@@ -61,7 +61,7 @@ router.get(
 router.post(
   '/change-status/:id',
   auth(USER_ROLE.superAdmin, USER_ROLE.admin),
-//   validateRequest(UserValidation.changeStatusValidationSchema),
+  // validateRequest(UserValidation.changeStatusValidationSchema),
   UserControllers.changeStatus,
 );
 

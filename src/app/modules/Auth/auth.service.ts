@@ -8,6 +8,7 @@ import AppError from '../../errors/AppError';
 import { User } from '../User/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
+// import { OtpServices } from '../Otp/otp.service';
 // import { SendEmail } from '../../utils/sendEmail';
 // import { OtpServices } from '../Otp/otp.service';
 
@@ -39,6 +40,12 @@ const loginUser = async (payload: TLoginUser) => {
 
   if (!(await User.isPasswordMatched(payload?.password, user?.password)))
     throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
+
+
+
+  // if(user.otpVerified === false) {
+  //   OtpServices.generateAndSendOTP(user.email);
+  // }
 
 
   //create token and sent to the  client
@@ -175,6 +182,9 @@ const forgetPassword = async (userEmail: string) => {
     throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
   }
   
+  // const otp = await OtpServices.generateAndSendOTP(user.email);
+
+
   const jwtPayload = {
     userEmail: user.email,
     role: user.role,
@@ -191,15 +201,14 @@ const forgetPassword = async (userEmail: string) => {
 
   // SendEmail.sendResetLinkToEmail(user.email, resetUILink);
           // console.log(newCustomer, 'newCustomer');
-          if(user.role === 'admin' || user.role === 'superAdmin'){
-            // const otp = await OtpServices.generateAndSendOTP(user.email);
+          // if(user.role === 'admin' || user.role === 'superAdmin'){
 
             // if (!otp) {
             //   throw new AppError(httpStatus.FORBIDDEN, 'Otp not created ! !');
             // }
   
             // return {otp, resetToken};
-          }
+          // }
   return {resetToken};
 };
 
