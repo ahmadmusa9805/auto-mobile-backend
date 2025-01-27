@@ -8,7 +8,7 @@ export const createUserValidationSchema = z.object({
       userName: z.string().min(3, 'Username must be at least 3 characters'),
       email: z.string().email('Invalid email format'),
       location: z.string().min(3, 'Location must be at least 3 characters'),
-      password: z.string().min(6, 'Password must be at least 6 characters'), // Consider adding regex for stronger passwords
+      password: z.string().min(5, 'Password must be at least 5 characters'), // Consider adding regex for stronger passwords
       passwordChangedAt: z.date().optional(),
       role: z.enum(['client', 'admin', 'supervisor', 'technician']).default('client'),
       dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date of birth must be in YYYY-MM-DD format'), // Example YYYY-MM-DD format
