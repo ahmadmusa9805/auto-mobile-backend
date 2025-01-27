@@ -17,7 +17,7 @@ router.post(
 router.post(
   '/create-technician', //create client or technician
   validateRequest(UserValidation.createUserValidationSchema),
-    UserControllers.createClient,
+    UserControllers.createTechnician,
 );
 
 router.post(
@@ -61,7 +61,7 @@ router.get(
 router.post(
   '/change-status/:id',
   auth(USER_ROLE.superAdmin, USER_ROLE.admin),
-//   validateRequest(UserValidation.changeStatusValidationSchema),
+  // validateRequest(UserValidation.changeStatusValidationSchema),
   UserControllers.changeStatus,
 );
 

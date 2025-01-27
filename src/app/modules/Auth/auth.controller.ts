@@ -49,23 +49,21 @@ const refreshToken = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Access token is retrieved succesfully!',
+    message: 'Refresh token is retrieved succesfully!',
     data: result,
   });
 });
 
 const forgetPassword = catchAsync(async (req, res) => {
   const userEmail = req.body.email;
-
   const result = await AuthServices.forgetPassword(userEmail);
- 
+  
   // const { message } = result;
-  console.log(result);
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: result.otp ? 'OTP sent succesfully!' : 'Token generated succesfully!',
+    message:  'Token generated succesfully!',
+    // message: result?.otp ? 'OTP sent succesfully!' : 'Token generated succesfully!',
     data: result,
   });
 });
