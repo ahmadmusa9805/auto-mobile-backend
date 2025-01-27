@@ -200,9 +200,7 @@ const forgetPassword = async (userEmail: string) => {
   
             // return {otp, resetToken};
           }
-
-          return {resetToken};
-   
+  return {resetToken};
 };
 
 const resetPassword = async (

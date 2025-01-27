@@ -17,7 +17,7 @@ router.post(
 router.post(
   '/create-technician', //create client or technician
   validateRequest(UserValidation.createUserValidationSchema),
-    UserControllers.createClient,
+    UserControllers.createTechnician,
 );
 
 router.post(
