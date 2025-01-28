@@ -10,13 +10,15 @@ import { usersSearchableFields } from './user.constant';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
+// import { OtpServices } from '../Otp/otp.service';
 
 export const createClientIntoDB = async (payload: TUser) => {
   payload.role = 'client'
     const newClient = await User.create(payload);
     if (!newClient) throw new Error('Failed to create user');
     
-        return newClient;
+    // await OtpServices.generateAndSendOTP(payload.email);
+    return newClient;
 };
 
 export const createTechnicianIntoDB = async (payload: TUser) => {
@@ -24,8 +26,9 @@ export const createTechnicianIntoDB = async (payload: TUser) => {
   payload.role = 'technician'
  const newTechnician = await User.create(payload);
  if (!newTechnician) throw new Error('Failed to create technician');
- 
-     return newTechnician;
+//  await OtpServices.generateAndSendOTP(payload.email);
+return newTechnician;
+
 };
 
 
@@ -34,6 +37,7 @@ export const createSuperVisorIntoDB = async (payload: TUser) => {
   payload.role = 'supervisor'
  const newSupervisor = await User.create(payload);
  if (!newSupervisor) throw new Error('Failed to create user');
+//  await OtpServices.generateAndSendOTP(payload.email);
 
      return newSupervisor;
 };
@@ -43,6 +47,7 @@ export const createAdminIntoDB = async (payload: TUser) => {
   payload.role = 'admin'
  const newAdmin = await User.create(payload);
  if (!newAdmin) throw new Error('Failed to create admin');
+// await OtpServices.generateAndSendOTP(payload.email);
 
      return newAdmin;
 };

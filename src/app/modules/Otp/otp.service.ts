@@ -5,10 +5,13 @@ import AppError from "../../errors/AppError";
 import { Otp } from "./otp.model";
 // import { User } from "../User/user.model";
 import { SendEmail } from "../../utils/sendEmail";
+import { User } from "../User/user.model";
 
 
 
-const generateAndSendOTP = async (email: any ) => {
+const generateAndSendOTP = async (payload: any ) => {
+  const { email} = payload;
+
     const otp = Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit OTP
 
     // Save OTP to database
@@ -16,13 +19,13 @@ const generateAndSendOTP = async (email: any ) => {
 
     // Simulate sending OTP (e.g., SMS or email)
     await SendEmail.sendOTPEmail(email, otp);
-    console.log(`Sending OTP ${otp} to user email ${email}`);
 
     return otp;
 
 };
 const verifyOTP = async (user: any, payload : any) => {
     const { email, otp } = payload;
+
     const record = await Otp.findOne({ email, otp });
 
     if (!record) {
@@ -55,21 +58,25 @@ const verifyOTP = async (user: any, payload : any) => {
 
 
     //   const userData = await User.findOne({ email });
+    //   console.log(userData, 'userData');
+
     //   if (userData) {
     //     userData.otpVerified = true; // Update the otpVerified field
     //     await userData.save(); // Save the updated user document
+    //     console.log('record3');
+
     //   } else {
     //     throw new AppError(httpStatus.BAD_REQUEST, "User not found.");
     // }
 
-    // const result = await User.updateOne(
-    //     { email }, // Filter by email
-    //     { $set: { otpVerified: true } } // Update the otpVerified field
-    //   );
+    const result = await User.updateOne(
+        { email }, // Filter by email
+        { $set: { otpVerified: true } } // Update the otpVerified field
+      );
       
-    //   if (result.modifiedCount === 0) {
-    //     throw new AppError(httpStatus.BAD_REQUEST, "User not found.");
-    //   }
+      if (result.modifiedCount === 0) {
+        throw new AppError(httpStatus.BAD_REQUEST, "User not found.");
+      }
 
       return true;
 };

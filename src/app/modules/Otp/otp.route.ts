@@ -4,7 +4,7 @@ import { OtpControllers } from './otp.controller';
 const router = express.Router();
 
 router.post(
-  '/veryfy',
+  '/verify',
   OtpControllers.otpVeryfy,
 );
 router.post(

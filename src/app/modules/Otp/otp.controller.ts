@@ -5,7 +5,7 @@ import { OtpServices } from './otp.service';
 
 
 const otpVeryfy = catchAsync(async (req, res) => {
-  const { otp: otpData } = req.body;
+  const { Otp: otpData } = req.body;
   const result = await OtpServices.verifyOTP(req.user, otpData);
 
   sendResponse(res, {
@@ -16,7 +16,7 @@ const otpVeryfy = catchAsync(async (req, res) => {
   });
 });
 const generateOtp = catchAsync(async (req, res) => {
-  const { otp: otpData } = req.body;
+  const { Otp	: otpData} = req.body;
   const result = await OtpServices.generateAndSendOTP( otpData);
   // const result = await OtpServices.generateAndSendOTP(req.user, otpData);
 
