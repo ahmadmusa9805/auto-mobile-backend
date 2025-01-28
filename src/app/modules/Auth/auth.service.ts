@@ -8,9 +8,10 @@ import AppError from '../../errors/AppError';
 import { User } from '../User/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
+import { OtpServices } from '../Otp/otp.service';
 // import { OtpServices } from '../Otp/otp.service';
 // import { SendEmail } from '../../utils/sendEmail';
-// import { OtpServices } from '../Otp/otp.service';
+// import { OtpServices } from '../Otp/otp.service'; 
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -18,7 +19,6 @@ const loginUser = async (payload: TLoginUser) => {
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
   }
-
 
   // checking if the user is already deleted
 
@@ -43,10 +43,17 @@ const loginUser = async (payload: TLoginUser) => {
 
 
 
-  // if(user.otpVerified === false) {
-  //   OtpServices.generateAndSendOTP(user.email);
-  // }
+  // If OTP is not verified, send OTP and return a specific message
+  if (!user.otpVerified) {
+    await OtpServices.generateAndSendOTP(user.email);
 
+    // Return a specific message for the controller
+    return {
+      message: 'OTP sent successfully!',
+      accessToken: null,
+      refreshToken: null,
+    };
+  }
 
   //create token and sent to the  client
   const jwtPayload:any = {
@@ -183,33 +190,51 @@ const forgetPassword = async (userEmail: string) => {
   }
   
   // const otp = await OtpServices.generateAndSendOTP(user.email);
+  // If OTP is not verified, send OTP and return a specific message
+  // if (!user.otpVerified) {
+
+  console.log('test', user, 'user', user.email, 'user.email');
 
 
-  const jwtPayload = {
-    userEmail: user.email,
-    role: user.role,
-  };
 
-  const resetToken = createToken(
-    jwtPayload,
-    config.jwt_access_secret as string,
-    '10m',
-  );
+    await OtpServices.generateAndSendOTP(user.email);
 
-  // const resetUILink = `${config.reset_pass_ui_link}?email=${user.email}&token=${resetToken} `;
-  // // console.log(resetUILink, 'resetUILink');
+    // Return a specific message for the controller
+    return {
+      message: 'OTP sent successfully!',
+      accessToken: null,
+      // refreshToken: null,
+    };
 
-  // SendEmail.sendResetLinkToEmail(user.email, resetUILink);
-          // console.log(newCustomer, 'newCustomer');
-          // if(user.role === 'admin' || user.role === 'superAdmin'){
+  // }
 
-            // if (!otp) {
-            //   throw new AppError(httpStatus.FORBIDDEN, 'Otp not created ! !');
-            // }
+
+
+  // const jwtPayload = {
+  //   userEmail: user.email,
+  //   role: user.role,
+  // };
+
+  // const resetToken = createToken(
+  //   jwtPayload,
+  //   config.jwt_access_secret as string,
+  //   '10m',
+  // );
+
+  // // const resetUILink = `${config.reset_pass_ui_link}?email=${user.email}&token=${resetToken} `;
+  // // // console.log(resetUILink, 'resetUILink');
+
+  // // SendEmail.sendResetLinkToEmail(user.email, resetUILink);
+  //         // console.log(newCustomer, 'newCustomer');
+  //         // if(user.role === 'admin' || user.role === 'superAdmin'){
+
+  //           // if (!otp) {
+  //           //   throw new AppError(httpStatus.FORBIDDEN, 'Otp not created ! !');
+  //           // }
   
-            // return {otp, resetToken};
-          // }
-  return {resetToken};
+  //           // return {otp, resetToken};
+  //         // }
+  // return {resetToken};
 };
 
 const resetPassword = async (

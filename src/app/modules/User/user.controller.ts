@@ -90,6 +90,17 @@ const getAllAdminUsers = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
+const getAllTechnicianUsers = catchAsync(async (req, res) => {
+  const result = await UserServices.getAllTechnicianUsersFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Users are retrieved succesfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
 const getAllUsers = catchAsync(async (req, res) => {
   const result = await UserServices.getAllUsersFromDB(req.query);
 
@@ -162,5 +173,6 @@ export const UserControllers = {
   updateUser,
   getMe,
   changeStatus,
-  getAllUsers
+  getAllUsers,
+  getAllTechnicianUsers
 };
