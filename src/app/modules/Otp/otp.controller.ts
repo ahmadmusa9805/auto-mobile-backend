@@ -4,6 +4,7 @@ import sendResponse from '../../utils/sendResponse';
 import { OtpServices } from './otp.service';
 
 
+
 const otpVeryfy = catchAsync(async (req, res) => {
   const { Otp: otpData } = req.body;
   const result = await OtpServices.verifyOTP(req.user, otpData);
