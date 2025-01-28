@@ -1,0 +1,28 @@
+import { Schema, model } from 'mongoose';
+      import { TJob, JobModel } from './Job.interface';
+      
+      const JobSchema = new Schema<TJob, JobModel>({
+        regName: { type: String, required: true },
+        make: { type: String, required: true },
+        model: { type: String, required: true },
+        engine: { type: String, required: true },
+        power: { type: String, required: true },
+        gearBox: { type: String, required: true },
+        services: { type: [String], required: true }, // Assuming services is an array of strings
+        status: { type: String, default: "pending" },
+        paymentStatus: { type: String, default: "pending" },
+        additionalInfo: { type: String },
+        assignedTechnician: { type: Schema.Types.ObjectId, ref: 'User' }, // Assuming it's a reference to a technician ID
+        createdAt: { type: Date, default: Date.now },
+        updatedAt: { type: Date, default: Date.now },
+        isDeleted: { type: Boolean, default: false }
+      });
+      
+      JobSchema.statics.isJobExists = async function (id: string) {
+        return await this.findOne({ _id: id, isDeleted: false });
+      };
+      
+      export const Job = model<TJob, JobModel>('Job', JobSchema);
+      
+    
+    

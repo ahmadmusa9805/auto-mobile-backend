@@ -3,6 +3,8 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AdminServices } from './Admin.service';
 
+
+
 const createAdmin = catchAsync(async (req, res) => {
   const { Admin: AdminData } = req.body;
   const result = await AdminServices.createAdminIntoDB(AdminData);
