@@ -10,6 +10,7 @@ const superUser = {
   location: 'sdgsdg',
   contactNo: "+4407823878152",
   role: USER_ROLE.superAdmin,
+  otpVerified: true,
   dob: '2000-01-01',
   isDeleted: false,
 };

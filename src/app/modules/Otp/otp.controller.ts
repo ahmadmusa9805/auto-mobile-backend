@@ -23,10 +23,23 @@ const generateOtp = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Created OTP Successfully.',
+    message: result?.message ||  'Created OTP Successfully.',
     data: result,
   });
+
 });
+// const generateOtp = catchAsync(async (req, res) => {
+//   const { Otp	: otpData} = req.body;
+//   const result = await OtpServices.generateAndSendOTP( otpData);
+//   // const result = await OtpServices.generateAndSendOTP(req.user, otpData);
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Created OTP Successfully.',
+//     data: result,
+//   });
+// });
 
 
 export const OtpControllers = {

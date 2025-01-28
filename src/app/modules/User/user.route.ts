@@ -45,6 +45,11 @@ router.get(
   auth(USER_ROLE.superAdmin),
   UserControllers.getAllAdminUsers,
 );
+router.get(
+  '/technicians',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  UserControllers.getAllTechnicianUsers,
+);
 
 router.get(
   '/users-monthly',

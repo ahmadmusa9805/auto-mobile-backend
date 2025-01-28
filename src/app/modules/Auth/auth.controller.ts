@@ -57,12 +57,13 @@ const refreshToken = catchAsync(async (req, res) => {
 const forgetPassword = catchAsync(async (req, res) => {
   const userEmail = req.body.email;
   const result = await AuthServices.forgetPassword(userEmail);
+    console.log(result, 'result');
   
   // const { message } = result;
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message:  'Token generated succesfully!',
+    message: result.message ||  'Token generated succesfully!',
     // message: result?.otp ? 'OTP sent succesfully!' : 'Token generated succesfully!',
     data: result,
   });

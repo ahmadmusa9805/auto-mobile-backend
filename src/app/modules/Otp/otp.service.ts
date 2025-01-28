@@ -6,11 +6,14 @@ import { Otp } from "./otp.model";
 // import { User } from "../User/user.model";
 import { SendEmail } from "../../utils/sendEmail";
 import { User } from "../User/user.model";
+import config from "../../config";
+import { createToken } from "../Auth/auth.utils";
 
 
 
-const generateAndSendOTP = async (payload: any ) => {
-  const { email} = payload;
+const generateAndSendOTP = async (email: any ) => {
+  // const { email} = payload;
+  //  console.log('email+', email, payload);
 
     const otp = Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit OTP
 
@@ -78,7 +81,20 @@ const verifyOTP = async (user: any, payload : any) => {
         throw new AppError(httpStatus.BAD_REQUEST, "User not found.");
       }
 
-      return true;
+
+      const jwtPayload = {
+    userEmail: user.email,
+    role: user.role,
+  };
+
+  const resetToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    '10m',
+  );
+
+
+  return {resetToken};
 };
 
 
