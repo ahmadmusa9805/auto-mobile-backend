@@ -3,11 +3,8 @@
 import httpStatus from "http-status";
 import AppError from "../../errors/AppError";
 import { Otp } from "./otp.model";
-// import { User } from "../User/user.model";
 import { SendEmail } from "../../utils/sendEmail";
 import { User } from "../User/user.model";
-import config from "../../config";
-import { createToken } from "../Auth/auth.utils";
 
 
 
@@ -76,25 +73,16 @@ const verifyOTP = async (user: any, payload : any) => {
         { email }, // Filter by email
         { $set: { otpVerified: true } } // Update the otpVerified field
       );
-      
       if (result.modifiedCount === 0) {
         throw new AppError(httpStatus.BAD_REQUEST, "User not found.");
       }
 
 
-      const jwtPayload = {
-    userEmail: user.email,
-    role: user.role,
-  };
 
-  const resetToken = createToken(
-    jwtPayload,
-    config.jwt_access_secret as string,
-    '10m',
-  );
-
-
-  return {resetToken};
+  return {
+    success: true,    
+    message: "OTP verified successfully."};
+  // return {resetToken};
 };
 
 

@@ -15,6 +15,7 @@ const otpVeryfy = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const generateOtp = catchAsync(async (req, res) => {
   const { Otp	: otpData} = req.body;
   const result = await OtpServices.generateAndSendOTP( otpData);
@@ -23,11 +24,13 @@ const generateOtp = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: result?.message ||  'Created OTP Successfully.',
+    message: 'Created OTP Successfully.',
+    // message: result?.message  ||  'Created OTP Successfully.',
     data: result,
   });
 
 });
+
 // const generateOtp = catchAsync(async (req, res) => {
 //   const { Otp	: otpData} = req.body;
 //   const result = await OtpServices.generateAndSendOTP( otpData);
