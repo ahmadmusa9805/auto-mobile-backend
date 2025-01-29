@@ -8,6 +8,10 @@ router.post(
   OtpControllers.otpVeryfy,
 );
 router.post(
+  '/verify-forget-password',
+  OtpControllers.otpVeryfyForgetPassword,
+);
+router.post(
   '/generate-otp',
   OtpControllers.generateOtp,
 );
