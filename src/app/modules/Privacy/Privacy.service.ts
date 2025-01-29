@@ -39,20 +39,20 @@ const getAllPrivacysFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getSinglePrivacyFromDB = async (id: string) => {
-  const result = await Privacy.findById({id, isDeleted: false});
+  const result = await Privacy.findOne({_id:id, isDeleted: false});
 
   return result;
 };
 
 const updatePrivacyIntoDB = async (id: string, payload: any) => {
   const isDeletedService = await mongoose.connection
-    .collection('privacys')
+    .collection('privacies')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
-      { projection: { isDeleted: 1, name: 1 } },
+      // { projection: { isDeleted: 1, name: 1 } },
     );
 
-  if (!isDeletedService?.name) {
+  if (!isDeletedService) {
     throw new Error('Privacy not found');
   }
 
