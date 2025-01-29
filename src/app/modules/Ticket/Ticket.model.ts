@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
       
       const TicketSchema = new Schema<TTicket, TicketModel>({
         jobId: { type: Schema.Types.ObjectId, ref: 'Job' },
-        status: { type: String },
+        status: { type: String, default: "pending" },
         isDeleted: { type: Boolean, default: false },
       });
       
