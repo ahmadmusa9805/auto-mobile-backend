@@ -16,6 +16,17 @@ const otpVeryfy = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const otpVeryfyForgetPassword = catchAsync(async (req, res) => {
+  const { Otp: otpData } = req.body;
+  const result = await OtpServices.otpVeryfyForgetPasswordIntoDB(otpData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'OTP verified successfully.',
+    data: result,
+  });
+});
 
 const generateOtp = catchAsync(async (req, res) => {
   const { Otp	: otpData} = req.body;
@@ -48,5 +59,6 @@ const generateOtp = catchAsync(async (req, res) => {
 
 export const OtpControllers = {
   otpVeryfy,
-  generateOtp
+  generateOtp,
+  otpVeryfyForgetPassword
 };
