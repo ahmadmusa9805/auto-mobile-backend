@@ -5,6 +5,8 @@ import AppError from "../../errors/AppError";
 import { Otp } from "./otp.model";
 import { SendEmail } from "../../utils/sendEmail";
 import { User } from "../User/user.model";
+import config from "../../config";
+import { createToken } from "../Auth/auth.utils";
 
 
 
@@ -85,9 +87,58 @@ const verifyOTP = async (user: any, payload : any) => {
   // return {resetToken};
 };
 
+const otpVeryfyForgetPasswordIntoDB = async ( payload : any) => {
+    const { email, otp } = payload;
+    const user = await User.findOne({ email });
+
+    const record = await Otp.findOne({ email, otp });
+
+    if (!record) {
+        throw new AppError(httpStatus.BAD_REQUEST,  "The OTP is incorrect. Please try again.");  // OTP not found
+    }
+
+    // Check expiration (5 minutes)
+    const EXPIRATION_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+    if (Date.now() - new Date(record.createdAt).getTime() > EXPIRATION_TIME) {
+      await Otp.deleteOne({ _id: record._id }); // Remove expired OTP
+      const otp = await OtpServices.generateAndSendOTP(email);
+
+      if (!otp) {
+        throw new AppError(
+          httpStatus.BAD_REQUEST,
+          `otp not created`
+        );
+      }
+
+      return {
+        success: false,
+        message: "The OTP is expired. Please try again to continue. A new OTP is sent again.",	 
+      };
+    }
+
+  // // OTP is valid
+  await Otp.deleteOne({ _id: record._id }); // Remove used OTP
+
+
+  const jwtPayload:any = {
+    userEmail: user?.email,
+    role: user?.role,
+  };
+
+  const resetToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    '5m',
+  );
+    
+  return {resetToken};
+};
+
 
 export const OtpServices = {
     generateAndSendOTP,
     verifyOTP,
+    otpVeryfyForgetPasswordIntoDB
     
 };
