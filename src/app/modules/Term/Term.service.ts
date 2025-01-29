@@ -39,7 +39,7 @@ const getAllTermsFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getSingleTermFromDB = async (id: string) => {
-  const result = await Term.findById({id, isDeleted: false});
+  const result = await Term.findOne({_id:id, isDeleted: false});
 
   return result;
 };
@@ -49,10 +49,10 @@ const updateTermIntoDB = async (id: string, payload: any) => {
     .collection('terms')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
-      { projection: { isDeleted: 1, name: 1 } },
+      // { projection: { isDeleted: 1, name: 1 } },
     );
 
-  if (!isDeletedService?.name) {
+  if (!isDeletedService) {
     throw new Error('Term not found');
   }
 
