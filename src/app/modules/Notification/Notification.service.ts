@@ -39,7 +39,7 @@ const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getSingleNotificationFromDB = async (id: string) => {
-  const result = await Notification.findById({id, isDeleted: false});
+  const result = await Notification.findById(id,{ isDeleted: false});
 
   return result;
 };
@@ -49,10 +49,10 @@ const updateNotificationIntoDB = async (id: string, payload: any) => {
     .collection('notifications')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
-      { projection: { isDeleted: 1, name: 1 } },
+      // { projection: { isDeleted: 1, name: 1 } },
     );
 
-  if (!isDeletedService?.name) {
+  if (!isDeletedService) {
     throw new Error('Notification not found');
   }
 
