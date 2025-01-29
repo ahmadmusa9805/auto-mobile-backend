@@ -4,6 +4,7 @@ export const createJobValidationSchema = z.object({
   body: z.object({
     Job: z.object({
       regName: z.string().min(1),
+      userId: z.string().min(1),
       make: z.string().min(1),
       model: z.string().min(1),
       engine: z.string().min(1),
@@ -23,6 +24,7 @@ export const updateJobValidationSchema = z.object({
   body: z.object({
     Job: z.object({
       regName: z.string().optional(),
+      userId: z.string().min(1).optional(),
       make: z.string().optional(),
       model: z.string().optional(),
       engine: z.string().optional(),

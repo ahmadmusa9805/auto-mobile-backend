@@ -3,6 +3,7 @@ import { Model, Types } from 'mongoose';
 
 export type TJob = {
   regName: string;
+  userId: Types.ObjectId;
   make: string;
   model: string;
   engine: string;

@@ -3,6 +3,7 @@ import { Schema, model } from 'mongoose';
       
       const JobSchema = new Schema<TJob, JobModel>({
         regName: { type: String, required: true },
+        userId: { type: Schema.Types.ObjectId, ref: 'User' },
         make: { type: String, required: true },
         model: { type: String, required: true },
         engine: { type: String, required: true },
