@@ -39,20 +39,20 @@ const getAllInvoicesFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getSingleInvoiceFromDB = async (id: string) => {
-  const result = await Invoice.findById({id, isDeleted: false});
-
+  const result = await Invoice.findOne({_id:id, isDeleted: false});
   return result;
 };
 
 const updateInvoiceIntoDB = async (id: string, payload: any) => {
+  
   const isDeletedService = await mongoose.connection
     .collection('invoices')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
-      { projection: { isDeleted: 1, name: 1 } },
+      // { projection: { isDeleted: 1, name: 1 } },
     );
 
-  if (!isDeletedService?.name) {
+  if (!isDeletedService) {
     throw new Error('Invoice not found');
   }
 
