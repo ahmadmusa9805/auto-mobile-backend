@@ -12,7 +12,7 @@ const createClient = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Client is created succesfully',
+    message: 'Client is created succesfully and OTP sent',
     data: result,
   });
 });
@@ -23,7 +23,7 @@ const createTechnician = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Technician is created succesfully',
+    message: 'Technician is created succesfully and OTP sent',
     data: result,
   });
 });
@@ -34,7 +34,7 @@ const createAdmin = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Admin is created succesfully',
+    message: 'Admin is created succesfully and OTP sent',
     data: result,
   });
 });
@@ -45,7 +45,7 @@ const createSuperVisor = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'supervisor is created succesfully',
+    message: 'supervisor is created succesfully and OTP sent',
     data: result,
   });
 });
