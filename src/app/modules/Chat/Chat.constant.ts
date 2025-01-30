@@ -1,1 +1,1 @@
-export const CHAT_SEARCHABLE_FIELDS = ['name', 'description', 'atcCodes'];
+export const CHAT_SEARCHABLE_FIELDS = ['message'];

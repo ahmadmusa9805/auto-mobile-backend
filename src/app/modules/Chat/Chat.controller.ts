@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ChatServices } from './Chat.service';
+import { Request, Response } from 'express';
 
 const createChat = catchAsync(async (req, res) => {
   const { Chat: ChatData } = req.body;
@@ -15,17 +17,45 @@ const createChat = catchAsync(async (req, res) => {
   });
 });
 
-const getSingleChat = catchAsync(async (req, res) => {
+const getUnreadMessagesCount = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await ChatServices.getSingleChatFromDB(id);
+  const count = await ChatServices.getUnreadMessagesCountFromDB(id);
 
-  sendResponse(res, {
+
+  // res.json({ unreadMessages: count });
+
+  sendResponse(res as any, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Chat is retrieved successfully',
+    message: 'Chats are retrieved successfully',
+    data: count,
+  });
+};
+
+const markAsRead = async (req: Request, res: Response) => {
+  const { sender, receiver } = req.body;
+  const result = await ChatServices.markMessagesAsReadIntoDB(sender, receiver);
+
+
+  sendResponse(res as any, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: '"Messages marked as read"',
     data: result,
   });
-});
+};
+
+const getRecentChats = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const chats = await ChatServices.getRecentChatsFromDB(id);
+
+  sendResponse(res as any, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: '"Messages marked as read"',
+    data: chats,
+  });
+};
 
 const getAllChats = catchAsync(async (req, res) => {
   const result = await ChatServices.getAllChatsFromDB(req.query);
@@ -39,18 +69,6 @@ const getAllChats = catchAsync(async (req, res) => {
   });
 });
 
-const updateChat = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const { Chat } = req.body;
-  const result = await ChatServices.updateChatIntoDB(id, Chat);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Chat is updated successfully',
-    data: result,
-  });
-});
 
 const deleteChat = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -66,8 +84,9 @@ const deleteChat = catchAsync(async (req, res) => {
 
 export const ChatControllers = {
   createChat,
-  getSingleChat,
   getAllChats,
-  updateChat,
   deleteChat,
+  markAsRead,
+  getUnreadMessagesCount,
+  getRecentChats
 };

@@ -2,12 +2,13 @@
 import httpStatus from 'http-status';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
-import mongoose from 'mongoose';
-import { TChat } from './Chat.interface';
 import { Chat } from './Chat.model';
+import { TChat } from './Chat.interface';
+import { CHAT_SEARCHABLE_FIELDS } from './Chat.constant';
+
 
 const createChatIntoDB = async (
-  payload: TChat,
+  payload: Partial<TChat>,
 ) => {
   const result = await Chat.create(payload);
   
@@ -18,12 +19,16 @@ const createChatIntoDB = async (
   return result;
 };
 
+const getUnreadMessagesCountFromDB = async (receiverId: string) => {
+  return await Chat.countDocuments({ receiver: receiverId, isRead: false });
+};
+
 const getAllChatsFromDB = async (query: Record<string, unknown>) => {
   const ChatQuery = new QueryBuilder(
     Chat.find(),
     query,
   )
-    .search(ChatSearchableFields)
+    .search(CHAT_SEARCHABLE_FIELDS)
     .filter()
     .sort()
     .paginate()
@@ -37,39 +42,23 @@ const getAllChatsFromDB = async (query: Record<string, unknown>) => {
   };
 };
 
-const getSingleChatFromDB = async (id: string) => {
-  const result = await Chat.findById(id);
 
-  return result;
+const markMessagesAsReadIntoDB = async (senderId: string, receiverId: string) => {
+  await Chat.updateMany({ sender: senderId, receiver: receiverId }, { isRead: true });
 };
 
-const updateChatIntoDB = async (id: string, payload: any) => {
-  const isDeletedService = await mongoose.connection
-    .collection('chats')
-    .findOne(
-      { _id: new mongoose.Types.ObjectId(id) },
-      { projection: { isDeleted: 1, name: 1 } },
-    );
-
-  if (!isDeletedService?.name) {
-    throw new Error('Chat not found');
-  }
-
-  if (isDeletedService.isDeleted) {
-    throw new Error('Cannot update a deleted Chat');
-  }
-
-  const updatedData = await Chat.findByIdAndUpdate(
-    { _id: id },
-    payload,
-    { new: true, runValidators: true },
-  );
-
-  if (!updatedData) {
-    throw new Error('Chat not found after update');
-  }
-
-  return updatedData;
+const getRecentChatsFromDB = async (userId: string) => {
+  return await Chat.aggregate([
+    { $match: { $or: [{ sender: userId }, { receiver: userId }] } },
+    { $sort: { createdAt: -1 } },
+    {
+      $group: {
+        _id: "$receiver",
+        lastMessage: { $first: "$$ROOT" },
+      },
+    },
+    { $sort: { "lastMessage.createdAt": -1 } },
+  ]);
 };
 
 const deleteChatFromDB = async (id: string) => {
@@ -87,9 +76,10 @@ const deleteChatFromDB = async (id: string) => {
 };
 
 export const ChatServices = {
+  getUnreadMessagesCountFromDB,
+  markMessagesAsReadIntoDB,
+  getRecentChatsFromDB,
   createChatIntoDB,
   getAllChatsFromDB,
-  getSingleChatFromDB,
-  updateChatIntoDB,
   deleteChatFromDB,
 };
