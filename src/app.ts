@@ -13,7 +13,16 @@ import config from './app/config';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 const app: Application = express();
 const httpServer = createServer(app);
-
+import http from "http";
+import { Server, Socket } from "socket.io";
+const server = http.createServer(app);
+// Initialize Socket.IO
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Replace with frontend URL
+  },
+});
+const connectedUsers: { [key: string]: string } = {}; // userId -> socketId mapping
 
 // Middleware
 app.use(helmet()); // Security headers
