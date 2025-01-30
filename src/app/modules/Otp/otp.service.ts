@@ -9,7 +9,6 @@ import config from "../../config";
 import { createToken } from "../Auth/auth.utils";
 
 
-
 const generateAndSendOTP = async (email: any ) => {
   // const { email} = payload;
   //  console.log('email+', email, payload);
