@@ -139,8 +139,8 @@ const changeStatus = catchAsync(async (req, res) => {
 
 const updateUser = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const { user } = req.body;
-  const result = await UserServices.updateUserIntoDB(id, user, req.file);
+  const { User } = req.body;
+  const result = await UserServices.updateUserIntoDB(id, User, req.file);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

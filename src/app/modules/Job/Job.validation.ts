@@ -11,7 +11,6 @@ export const createJobValidationSchema = z.object({
       power: z.string().min(1),
       gearBox: z.string().min(1),
       services: z.array(z.string()).min(1), // Ensure at least one service
-      status: z.string().min(1),
       paymentStatus: z.string().min(1),
       additionalInfo: z.string().optional(),
       assignedTechnician: z.string().optional(),
