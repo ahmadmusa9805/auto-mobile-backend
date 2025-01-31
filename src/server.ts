@@ -7,18 +7,18 @@ import config from './app/config/index.js';
 import seedSuperAdmin from './app/DB/index.js';
 // let server = http.createServer(app);
 // let server: Server;
+const server = http.createServer(app);
 async function main() {
   try {
     // await mongoose.connect("mongodb+srv://property-db:tQuvNkBQyuqlH7e6@cluster0.1ddal.mongodb.net/property-development?retryWrites=true&w=majority&appName=Cluster0" as string);
     await mongoose.connect(config.database_url as string);
     // await mongoose.connect('mongodb://localhost:27017/mydatabase');
-
     // const port = config.port || 3000;  // Default to 3000 if undefined
 
     await seedSuperAdmin();
 
      // Create HTTP Server
-     const server = http.createServer(app);
+   
 
        // Initialize Socket.IO
        const io = new Server(server, {
@@ -58,4 +58,10 @@ process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err.message);
   // console.log(`😈 uncaughtException is detected , shutting down ...`);
   process.exit(1);
+});
+
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received: closing server...');
+  server.close(() => console.log('Server closed.'));
 });
