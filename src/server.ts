@@ -22,8 +22,12 @@ async function main() {
 
        // Initialize Socket.IO
        const io = new Server(server, {
+        // cors: {
+        //   origin: "*", // Replace with frontend URL
+        // },
         cors: {
-          origin: "*", // Replace with frontend URL
+          origin: "http://localhost:3000", // Ensure this is correct for Next.js frontend
+          methods: ["GET", "POST"],
         },
       });
 

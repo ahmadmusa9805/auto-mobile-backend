@@ -15,6 +15,13 @@ export const initializeChatSocket = (io: Server) => {
       console.log(`User ${userId} registered with socket ${socket.id}`);
     });
 
+
+    socket.on("chatMessage", (msg) => {
+        console.log("Message received from client:", msg);
+        io.emit("chatMessage", msg);
+      });
+
+
     // Join private room for 1-to-1 chat
     socket.on("joinChat", ({ userId, otherUserId }) => {
       const roomId = [userId, otherUserId].sort().join("_"); // Unique room ID
@@ -64,7 +71,7 @@ export const initializeChatSocket = (io: Server) => {
       });
     });
 
-    
+
   });
 };
 
