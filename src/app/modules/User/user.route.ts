@@ -96,6 +96,7 @@ router.patch(
     }
     next();
   },
+  validateRequest(UserValidation.updateUserValidationSchema),
   UserControllers.updateUser,
 );
 

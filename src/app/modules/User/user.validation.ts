@@ -24,18 +24,18 @@ export const createUserValidationSchema = z.object({
 export const updateUserValidationSchema = z.object({
   body: z.object({
       User: z.object({
-      fullName: z.string().min(1, 'Full name must be at least 3 characters'),
-      contactNo: z.string().min(10, 'Contact number must be at least 10 digits').max(15, 'Contact number cannot exceed 15 digits'), // Adjust min/max as needed
-      userName: z.string().min(3, 'Username must be at least 3 characters'),
-      email: z.string().email('Invalid email format'),
-      location: z.string().min(3, 'Location must be at least 3 characters'),
-      dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date of birth must be in YYYY-MM-DD format'), // Example YYYY-MM-DD format
+      fullName: z.string().min(1, 'Full name must be at least 3 characters').optional(),
+      contactNo: z.string().min(10, 'Contact number must be at least 10 digits').max(15, 'Contact number cannot exceed 15 digits').optional(), // Adjust min/max as needed
+      userName: z.string().min(3, 'Username must be at least 3 characters').optional(),
+      email: z.string().email('Invalid email format').optional(),
+      location: z.string().min(3, 'Location must be at least 3 characters').optional(),
+      dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date of birth must be in YYYY-MM-DD format').optional(), // Example YYYY-MM-DD format
       profileImg: z.string().optional(), // Allow empty string or undefined
       // otpVerified: z.boolean().default(false),
-      status: z.enum(['active', 'blocked']).default('active'), // Use the actual UserStatus values
-      skills: z.array(z.string()).default([]),
+      status: z.enum(['active', 'blocked']).default('active').optional(), // Use the actual UserStatus values
+      skills: z.array(z.string()).default([]).optional(),
       adminClientEmail: z.string().optional(), // Make optional, as it seems specific to certain users
-      isDeleted: z.boolean().default(false),
+      isDeleted: z.boolean().default(false).optional(),
     }),
   }),
 });
