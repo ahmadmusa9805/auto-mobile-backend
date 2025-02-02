@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
+// import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
-import { TERM_SEARCHABLE_FIELDS } from './Term.constant';
+// import { TERM_SEARCHABLE_FIELDS } from './Term.constant';
 import mongoose from 'mongoose';
 import { TTerm } from './Term.interface';
 import { Term } from './Term.model';
@@ -19,24 +19,24 @@ const createTermIntoDB = async (
   return result;
 };
 
-const getAllTermsFromDB = async (query: Record<string, unknown>) => {
-  const TermQuery = new QueryBuilder(
-    Term.find({ isDeleted: false }),
-    query,
-  )
-    .search(TERM_SEARCHABLE_FIELDS)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
+// const getAllTermsFromDB = async (query: Record<string, unknown>) => {
+//   const TermQuery = new QueryBuilder(
+//     Term.find({ isDeleted: false }),
+//     query,
+//   )
+//     .search(TERM_SEARCHABLE_FIELDS)
+//     .filter()
+//     .sort()
+//     .paginate()
+//     .fields();
 
-  const result = await TermQuery.modelQuery;
-  const meta = await TermQuery.countTotal();
-  return {
-    result,
-    meta,
-  };
-};
+//   const result = await TermQuery.modelQuery;
+//   const meta = await TermQuery.countTotal();
+//   return {
+//     result,
+//     meta,
+//   };
+// };
 
 const getSingleTermFromDB = async (id: string) => {
   const result = await Term.findOne({_id:id, isDeleted: false});
@@ -73,24 +73,24 @@ const updateTermIntoDB = async (id: string, payload: any) => {
   return updatedData;
 };
 
-const deleteTermFromDB = async (id: string) => {
-  const deletedService = await Term.findByIdAndUpdate(
-    id,
-    { isDeleted: true },
-    { new: true },
-  );
+// const deleteTermFromDB = async (id: string) => {
+//   const deletedService = await Term.findByIdAndUpdate(
+//     id,
+//     { isDeleted: true },
+//     { new: true },
+//   );
 
-  if (!deletedService) {
-    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete Term');
-  }
+//   if (!deletedService) {
+//     throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete Term');
+//   }
 
-  return deletedService;
-};
+//   return deletedService;
+// };
 
 export const TermServices = {
   createTermIntoDB,
-  getAllTermsFromDB,
+  // getAllTermsFromDB,
   getSingleTermFromDB,
   updateTermIntoDB,
-  deleteTermFromDB,
+  // deleteTermFromDB,
 };

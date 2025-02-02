@@ -47,6 +47,8 @@ const markAsRead = async (req: Request, res: Response) => {
 
 const getRecentChats = async (req: Request, res: Response) => {
   const { id } = req.params;
+  console.log(id, 'getRecentChats');
+  
   const chats = await ChatServices.getRecentChatsFromDB(id);
 
   sendResponse(res as any, {
@@ -58,14 +60,16 @@ const getRecentChats = async (req: Request, res: Response) => {
 };
 
 const getAllChats = catchAsync(async (req, res) => {
-  const result = await ChatServices.getAllChatsFromDB(req.query);
+  const { userId, chatId } = req.params; 
+  const result = await ChatServices.getAllChatsFromDB(userId, chatId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Chats are retrieved successfully',
-    meta: result.meta,
-    data: result.result,
+    // meta: result.meta,
+    // data: result.result,
+    data: result,
   });
 });
 

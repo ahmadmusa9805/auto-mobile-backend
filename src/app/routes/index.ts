@@ -9,6 +9,7 @@ import { InvoiceRoutes } from '../modules/Invoice/Invoice.route';
 import { NotificationRoutes } from '../modules/Notification/Notification.route';
 import { TermRoutes } from '../modules/Term/Term.route';
 import { PrivacyRoutes } from '../modules/Privacy/Privacy.route';
+import { ChatRoutes } from '../modules/Chat/Chat.route';
 
 
 
@@ -54,6 +55,10 @@ const moduleRoutes = [
   {
     path: '/privacies',
     route: PrivacyRoutes,
+  },
+  {
+    path: '/chats',
+    route: ChatRoutes,
   },
 ];
 
