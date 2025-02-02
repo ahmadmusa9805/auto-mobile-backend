@@ -27,17 +27,17 @@ const getSinglePrivacy = catchAsync(async (req, res) => {
   });
 });
 
-const getAllPrivacys = catchAsync(async (req, res) => {
-  const result = await PrivacyServices.getAllPrivacysFromDB(req.query);
+// const getAllPrivacys = catchAsync(async (req, res) => {
+//   const result = await PrivacyServices.getAllPrivacysFromDB(req.query);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Privacys are retrieved successfully',
-    meta: result.meta,
-    data: result.result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Privacys are retrieved successfully',
+//     meta: result.meta,
+//     data: result.result,
+//   });
+// });
 
 const updatePrivacy = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -52,22 +52,22 @@ const updatePrivacy = catchAsync(async (req, res) => {
   });
 });
 
-const deletePrivacy = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await PrivacyServices.deletePrivacyFromDB(id);
+// const deletePrivacy = catchAsync(async (req, res) => {
+//   const { id } = req.params;
+//   const result = await PrivacyServices.deletePrivacyFromDB(id);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Privacy is deleted successfully',
-    data: result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Privacy is deleted successfully',
+//     data: result,
+//   });
+// });
 
 export const PrivacyControllers = {
   createPrivacy,
   getSinglePrivacy,
-  getAllPrivacys,
+  // getAllPrivacys,
   updatePrivacy,
-  deletePrivacy,
+  // deletePrivacy,
 };

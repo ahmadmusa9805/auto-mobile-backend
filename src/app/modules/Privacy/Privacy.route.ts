@@ -22,14 +22,14 @@ router.patch(
   PrivacyControllers.updatePrivacy,
 );
 
-router.delete(
-  '/:id',
-  PrivacyControllers.deletePrivacy,
-);
+// router.delete(
+//   '/:id',
+//   PrivacyControllers.deletePrivacy,
+// );
 
-router.get(
-  '/',
-  PrivacyControllers.getAllPrivacys,
-);
+// router.get(
+//   '/',
+//   PrivacyControllers.getAllPrivacys,
+// );
 
 export const PrivacyRoutes = router;
