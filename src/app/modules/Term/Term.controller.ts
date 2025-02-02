@@ -27,17 +27,17 @@ const getSingleTerm = catchAsync(async (req, res) => {
   });
 });
 
-const getAllTerms = catchAsync(async (req, res) => {
-  const result = await TermServices.getAllTermsFromDB(req.query);
+// const getAllTerms = catchAsync(async (req, res) => {
+//   const result = await TermServices.getAllTermsFromDB(req.query);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Terms are retrieved successfully',
-    meta: result.meta,
-    data: result.result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Terms are retrieved successfully',
+//     meta: result.meta,
+//     data: result.result,
+//   });
+// });
 
 const updateTerm = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -52,22 +52,22 @@ const updateTerm = catchAsync(async (req, res) => {
   });
 });
 
-const deleteTerm = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await TermServices.deleteTermFromDB(id);
+// const deleteTerm = catchAsync(async (req, res) => {
+//   const { id } = req.params;
+//   const result = await TermServices.deleteTermFromDB(id);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Term is deleted successfully',
-    data: result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Term is deleted successfully',
+//     data: result,
+//   });
+// });
 
 export const TermControllers = {
   createTerm,
   getSingleTerm,
-  getAllTerms,
+  // getAllTerms,
   updateTerm,
-  deleteTerm,
+  // deleteTerm,
 };
