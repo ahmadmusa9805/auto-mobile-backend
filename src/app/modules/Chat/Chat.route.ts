@@ -7,7 +7,8 @@ import { createChatValidationSchema } from './Chat.validation';
 
 const router = express.Router();
 
-router.get("/chats/:id", ChatControllers.getRecentChats);
+router.get("/:id", ChatControllers.getRecentChats);
+
 router.get("/unread/:id", ChatControllers.getUnreadMessagesCount);
 router.post("/read", ChatControllers.markAsRead);
 
@@ -34,7 +35,7 @@ router.delete(
 );
 
 router.get(
-  '/',
+  '/messages/:userId/:chatId',
   ChatControllers.getAllChats,
 );
 

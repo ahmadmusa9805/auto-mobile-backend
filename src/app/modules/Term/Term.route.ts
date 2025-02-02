@@ -22,14 +22,14 @@ router.patch(
   TermControllers.updateTerm,
 );
 
-router.delete(
-  '/:id',
-  TermControllers.deleteTerm,
-);
+// router.delete(
+//   '/:id',
+//   TermControllers.deleteTerm,
+// );
 
-router.get(
-  '/',
-  TermControllers.getAllTerms,
-);
+// router.get(
+//   '/',
+//   TermControllers.getAllTerms,
+// );
 
 export const TermRoutes = router;
