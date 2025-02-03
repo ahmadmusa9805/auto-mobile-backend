@@ -78,27 +78,16 @@ const getSingleUser = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const changeStatus = catchAsync(async (req, res) => {
+  const id = req.params.id;
 
-const getAllAdminUsers = catchAsync(async (req, res) => {
-  const result = await UserServices.getAllAdminUsersFromDB(req.query);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Users are retrieved succesfully',
-    meta: result.meta,
-    data: result.result,
-  });
-});
-const getAllTechnicianUsers = catchAsync(async (req, res) => {
-  const result = await UserServices.getAllTechnicianUsersFromDB(req.query);
+  const result = await UserServices.changeStatus(id, req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Users are retrieved succesfully',
-    meta: result.meta,
-    data: result.result,
+    message: 'Status is updated succesfully',
+    data: result,
   });
 });
 const getAllUsers = catchAsync(async (req, res) => {
@@ -112,7 +101,6 @@ const getAllUsers = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
-
 const getUsersMonthly = catchAsync(async (req, res) => {
   const result = await UserServices.getUsersMonthlyFromDB();
 
@@ -120,19 +108,6 @@ const getUsersMonthly = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Users are retrieved succesfully',
-    data: result,
-  });
-});
-
-const changeStatus = catchAsync(async (req, res) => {
-  const id = req.params.id;
-
-  const result = await UserServices.changeStatus(id, req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Status is updated succesfully',
     data: result,
   });
 });
@@ -161,11 +136,59 @@ const deleteUser = catchAsync(async (req, res) => {
   });
 });
 
+
+const getAllTechnicians = catchAsync(async (req, res) => {
+  const result = await UserServices.getAllTechniciansFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Technicians are retrieved succesfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
+
+const getAllAdmins = catchAsync(async (req, res) => {
+  const result = await UserServices.getAllAdminsFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Admins are retrieved succesfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
+const getAllClients = catchAsync(async (req, res) => {
+  const result = await UserServices.getAllAdminsFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Clients are retrieved succesfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
+
+const getAllSuperVisors = catchAsync(async (req, res) => {
+  const result = await UserServices.getAllAdminsFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'SuperVisors are retrieved succesfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
+
+
 export const UserControllers = {
   createClient,
   createTechnician,
   createAdmin,
-  getAllAdminUsers,
   createSuperVisor,
   getSingleUser,
   getUsersMonthly,
@@ -174,5 +197,8 @@ export const UserControllers = {
   getMe,
   changeStatus,
   getAllUsers,
-  getAllTechnicianUsers
+  getAllTechnicians,
+  getAllSuperVisors,
+  getAllClients,
+  getAllAdmins
 };
