@@ -207,7 +207,6 @@ const getUsersMonthlyFromDB = async () => {
   return formattedResult;
 };
 
-
 const getAllAdminsFromDB = async (query: Record<string, unknown>) => {
   const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'admin', isDeleted: false}), query)
     .search(usersSearchableFields)

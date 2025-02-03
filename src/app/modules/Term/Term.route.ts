@@ -12,7 +12,7 @@ router.post(
 );
 
 router.get(
-  '/:id',
+  '/',
   TermControllers.getSingleTerm,
 );
 

@@ -16,8 +16,8 @@ const createTerm = catchAsync(async (req, res) => {
 });
 
 const getSingleTerm = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await TermServices.getSingleTermFromDB(id);
+
+  const result = await TermServices.getSingleTermFromDB();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
