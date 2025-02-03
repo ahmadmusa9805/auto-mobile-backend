@@ -36,11 +36,7 @@ router.get(
   auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client, USER_ROLE.supervisor, USER_ROLE.technician),
   UserControllers.getMe,
 );
-router.get(
-  '/:id',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
-  UserControllers.getSingleUser,
-);
+
 
 router.post(
   '/change-status/:id',
@@ -105,7 +101,11 @@ router.get(
   auth(USER_ROLE.superAdmin,USER_ROLE.admin, USER_ROLE.client),
   UserControllers.getAllSuperVisors,
 );
-
+router.get(
+  '/:id',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  UserControllers.getSingleUser,
+);
 
 
 export const UserRoutes = router;

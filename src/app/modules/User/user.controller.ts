@@ -161,7 +161,7 @@ const getAllAdmins = catchAsync(async (req, res) => {
   });
 });
 const getAllClients = catchAsync(async (req, res) => {
-  const result = await UserServices.getAllAdminsFromDB(req.query);
+  const result = await UserServices.getAllClientsFromDB(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -173,7 +173,7 @@ const getAllClients = catchAsync(async (req, res) => {
 });
 
 const getAllSuperVisors = catchAsync(async (req, res) => {
-  const result = await UserServices.getAllAdminsFromDB(req.query);
+  const result = await UserServices.getAllSuperVisorsFromDB(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

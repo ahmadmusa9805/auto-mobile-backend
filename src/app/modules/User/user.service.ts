@@ -142,9 +142,8 @@ const deleteUserFromDB = async (id: string) => {
 
   try {
     // Step 1: Soft-delete the user
-    const deletedUser = await User.findByIdAndUpdate(
+    const deletedUser = await User.findByIdAndDelete(
       id,
-      { isDeleted: true },
       { new: true, session } // Pass the session
     );
 
@@ -242,7 +241,7 @@ const getAllTechniciansFromDB = async (query: Record<string, unknown>) => {
   };
 };
 const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
-  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'technician', isDeleted: false}), query)
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'supervisor', isDeleted: false}), query)
     .search(usersSearchableFields)
     .filter()
     .sort()
@@ -258,7 +257,7 @@ const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
   };
 };
 const getAllClientsFromDB = async (query: Record<string, unknown>) => {
-  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'technician', isDeleted: false}), query)
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'client', isDeleted: false}), query)
     .search(usersSearchableFields)
     .filter()
     .sort()
