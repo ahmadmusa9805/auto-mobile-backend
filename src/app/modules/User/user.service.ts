@@ -21,7 +21,6 @@ export const createClientIntoDB = async (payload: TUser) => {
     await OtpServices.generateAndSendOTP(payload.email);
     return newClient;
 };
-
 export const createTechnicianIntoDB = async (payload: TUser) => {
 
   payload.role = 'technician'
@@ -31,8 +30,6 @@ export const createTechnicianIntoDB = async (payload: TUser) => {
 return newTechnician;
 
 };
-
-
 export const createSuperVisorIntoDB = async (payload: TUser) => {	
 
   payload.role = 'supervisor'
@@ -42,7 +39,6 @@ export const createSuperVisorIntoDB = async (payload: TUser) => {
 
      return newSupervisor;
 };
-
 export const createAdminIntoDB = async (payload: TUser) => {	
 
   payload.role = 'admin'
@@ -52,8 +48,6 @@ await OtpServices.generateAndSendOTP(payload.email);
 
      return newAdmin;
 };
-
-
 
 const getMe = async (userEmail: string) => {
   const result = await User.findOne({ email: userEmail });
@@ -81,71 +75,6 @@ const getAllUsersFromDB = async (query: Record<string, unknown>) => {
     result,
   };
 };
-const getAllAdminUsersFromDB = async (query: Record<string, unknown>) => {
-  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'admin', isDeleted: false}), query)
-    .search(usersSearchableFields)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const meta = await studentQuery.countTotal();
-  const result = await studentQuery.modelQuery;
-
-  return {
-    meta,
-    result,
-  };
-};
-const getAllTechnicianUsersFromDB = async (query: Record<string, unknown>) => {
-  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'technician', isDeleted: false}), query)
-    .search(usersSearchableFields)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const meta = await studentQuery.countTotal();
-  const result = await studentQuery.modelQuery;
-
-  return {
-    meta,
-    result,
-  };
-};
-const getUsersMonthlyFromDB = async () => {
-  const startOfYear = new Date(new Date().getFullYear(), 0, 1); // January 1st, current year
-  const endOfYear = new Date(new Date().getFullYear() + 1, 0, 1); // January 1st, next year
-
-  const result = await User.aggregate([
-    {
-      $match: {
-        status: 'active',
-        isDeleted: false,
-        createdAt: { $gte: startOfYear, $lt: endOfYear } // Filter users created in the current year
-      }
-    },
-    {
-      $group: {
-        _id: { $month: "$createdAt" }, // Group by month of 'createdAt'
-        count: { $sum: 1 } // Count users per month
-      }
-    },
-    {
-      $sort: { _id: 1 } // Sort by month in ascending order
-    }
-  ]);
-
-  // Format result to include month names (optional)
-  const formattedResult = result.map(item => ({
-    month: new Date(0, item._id - 1).toLocaleString('default', { month: 'long' }),
-    count: item.count
-  }));
-
-  return formattedResult;
-};
-
-
 const changeStatus = async (id: string, payload: { status: string }) => {
   const result = await User.findByIdAndUpdate(id, payload, {
     new: true,
@@ -179,8 +108,6 @@ const changeStatus = async (id: string, payload: { status: string }) => {
 
   return result;
 };
-
-
 const updateUserIntoDB = async (id: string, payload: Partial<TUser>, file?: any) => {
   const {  ...userData } = payload;
   // const { fullName, ...userData } = payload;
@@ -209,16 +136,14 @@ const updateUserIntoDB = async (id: string, payload: Partial<TUser>, file?: any)
 
   return result;
 };
-
 const deleteUserFromDB = async (id: string) => {
   const session = await mongoose.startSession(); // Start a session
   session.startTransaction(); // Start transaction
 
   try {
     // Step 1: Soft-delete the user
-    const deletedUser = await User.findByIdAndUpdate(
+    const deletedUser = await User.findByIdAndDelete(
       id,
-      { isDeleted: true },
       { new: true, session } // Pass the session
     );
 
@@ -250,13 +175,112 @@ const deleteUserFromDB = async (id: string) => {
     throw error; // Propagate the error to be handled by the caller
   }
 };
+const getUsersMonthlyFromDB = async () => {
+  const startOfYear = new Date(new Date().getFullYear(), 0, 1); // January 1st, current year
+  const endOfYear = new Date(new Date().getFullYear() + 1, 0, 1); // January 1st, next year
+
+  const result = await User.aggregate([
+    {
+      $match: {
+        status: 'active',
+        isDeleted: false,
+        createdAt: { $gte: startOfYear, $lt: endOfYear } // Filter users created in the current year
+      }
+    },
+    {
+      $group: {
+        _id: { $month: "$createdAt" }, // Group by month of 'createdAt'
+        count: { $sum: 1 } // Count users per month
+      }
+    },
+    {
+      $sort: { _id: 1 } // Sort by month in ascending order
+    }
+  ]);
+
+  // Format result to include month names (optional)
+  const formattedResult = result.map(item => ({
+    month: new Date(0, item._id - 1).toLocaleString('default', { month: 'long' }),
+    count: item.count
+  }));
+
+  return formattedResult;
+};
+
+const getAllAdminsFromDB = async (query: Record<string, unknown>) => {
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'admin', isDeleted: false}), query)
+    .search(usersSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await studentQuery.countTotal();
+  const result = await studentQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
+};
+const getAllTechniciansFromDB = async (query: Record<string, unknown>) => {
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'technician', isDeleted: false}), query)
+    .search(usersSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await studentQuery.countTotal();
+  const result = await studentQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
+};
+const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'supervisor', isDeleted: false}), query)
+    .search(usersSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await studentQuery.countTotal();
+  const result = await studentQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
+};
+const getAllClientsFromDB = async (query: Record<string, unknown>) => {
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'client', isDeleted: false}), query)
+    .search(usersSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await studentQuery.countTotal();
+  const result = await studentQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
+};
+
 
 export const UserServices = {
+  getAllTechniciansFromDB,
+  getAllSuperVisorsFromDB,
+  getAllClientsFromDB,
   createClientIntoDB,
   createAdminIntoDB,
   createSuperVisorIntoDB,
   createTechnicianIntoDB,
-  getAllAdminUsersFromDB,
   getSingleUserIntoDB,
   getUsersMonthlyFromDB, 
   deleteUserFromDB,
@@ -264,5 +288,5 @@ export const UserServices = {
   changeStatus,
   getAllUsersFromDB,
   updateUserIntoDB, 
-  getAllTechnicianUsersFromDB
+  getAllAdminsFromDB
 };

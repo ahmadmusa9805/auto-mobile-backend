@@ -60,7 +60,15 @@ const getAllChatsFromDB = async (userId: string, chatId: string) => {
 //   await Chat.updateMany({ sender: senderId, receiver: receiverId }, { isRead: true });
 // };
 const markMessagesAsReadIntoDB = async (senderId: string, receiverId: string) => {
-  await Chat.updateMany({ sender: senderId, receiver: receiverId, isRead: false }, { isRead: true });
+  // console.log(`senderId: ${senderId}, receiverId: ${receiverId}`);
+ await Chat.updateMany({ sender: senderId, receiver: receiverId, isRead: false }, { isRead: true });
+  // console.log(`senderId: ${result}`);
+
+  // if (result.modifiedCount === 0) {
+  //   throw new AppError(httpStatus.BAD_REQUEST, 'Failed to mark messages as read');
+  // }
+
+  // return result;
 };
 
 

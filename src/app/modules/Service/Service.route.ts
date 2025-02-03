@@ -28,7 +28,7 @@ router.delete(
 );
 
 router.get(
-  '/',
+  '/', 
   ServiceControllers.getAllServices,
 );
 

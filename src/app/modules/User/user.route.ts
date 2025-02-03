@@ -19,49 +19,24 @@ router.post(
   validateRequest(UserValidation.createUserValidationSchema),
     UserControllers.createTechnician,
 );
-
 router.post(
   '/create-supervisor',
   // auth(USER_ROLE.client),
   validateRequest(UserValidation.createUserValidationSchema),
     UserControllers.createSuperVisor,
 );
-
 router.post(
   '/create-admin',
   // auth(USER_ROLE.superAdmin),
   validateRequest(UserValidation.createUserValidationSchema),
     UserControllers.createAdmin,
 );
-
 router.get(
   '/me',
   auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client, USER_ROLE.supervisor, USER_ROLE.technician),
   UserControllers.getMe,
 );
 
-router.get(
-  '/admin',
-  auth(USER_ROLE.superAdmin),
-  UserControllers.getAllAdminUsers,
-);
-router.get(
-  '/technicians',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
-  UserControllers.getAllTechnicianUsers,
-);
-
-router.get(
-  '/users-monthly',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
-  UserControllers.getUsersMonthly,
-);
-
-router.get(
-  '/:id',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
-  UserControllers.getSingleUser,
-);
 
 router.post(
   '/change-status/:id',
@@ -69,19 +44,6 @@ router.post(
   // validateRequest(UserValidation.changeStatusValidationSchema),
   UserControllers.changeStatus,
 );
-
-router.get(
-  '/',
-  // auth(USER_ROLE.superAdmin, USER_ROLE.admin),
-  UserControllers.getAllUsers,
-);
-
-router.delete(
-  '/:id',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
-  UserControllers.deleteUser,
-);
-
 router.patch(
   '/:id',
   auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client, USER_ROLE.supervisor, USER_ROLE.technician),
@@ -99,5 +61,51 @@ router.patch(
   validateRequest(UserValidation.updateUserValidationSchema),
   UserControllers.updateUser,
 );
+
+router.get(
+  '/users-monthly',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  UserControllers.getUsersMonthly,
+);
+
+router.delete(
+  '/:id',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  UserControllers.deleteUser,
+);
+
+router.get(
+  '/',
+  auth(USER_ROLE.superAdmin),
+  UserControllers.getAllUsers,
+);
+
+router.get(
+  '/admins',
+  auth(USER_ROLE.superAdmin),
+  UserControllers.getAllAdmins,
+);
+
+router.get(
+  '/clients',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  UserControllers.getAllClients,
+);
+router.get(
+  '/technicians',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  UserControllers.getAllTechnicians,
+);
+router.get(
+  '/supervisors',
+  auth(USER_ROLE.superAdmin,USER_ROLE.admin, USER_ROLE.client),
+  UserControllers.getAllSuperVisors,
+);
+router.get(
+  '/:id',
+  auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),
+  UserControllers.getSingleUser,
+);
+
 
 export const UserRoutes = router;
