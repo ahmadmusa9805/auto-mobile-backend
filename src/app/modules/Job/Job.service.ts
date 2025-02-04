@@ -37,6 +37,25 @@ const getAllJobsFromDB = async (query: Record<string, unknown>) => {
     meta,
   };
 };
+const getAllRaiedJobsByTechnicianIdFromDB = async (technicianId: string, query: Record<string, unknown>) => {
+  const JobQuery = new QueryBuilder(
+    Job.find({assignedTechnician: technicianId, isDeleted: false}),
+    // Job.find({raisedId,isDeleted: false}).populate('assignedTechnician'),
+    query,
+  )
+    .search(JOB_SEARCHABLE_FIELDS)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await JobQuery.modelQuery;
+  const meta = await JobQuery.countTotal();
+  return {
+    result,
+    meta,
+  };
+};
 
 const getSingleJobFromDB = async (id: string) => {
   const result = await Job.findById(id, { isDeleted: false }).populate('assignedTechnician');
@@ -93,4 +112,5 @@ export const JobServices = {
   getSingleJobFromDB,
   updateJobIntoDB,
   deleteJobFromDB,
+  getAllRaiedJobsByTechnicianIdFromDB
 };

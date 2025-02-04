@@ -12,6 +12,11 @@ router.post(
 );
 
 router.get(
+  '/technician/:id',
+  JobControllers.getAllJobsByTechnicianId,
+);
+
+router.get(
   '/:id',
   JobControllers.getSingleJob,
 );
@@ -31,5 +36,6 @@ router.get(
   '/',
   JobControllers.getAllJobs,
 );
+
 
 export const JobRoutes = router;

@@ -4,6 +4,7 @@ import { Schema, model } from 'mongoose';
       const JobSchema = new Schema<TJob, JobModel>({
         regName: { type: String, required: true },
         userId: { type: Schema.Types.ObjectId, ref: 'User' },
+        raisedId: { type: Schema.Types.ObjectId, ref: 'User' },
         make: { type: String, required: true },
         model: { type: String, required: true },
         engine: { type: String, required: true },
@@ -13,7 +14,7 @@ import { Schema, model } from 'mongoose';
         status: { type: String, default: "pending" },
         paymentStatus: { type: String, default: "pending" },
         additionalInfo: { type: String },
-        assignedTechnician: { type: Schema.Types.ObjectId, ref: 'User' }, // Assuming it's a reference to a technician ID
+        assignedTechnician: { type: Schema.Types.ObjectId, ref: 'User', default: null	}, // Assuming it's a reference to a technician ID
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, default: Date.now },
         isDeleted: { type: Boolean, default: false }
