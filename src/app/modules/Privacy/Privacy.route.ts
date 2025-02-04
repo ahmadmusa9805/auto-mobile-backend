@@ -13,7 +13,7 @@ router.post(
 
 
 router.get(
-  '/:id',
+  '/',
   PrivacyControllers.getSinglePrivacy,
 );
 export const PrivacyRoutes = router;
