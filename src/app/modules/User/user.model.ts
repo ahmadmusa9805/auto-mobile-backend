@@ -13,13 +13,13 @@ const userSchema = new Schema<TUser, UserModel>(
       type: String,
       required: true,
     },
-    userName: { type: String, required: true },
+    userName: { type: String},
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    location: { type: String, required: true },
+    location: { type: String },
     password: {
       type: String,
       required: true,
@@ -33,7 +33,7 @@ const userSchema = new Schema<TUser, UserModel>(
       enum: ['client', 'superAdmin', 'admin', 'supervisor', 'technician'],
       default: 'client',
     },
-    dob: { type: String, required: true },
+    dob: { type: String },
     profileImg : {
       type: String,
       default: '',

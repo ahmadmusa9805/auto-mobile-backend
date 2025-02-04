@@ -4,9 +4,9 @@ import { USER_ROLE } from './user.constant';
 
 export type  TUser = {
   fullName: string;
-  userName: string;
+  userName?: string;
   email: string;
-  location: string;
+  location?: string;
   password: string;
   passwordChangedAt?: Date;
   contactNo: string;
@@ -14,7 +14,7 @@ export type  TUser = {
   otpVerified: boolean;
   skills: string[];
   adminClientEmail: string;
-  dob: string;
+  dob?: string;
   role: 'client' | 'superAdmin' | 'admin' | 'supervisor' | 'technician';
   status?: 'active' | 'blocked';
   isDeleted: boolean;
