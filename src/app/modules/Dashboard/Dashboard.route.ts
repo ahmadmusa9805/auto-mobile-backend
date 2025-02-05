@@ -10,9 +10,23 @@ router.post(
   validateRequest(createDashboardValidationSchema),
   DashboardControllers.createDashboard,
 );
+
 router.get(
   '/user-growth-monthly',
   DashboardControllers.userGrowthMonthly,
+);
+router.get(
+  '/job-growth-monthly',
+  DashboardControllers.jobGrowthMonthly,
+);
+router.get(
+  '/job-completed-monthly',
+  DashboardControllers.getAlljobCompletedMonthly,
+);
+
+router.get(
+  '/dashboard-reports',
+  DashboardControllers.getAllDashboardReports,
 );
 
 router.get(
@@ -32,9 +46,6 @@ router.delete(
   DashboardControllers.deleteDashboard,
 );
 
-router.get(
-  '/',
-  DashboardControllers.getAllDashboards,
-);
+
 
 export const DashboardRoutes = router;

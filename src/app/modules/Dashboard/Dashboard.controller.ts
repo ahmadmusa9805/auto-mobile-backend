@@ -26,13 +26,34 @@ const getSingleDashboard = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 const userGrowthMonthly = catchAsync(async (req, res) => {
   const result = await DashboardServices.userGrowthMonthlyFromDB();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Dashboard is retrieved successfully',
+    message: 'User Growth are retrieved successfully',
+    data: result,
+  });
+});
+const jobGrowthMonthly = catchAsync(async (req, res) => {
+  const result = await DashboardServices.jobGrowthMonthlyFromDB();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Job Growth are retrieved successfully',
+    data: result,
+  });
+});
+const getAlljobCompletedMonthly = catchAsync(async (req, res) => {
+  const result = await DashboardServices.getAlljobCompletedMonthlyFromDB();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Completed Job are retrieved successfully',
     data: result,
   });
 });
@@ -80,5 +101,7 @@ export const DashboardControllers = {
   getAllDashboards,
   updateDashboard,
   deleteDashboard,
-  userGrowthMonthly
+  userGrowthMonthly,
+  jobGrowthMonthly,
+  getAlljobCompletedMonthly
 };

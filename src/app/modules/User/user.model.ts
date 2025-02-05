@@ -54,8 +54,6 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     adminClientEmail: {
       type: String,
-      enum: Object.values(UserStatus),
-      default: 'active',
     },
     isDeleted: {
       type: Boolean,
