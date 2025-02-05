@@ -4,13 +4,14 @@ import { Model, Types } from 'mongoose';
 export type TJob = {
   regName: string;
   userId: Types.ObjectId;
+  raisedId?: Types.ObjectId;
   make: string;
   model: string;
   engine: string;
   power: string;
   gearBox: string;
   services: string[];
-  status: 'cancelled' | 'pending' | 'completed';
+  status: 'cancelled' | 'pending' | 'completed' | 'raised';
   paymentStatus: 'cancelled' | 'pending' | 'completed';
   additionalInfo?: string;
   assignedTechnician?: Types.ObjectId;

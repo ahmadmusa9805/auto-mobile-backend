@@ -10,6 +10,7 @@ import { NotificationRoutes } from '../modules/Notification/Notification.route';
 import { TermRoutes } from '../modules/Term/Term.route';
 import { PrivacyRoutes } from '../modules/Privacy/Privacy.route';
 import { ChatRoutes } from '../modules/Chat/Chat.route';
+import { DashboardRoutes } from '../modules/Dashboard/Dashboard.route';
 
 
 
@@ -59,6 +60,10 @@ const moduleRoutes = [
   {
     path: '/chats',
     route: ChatRoutes,
+  },
+  {
+    path: '/dashboards',
+    route: DashboardRoutes,
   },
 ];
 

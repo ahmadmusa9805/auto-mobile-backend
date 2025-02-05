@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FilterQuery, Query } from 'mongoose';
 
 class QueryBuilder<T> {
@@ -59,6 +60,11 @@ class QueryBuilder<T> {
     this.modelQuery = this.modelQuery.select(fields);
     return this;
   }
+
+  // public aggregate(pipeline: any[]) {
+  //   return this.modelQuery.model.aggregate(pipeline);
+  // }
+
   async countTotal() {
     const totalQueries = this.modelQuery.getFilter();
     const total = await this.modelQuery.model.countDocuments(totalQueries);

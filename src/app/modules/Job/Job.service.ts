@@ -6,6 +6,7 @@ import { JOB_SEARCHABLE_FIELDS } from './Job.constant';
 import mongoose from 'mongoose';
 import { TJob } from './Job.interface';
 import { Job } from './Job.model';
+// import { User } from '../User/user.model';
 
 const createJobIntoDB = async (
   payload: TJob,
@@ -19,9 +20,46 @@ const createJobIntoDB = async (
   return result;
 };
 
-const getAllJobsFromDB = async (query: Record<string, unknown>) => {
+const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
     Job.find({isDeleted: false}).populate('assignedTechnician'),
+    query,
+  )
+    .search(JOB_SEARCHABLE_FIELDS)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await JobQuery.modelQuery;
+  const meta = await JobQuery.countTotal();
+  return {
+    result,
+    meta,
+  };
+};
+const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, unknown>) => {
+  const JobQuery = new QueryBuilder(
+    Job.find({userId, isDeleted: false}).populate('userId'),
+    query,
+  )
+    .search(JOB_SEARCHABLE_FIELDS)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await JobQuery.modelQuery;
+  const meta = await JobQuery.countTotal();
+  return {
+    result,
+    meta,
+  };
+};
+const getAllRaiedJobsByTechnicianIdFromDB = async (technicianId: string, query: Record<string, unknown>) => {
+  const JobQuery = new QueryBuilder(
+    Job.find({assignedTechnician: technicianId, isDeleted: false}),
+    // Job.find({raisedId,isDeleted: false}).populate('assignedTechnician'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -60,6 +98,14 @@ const updateJobIntoDB = async (id: string, payload: any) => {
   if (isDeletedService.isDeleted) {
     throw new Error('Cannot update a deleted Job');
   }
+
+  // if(payload.status === 'Completed'){
+  //   const updatedData = await User.findByIdAndUpdate(
+  //     { _id: isDeletedService.assignedTechnician },
+  //     {$inc: {technicianJobs: 1}}
+  //   )
+  // }
+
   const updatedData = await Job.findByIdAndUpdate(
     { _id: id },
     payload,
@@ -93,4 +139,6 @@ export const JobServices = {
   getSingleJobFromDB,
   updateJobIntoDB,
   deleteJobFromDB,
+  getAllRaiedJobsByTechnicianIdFromDB,
+  getAllJobsWithUserIdFromDB
 };
