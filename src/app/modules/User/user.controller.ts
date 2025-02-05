@@ -101,6 +101,18 @@ const getAllUsers = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
+const getAllSuperVisorsWithUserId = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await UserServices.getAllSuperVisorsWithUserIdFromDB(id, req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'SuperVisors are retrieved succesfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
 const getUsersMonthly = catchAsync(async (req, res) => {
   const result = await UserServices.getUsersMonthlyFromDB();
 
@@ -200,5 +212,6 @@ export const UserControllers = {
   getAllTechnicians,
   getAllSuperVisors,
   getAllClients,
-  getAllAdmins
+  getAllAdmins,
+  getAllSuperVisorsWithUserId
 };

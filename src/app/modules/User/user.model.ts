@@ -9,6 +9,7 @@ import { TUser, UserModel } from './user.interface';
 const userSchema = new Schema<TUser, UserModel>(
   {
     fullName: { type: String, required: true },
+    creatorId: { type: Schema.Types.ObjectId, ref: 'User', default: null },
     contactNo: {
       type: String,
       required: true,

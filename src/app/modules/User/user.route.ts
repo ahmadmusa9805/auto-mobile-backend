@@ -79,6 +79,11 @@ router.get(
   auth(USER_ROLE.superAdmin),
   UserControllers.getAllUsers,
 );
+router.get(
+  '/supervisors/:id',
+  // auth(USER_ROLE.superAdmin),
+  UserControllers.getAllSuperVisorsWithUserId,  
+);
 
 router.get(
   '/admins',
