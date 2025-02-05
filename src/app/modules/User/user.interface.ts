@@ -6,6 +6,7 @@ export type  TUser = {
   fullName: string;
   userName?: string;
   creatorId?: Types.ObjectId;
+  technicianJobs?: number;
   email: string;
   location?: string;
   password: string;

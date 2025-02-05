@@ -15,6 +15,7 @@ const userSchema = new Schema<TUser, UserModel>(
       required: true,
     },
     userName: { type: String},
+    technicianJobs: { type: Number},
     email: {
       type: String,
       required: true,

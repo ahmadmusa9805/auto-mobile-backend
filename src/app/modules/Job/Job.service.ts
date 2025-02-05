@@ -6,6 +6,7 @@ import { JOB_SEARCHABLE_FIELDS } from './Job.constant';
 import mongoose from 'mongoose';
 import { TJob } from './Job.interface';
 import { Job } from './Job.model';
+// import { User } from '../User/user.model';
 
 const createJobIntoDB = async (
   payload: TJob,
@@ -97,6 +98,14 @@ const updateJobIntoDB = async (id: string, payload: any) => {
   if (isDeletedService.isDeleted) {
     throw new Error('Cannot update a deleted Job');
   }
+
+  // if(payload.status === 'Completed'){
+  //   const updatedData = await User.findByIdAndUpdate(
+  //     { _id: isDeletedService.assignedTechnician },
+  //     {$inc: {technicianJobs: 1}}
+  //   )
+  // }
+
   const updatedData = await Job.findByIdAndUpdate(
     { _id: id },
     payload,
