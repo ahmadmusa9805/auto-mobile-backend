@@ -11,6 +11,7 @@ import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import { OtpServices } from '../Otp/otp.service';
+import { Job } from '../Job/Job.model';
 // import { OtpServices } from '../Otp/otp.service';
 
 export const createClientIntoDB = async (payload: TUser) => {
@@ -313,12 +314,19 @@ const getAllTechniciansFromDB = async (query: Record<string, unknown>) => {
 
   const meta = await studentQuery.countTotal();
   const result = await studentQuery.modelQuery;
-
+  console.log(result, "test");
+  // const res1 = await Job.find({assignedTechnician: result[0]?._id, status: 'completed'}).populate('assignedTechnician');
   return {
     meta,
     result,
   };
 };
+
+
+
+
+
+
 const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
   const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'supervisor', isDeleted: false}), query)
     .search(usersSearchableFields)

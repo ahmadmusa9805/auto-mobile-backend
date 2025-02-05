@@ -151,13 +151,11 @@ const deleteUser = catchAsync(async (req, res) => {
 
 const getAllTechnicians = catchAsync(async (req, res) => {
   const result = await UserServices.getAllTechniciansFromDB(req.query);
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Technicians are retrieved succesfully',
-    meta: result.meta,
-    data: result.result,
+    data: result
   });
 });
 
