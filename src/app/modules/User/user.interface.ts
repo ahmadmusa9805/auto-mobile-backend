@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose';
+import { Model , Types} from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
 export type  TUser = {
   fullName: string;
-  userName: string;
+  userName?: string;
+  creatorId?: Types.ObjectId;
+  technicianJobs?: number;
   email: string;
-  location: string;
+  location?: string;
   password: string;
   passwordChangedAt?: Date;
   contactNo: string;
@@ -14,7 +16,7 @@ export type  TUser = {
   otpVerified: boolean;
   skills: string[];
   adminClientEmail: string;
-  dob: string;
+  dob?: string;
   role: 'client' | 'superAdmin' | 'admin' | 'supervisor' | 'technician';
   status?: 'active' | 'blocked';
   isDeleted: boolean;

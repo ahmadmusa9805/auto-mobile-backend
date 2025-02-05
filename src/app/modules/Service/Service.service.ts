@@ -21,7 +21,7 @@ const createServiceIntoDB = async (
 
 const getAllServicesFromDB = async (query: Record<string, unknown>) => {
   const ServiceQuery = new QueryBuilder(
-    Service.find(),
+    Service.find({isDeleted: false}),
     query,
   )
     .search(SERVICE_SEARCHABLE_FIELDS)
@@ -74,9 +74,7 @@ const updateServiceIntoDB = async (id: string, payload: any) => {
 };
 
 const deleteServiceFromDB = async (id: string) => {
-  const deletedService = await Service.findByIdAndUpdate(
-    id,
-    { isDeleted: true },
+  const deletedService = await Service.findByIdAndDelete(id,
     { new: true },
   );
 
