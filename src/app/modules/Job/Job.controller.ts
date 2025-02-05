@@ -38,6 +38,18 @@ const getAllJobs = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
+const getAllJobsWithUserId = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await JobServices.getAllJobsWithUserIdFromDB(id, req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Jobs are retrieved successfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
 const getAllJobsByTechnicianId = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await JobServices.getAllRaiedJobsByTechnicianIdFromDB(id ,  req.query);
@@ -82,5 +94,6 @@ export const JobControllers = {
   getAllJobs,
   updateJob,
   deleteJob,
-  getAllJobsByTechnicianId
+  getAllJobsByTechnicianId,
+  getAllJobsWithUserId
 };

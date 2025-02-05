@@ -17,6 +17,12 @@ router.get(
 );
 
 router.get(
+  '/user/:id',
+  JobControllers.getAllJobsWithUserId,
+);
+
+
+router.get(
   '/:id',
   JobControllers.getSingleJob,
 );
