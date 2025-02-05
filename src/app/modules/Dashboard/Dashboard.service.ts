@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
-import { DASHBOARD_SEARCHABLE_FIELDS, monthNamesShortForm } from './Dashboard.constant';
+import { monthNamesShortForm } from './Dashboard.constant';
 import mongoose from 'mongoose';
 import { TDashboard } from './Dashboard.interface';
 import { Dashboard } from './Dashboard.model';
@@ -21,24 +20,7 @@ const createDashboardIntoDB = async (
   return result;
 };
 
-const getAllDashboardsFromDB = async (query: Record<string, unknown>) => {
-  const DashboardQuery = new QueryBuilder(
-    Dashboard.find(),
-    query,
-  )
-    .search(DASHBOARD_SEARCHABLE_FIELDS)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
 
-  const result = await DashboardQuery.modelQuery;
-  const meta = await DashboardQuery.countTotal();
-  return {
-    result,
-    meta,
-  };
-};
 
 const getSingleDashboardFromDB = async (id: string) => {
   const result = await Dashboard.findById(id);
@@ -196,8 +178,6 @@ const getAlljobCompletedMonthlyFromDB = async () => {
   }
 };
 
-
-
 const updateDashboardIntoDB = async (id: string, payload: any) => {
   const isDeletedService = await mongoose.connection
     .collection('dashboards')
@@ -241,9 +221,33 @@ const deleteDashboardFromDB = async (id: string) => {
   return deletedService;
 };
 
+const getAllDashboardReportsFromDB = async () => {
+  const jobGrowthMonthly = await userGrowthMonthlyFromDB()
+  const completedJobMonthly = await jobGrowthMonthlyFromDB()
+  const userGrowthMonthly = await getAlljobCompletedMonthlyFromDB()
+
+  // Aggregate the total users, total jobs, total clients, and total technicians
+  const totalUsers = await User.countDocuments(); // Get total number of users
+  const totalJobs = await Job.countDocuments(); // Get total number of jobs
+  const totalClients = await User.countDocuments({ role: 'client' }); // Get total number of clients
+  const totalTechnicians = await User.countDocuments({ role: 'technician' }); // Get total number of technicians
+
+
+    // Return the aggregated report
+    return {
+      jobGrowthMonthly,
+      completedJobMonthly,
+      userGrowthMonthly,
+      totalUsers,
+      totalJobs,
+      totalClients,
+      totalTechnicians,
+    };
+};
+
 export const DashboardServices = {
   createDashboardIntoDB,
-  getAllDashboardsFromDB,
+  getAllDashboardReportsFromDB,
   getSingleDashboardFromDB,
   updateDashboardIntoDB,
   deleteDashboardFromDB,

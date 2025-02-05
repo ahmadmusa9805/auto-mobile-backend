@@ -58,15 +58,14 @@ const getAlljobCompletedMonthly = catchAsync(async (req, res) => {
   });
 });
 
-const getAllDashboards = catchAsync(async (req, res) => {
-  const result = await DashboardServices.getAllDashboardsFromDB(req.query);
+const getAllDashboardReports = catchAsync(async (req, res) => {
+  const result = await DashboardServices.getAllDashboardReportsFromDB();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Dashboards are retrieved successfully',
-    meta: result.meta,
-    data: result.result,
+    data: result,
   });
 });
 
@@ -98,10 +97,10 @@ const deleteDashboard = catchAsync(async (req, res) => {
 export const DashboardControllers = {
   createDashboard,
   getSingleDashboard,
-  getAllDashboards,
   updateDashboard,
   deleteDashboard,
   userGrowthMonthly,
   jobGrowthMonthly,
-  getAlljobCompletedMonthly
+  getAlljobCompletedMonthly,
+  getAllDashboardReports
 };
