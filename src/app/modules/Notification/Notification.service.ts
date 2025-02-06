@@ -39,8 +39,12 @@ const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getSingleNotificationFromDB = async (id: string) => {
-  const result = await Notification.findById(id,{ isDeleted: false});
 
+  const result = await Notification.findOneAndUpdate(
+    { _id: id, isDeleted: false },
+    { $set: { isRead: true } },
+    { new: true }
+  );
   return result;
 };
 

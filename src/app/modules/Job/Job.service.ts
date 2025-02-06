@@ -6,6 +6,7 @@ import { JOB_SEARCHABLE_FIELDS } from './Job.constant';
 import mongoose from 'mongoose';
 import { TJob } from './Job.interface';
 import { Job } from './Job.model';
+import { NotificationServices } from '../Notification/Notification.service';
 // import { User } from '../User/user.model';
 
 const createJobIntoDB = async (
@@ -83,8 +84,8 @@ const getSingleJobFromDB = async (id: string) => {
 };
 
 const updateJobIntoDB = async (id: string, payload: any) => {
-
-    const isDeletedService = await mongoose.connection
+console.log(id, "id", payload)
+  const isDeletedService = await mongoose.connection
     .collection('jobs')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
@@ -92,20 +93,36 @@ const updateJobIntoDB = async (id: string, payload: any) => {
 
   if (!isDeletedService) {
       throw new Error('Job not found');
-    }
-
+  }
 
   if (isDeletedService.isDeleted) {
     throw new Error('Cannot update a deleted Job');
   }
 
-  // if(payload.status === 'Completed'){
-  //   const updatedData = await User.findByIdAndUpdate(
-  //     { _id: isDeletedService.assignedTechnician },
-  //     {$inc: {technicianJobs: 1}}
-  //   )
-  // }
+  if(payload.status === 'raised'){
 
+    const updatedData = await Job.findByIdAndUpdate(
+      { _id: id },
+        payload,
+      { new: true, runValidators: true },
+    );
+   
+    if (!updatedData) {
+      throw new Error('Job not found after update');
+    }
+
+     await  NotificationServices.createNotificationIntoDB({
+      message: 'New job raised',
+      jobId: id,
+      userId: payload.userId,
+      isRead: false,
+      isDeleted: false
+    })
+
+    return updatedData;
+
+  }else{
+    
   const updatedData = await Job.findByIdAndUpdate(
     { _id: id },
     payload,
@@ -117,6 +134,9 @@ const updateJobIntoDB = async (id: string, payload: any) => {
   }
 
   return updatedData;
+
+  }
+ 
 };
 
 const deleteJobFromDB = async (id: string) => {
