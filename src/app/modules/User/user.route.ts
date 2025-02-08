@@ -98,7 +98,7 @@ router.get(
 );
 router.get(
   '/technicians',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  // auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   UserControllers.getAllTechnicians,
 );
 router.get(

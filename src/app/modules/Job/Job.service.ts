@@ -34,6 +34,11 @@ const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
 
   const result = await JobQuery.modelQuery;
   const meta = await JobQuery.countTotal();
+
+
+
+
+
   return {
     result,
     meta,
@@ -57,9 +62,9 @@ const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, u
     meta,
   };
 };
-const getAllRaiedJobsByTechnicianIdFromDB = async (technicianId: string, query: Record<string, unknown>) => {
+const getAllRaiedJobsByTechnicianIdFromDB = async (assignedTechnician: string, query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
-    Job.find({assignedTechnician: technicianId, isDeleted: false}),
+    Job.find({assignedTechnician: assignedTechnician, isDeleted: false}),
     // Job.find({raisedId,isDeleted: false}).populate('assignedTechnician'),
     query,
   )
