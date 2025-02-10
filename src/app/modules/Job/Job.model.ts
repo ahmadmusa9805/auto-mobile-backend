@@ -6,6 +6,7 @@ import { Schema, model } from 'mongoose';
         userId: { type: Schema.Types.ObjectId, ref: 'User' },
         raisedId: { type: Schema.Types.ObjectId, ref: 'User' },
         make: { type: String, required: true },
+        jobId: { type: String, required: true, unique: true },
         model: { type: String, required: true },
         engine: { type: String, required: true },
         power: { type: String, required: true },

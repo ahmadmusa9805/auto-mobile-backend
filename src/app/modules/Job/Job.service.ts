@@ -7,16 +7,21 @@ import mongoose from 'mongoose';
 import { TJob } from './Job.interface';
 import { Job } from './Job.model';
 import { NotificationServices } from '../Notification/Notification.service';
+import generateUniqueJobId from './job.util';
 // import { User } from '../User/user.model';
 
 const createJobIntoDB = async (
   payload: TJob,
 ) => {
+
+  const id = await generateUniqueJobId();
+  payload.jobId = id as string;
+
   const result = await Job.create(payload);
   
-  if (!result) {
-    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create Job');
-  }
+  // if (!result) {
+  //   throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create Job');
+  // }
 
   return result;
 };
@@ -34,10 +39,6 @@ const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
 
   const result = await JobQuery.modelQuery;
   const meta = await JobQuery.countTotal();
-
-
-
-
 
   return {
     result,

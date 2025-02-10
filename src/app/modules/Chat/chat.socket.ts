@@ -202,6 +202,7 @@ export const initializeChatSocket = (io: Server) => {
     //   }
     // });
     socket.on("chatMessage", async (data) => {
+      console.log("Message received from client:", data);
       const { sender, receiver, message, image } = data;
       if (!sender || !receiver || !message) return;
     
