@@ -7,6 +7,7 @@ import { Schema, model } from 'mongoose';
           receiver: { type: Schema.Types.ObjectId, ref: "User", required: true },
           message: { type: String },
           image: { type: String },
+          regName: { type: String },
           isRead: { type: Boolean, default: false },
           isDeleted: { type: Boolean, default: false },
 

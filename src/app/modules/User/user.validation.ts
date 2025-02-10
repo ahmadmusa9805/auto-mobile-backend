@@ -36,7 +36,7 @@ export const updateUserValidationSchema = z.object({
       skills: z.array(z.string()).default([]).optional(),
       adminClientEmail: z.string().optional(), // Make optional, as it seems specific to certain users
       isDeleted: z.boolean().default(false).optional(),
-    }),
+    }).optional(),
   }),
 });
 

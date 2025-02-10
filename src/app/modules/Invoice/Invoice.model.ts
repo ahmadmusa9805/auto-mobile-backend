@@ -9,8 +9,8 @@ import { Schema, model } from 'mongoose';
         paymentStatus: { type: String, required: true },
         totalCost: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
-      });
-      
+      }, { timestamps: true });
+       
       InvoiceSchema.statics.isInvoiceExists = async function (id: string) {
         return await this.findOne({ _id: id, isDeleted: false });
       };

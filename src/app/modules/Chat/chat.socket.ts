@@ -202,7 +202,8 @@ export const initializeChatSocket = (io: Server) => {
     //   }
     // });
     socket.on("chatMessage", async (data) => {
-      const { sender, receiver, message, image } = data;
+      console.log("Message received from client:", data);
+      const { sender, receiver, message, image, regName } = data;
       if (!sender || !receiver || !message) return;
     
       const chatMessage = await ChatServices.createChatIntoDB({
@@ -211,6 +212,7 @@ export const initializeChatSocket = (io: Server) => {
         message,
         image: image || null,
         isRead: false,
+        regName ,
         createdAt: new Date(),
         isDeleted: false,
       });

@@ -38,6 +38,17 @@ const getAllNotifications = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
+const getAllNotificationsAndReadAll = catchAsync(async (req, res) => {
+  const result = await NotificationServices.getAllNotificationsAndReadAllFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Notifications are retrieved successfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
 
 const updateNotification = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -70,4 +81,5 @@ export const NotificationControllers = {
   getAllNotifications,
   updateNotification,
   deleteNotification,
+  getAllNotificationsAndReadAll
 };

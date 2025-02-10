@@ -12,6 +12,11 @@ router.post(
 );
 
 router.get(
+  '/read-all',
+  NotificationControllers.getAllNotificationsAndReadAll,
+);
+
+router.get(
   '/:id',
   NotificationControllers.getSingleNotification,
 );
@@ -29,6 +34,10 @@ router.delete(
 
 router.get(
   '/',
+  NotificationControllers.getAllNotifications,
+);
+router.get(
+  '/read-all',
   NotificationControllers.getAllNotifications,
 );
 

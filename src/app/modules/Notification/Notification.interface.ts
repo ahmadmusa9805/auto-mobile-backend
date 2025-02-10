@@ -3,6 +3,9 @@ import { Model } from 'mongoose';
 
 export type TNotification = {
   message: string;
+  jobId: string;
+  userId: string;
+  isRead: boolean;
   isDeleted: boolean;
 };
 

@@ -6,16 +6,22 @@ import { JOB_SEARCHABLE_FIELDS } from './Job.constant';
 import mongoose from 'mongoose';
 import { TJob } from './Job.interface';
 import { Job } from './Job.model';
+import { NotificationServices } from '../Notification/Notification.service';
+import generateUniqueJobId from './job.util';
 // import { User } from '../User/user.model';
 
 const createJobIntoDB = async (
   payload: TJob,
 ) => {
+
+  const id = await generateUniqueJobId();
+  payload.jobId = id as string;
+
   const result = await Job.create(payload);
   
-  if (!result) {
-    throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create Job');
-  }
+  // if (!result) {
+  //   throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create Job');
+  // }
 
   return result;
 };
@@ -33,6 +39,7 @@ const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
 
   const result = await JobQuery.modelQuery;
   const meta = await JobQuery.countTotal();
+
   return {
     result,
     meta,
@@ -56,9 +63,9 @@ const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, u
     meta,
   };
 };
-const getAllRaiedJobsByTechnicianIdFromDB = async (technicianId: string, query: Record<string, unknown>) => {
+const getAllRaiedJobsByTechnicianIdFromDB = async (assignedTechnician: string, query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
-    Job.find({assignedTechnician: technicianId, isDeleted: false}),
+    Job.find({assignedTechnician: assignedTechnician, isDeleted: false}),
     // Job.find({raisedId,isDeleted: false}).populate('assignedTechnician'),
     query,
   )
@@ -83,8 +90,8 @@ const getSingleJobFromDB = async (id: string) => {
 };
 
 const updateJobIntoDB = async (id: string, payload: any) => {
-
-    const isDeletedService = await mongoose.connection
+console.log(id, "id", payload)
+  const isDeletedService = await mongoose.connection
     .collection('jobs')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
@@ -92,20 +99,36 @@ const updateJobIntoDB = async (id: string, payload: any) => {
 
   if (!isDeletedService) {
       throw new Error('Job not found');
-    }
-
+  }
 
   if (isDeletedService.isDeleted) {
     throw new Error('Cannot update a deleted Job');
   }
 
-  // if(payload.status === 'Completed'){
-  //   const updatedData = await User.findByIdAndUpdate(
-  //     { _id: isDeletedService.assignedTechnician },
-  //     {$inc: {technicianJobs: 1}}
-  //   )
-  // }
+  if(payload.status === 'raised'){
 
+    const updatedData = await Job.findByIdAndUpdate(
+      { _id: id },
+        payload,
+      { new: true, runValidators: true },
+    );
+   
+    if (!updatedData) {
+      throw new Error('Job not found after update');
+    }
+
+     await  NotificationServices.createNotificationIntoDB({
+      message: 'New job raised',
+      jobId: id,
+      userId: payload.userId,
+      isRead: false,
+      isDeleted: false
+    })
+
+    return updatedData;
+
+  }else{
+    
   const updatedData = await Job.findByIdAndUpdate(
     { _id: id },
     payload,
@@ -117,6 +140,9 @@ const updateJobIntoDB = async (id: string, payload: any) => {
   }
 
   return updatedData;
+
+  }
+ 
 };
 
 const deleteJobFromDB = async (id: string) => {

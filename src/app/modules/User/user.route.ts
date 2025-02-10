@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+// 
+// import express from 'express';
 import express, { NextFunction, Response, Request } from 'express';
 import auth from '../../middlewares/auth';
 import { USER_ROLE } from './user.constant';
@@ -7,6 +8,7 @@ import { UserControllers } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { UserValidation } from './user.validation';
 import { uploadFileS3 } from '../../utils/UploaderS3';
+// import { upladFileS3 } from '../../utils/UploaderS3';
 
 const router = express.Router();
 router.post(
@@ -36,7 +38,6 @@ router.get(
   auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client, USER_ROLE.supervisor, USER_ROLE.technician),
   UserControllers.getMe,
 );
-
 
 router.post(
   '/change-status/:id',
@@ -98,14 +99,16 @@ router.get(
 );
 router.get(
   '/technicians',
-  auth(USER_ROLE.superAdmin, USER_ROLE.admin),
+  // auth(USER_ROLE.superAdmin, USER_ROLE.admin),
   UserControllers.getAllTechnicians,
 );
+
 router.get(
   '/supervisors',
   auth(USER_ROLE.superAdmin,USER_ROLE.admin, USER_ROLE.client),
   UserControllers.getAllSuperVisors,
 );
+
 router.get(
   '/:id',
   auth(USER_ROLE.superAdmin, USER_ROLE.admin, USER_ROLE.client),

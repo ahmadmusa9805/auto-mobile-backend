@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import mongoose from 'mongoose';
+import { ObjectId } from 'mongodb'; // Import ObjectId
 
 import { TUser } from './user.interface';
 import { User } from './user.model';
@@ -190,9 +191,10 @@ const changeStatus = async (id: string, payload: { status: string }) => {
   return result;
 };
 const updateUserIntoDB = async (id: string, payload: Partial<TUser>, file?: any) => {
+
   const {  ...userData } = payload;
   // const { fullName, ...userData } = payload;
-
+  
   const modifiedUpdatedData: Record<string, unknown> = { ...userData };
 
   // if (name && Object.keys(name).length) {
@@ -304,8 +306,13 @@ const getAllAdminsFromDB = async (query: Record<string, unknown>) => {
     result,
   };
 };
+
 const getAllTechniciansFromDB = async (query: Record<string, unknown>) => {
-  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'technician', isDeleted: false}), query)
+
+  const studentQuery = new QueryBuilder(
+    User.find({ status: 'active', role: 'technician', isDeleted: false }),
+    query
+  )
     .search(usersSearchableFields)
     .filter()
     .sort()
@@ -313,19 +320,27 @@ const getAllTechniciansFromDB = async (query: Record<string, unknown>) => {
     .fields();
 
   const meta = await studentQuery.countTotal();
-  const result = await studentQuery.modelQuery;
-  console.log(result, "test");
-  // const res1 = await Job.find({assignedTechnician: result[0]?._id, status: 'completed'}).populate('assignedTechnician');
+  const technicians = await studentQuery.modelQuery;
+
+  // Fetch all completed jobs
+  const completedJobs = await Job.find({ status: 'completed' });
+
+  // Map completed jobs to technicians
+  const result = technicians.map((tech: any) => {
+    const jobsForTech = completedJobs.filter((job:any) =>
+      new ObjectId(job.assignedTechnician).equals(tech._id) // Convert and compare
+    );
+    return {
+      ...tech._doc,
+      completedJobs: jobsForTech.length, // Add the count of completed jobs
+    };
+  });
+
   return {
     meta,
     result,
   };
 };
-
-
-
-
-
 
 const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
   const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'supervisor', isDeleted: false}), query)
@@ -336,7 +351,24 @@ const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
     .fields();
 
   const meta = await studentQuery.countTotal();
-  const result = await studentQuery.modelQuery;
+  const superVisors = await studentQuery.modelQuery;
+
+
+// Fetch all completed jobs
+const completedJobs = await Job.find({ status: 'completed' });
+
+// Map completed jobs to technicians
+const result = superVisors.map((superVisor: any) => {
+  const jobsForSuperVisor = completedJobs.filter((job:any) =>
+    new ObjectId(job.userId).equals(superVisor._id) // Convert and compare
+  );
+  return {
+    ...superVisor._doc,
+    completedJobs: jobsForSuperVisor.length, // Add the count of completed jobs
+  };
+});
+
+
 
   return {
     meta,
@@ -352,7 +384,23 @@ const getAllClientsFromDB = async (query: Record<string, unknown>) => {
     .fields();
 
   const meta = await studentQuery.countTotal();
-  const result = await studentQuery.modelQuery;
+  const clients = await studentQuery.modelQuery;
+
+
+  // Fetch all completed jobs
+  const completedJobs = await Job.find({ status: 'completed' });
+
+  // Map completed jobs to technicians
+  const result = clients.map((client: any) => {
+    const jobsForClient = completedJobs.filter((job:any) =>
+      new ObjectId(job.userId).equals(client._id) // Convert and compare
+    );
+    return {
+      ...client._doc,
+      completedJobs: jobsForClient.length, // Add the count of completed jobs
+    };
+  });
+
 
   return {
     meta,

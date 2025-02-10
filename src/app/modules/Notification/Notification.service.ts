@@ -37,10 +37,39 @@ const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
     meta,
   };
 };
+const getAllNotificationsAndReadAllFromDB = async (query: Record<string, unknown>) => {
+  const NotificationQuery = new QueryBuilder(
+    Notification.find({ isDeleted: false }),
+    query,
+  )
+    .search(NOTIFICATION_SEARCHABLE_FIELDS)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await NotificationQuery.modelQuery;
+  const meta = await NotificationQuery.countTotal();
+
+  
+  // Update all notifications to mark them as read
+  await Notification.updateMany(
+    { isDeleted: false }, // Filter condition
+    { $set: { isRead: true } } // Update operation
+  );
+
+  return {
+    result,
+    meta,
+  };
+};
 
 const getSingleNotificationFromDB = async (id: string) => {
-  const result = await Notification.findById(id,{ isDeleted: false});
-
+  const result = await Notification.findOneAndUpdate(
+    { _id: id, isDeleted: false },
+    { $set: { isRead: true } },
+    { new: true }
+  );
   return result;
 };
 
@@ -93,4 +122,5 @@ export const NotificationServices = {
   getSingleNotificationFromDB,
   updateNotificationIntoDB,
   deleteNotificationFromDB,
+  getAllNotificationsAndReadAllFromDB
 };

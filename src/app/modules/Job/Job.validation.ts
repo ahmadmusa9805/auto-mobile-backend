@@ -35,6 +35,7 @@ export const updateJobValidationSchema = z.object({
       paymentStatus: z.string().optional(),
       additionalInfo: z.string().optional(),
       assignedTechnician: z.string().optional(),
+      jobId: z.string().optional(),
       isDeleted: z.boolean().optional(),
     }),
   }),
