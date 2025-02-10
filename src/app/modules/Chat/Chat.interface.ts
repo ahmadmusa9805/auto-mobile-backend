@@ -5,6 +5,7 @@ export type TChat = {
   sender: Types.ObjectId;
   receiver: Types.ObjectId;
   message: string;
+  regName: string;
   image?: string;
   isRead: boolean;
   createdAt: Date;
