@@ -108,6 +108,7 @@ export const createSuperVisorIntoDB = async (payload: TUser) => {
 export const createAdminIntoDB = async (payload: TUser) => {	
 
   payload.role = 'admin'
+  payload.otpVerified = true
  const newAdmin = await User.create(payload);
  if (!newAdmin) throw new Error('Failed to create admin');
 await OtpServices.generateAndSendOTP(payload.email);

@@ -4,8 +4,12 @@ import { Schema, model } from 'mongoose';
       const InvoiceSchema = new Schema<TInvoice, InvoiceModel>({
         jobId: { type: Schema.Types.ObjectId, ref: 'Job' },
         clientAdminName: { type: String },
-        serviceName: { type: String, required: true },
-        servicePrice: { type: String, required: true },
+        services: [
+          {
+            serviceName: { type: String, required: true },
+            serviceCost: { type: Number, required: true },
+          },
+        ],
         paymentStatus: { type: String, required: true },
         totalCost: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },
