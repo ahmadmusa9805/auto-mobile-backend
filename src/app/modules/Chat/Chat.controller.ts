@@ -47,7 +47,7 @@ const markAsRead = async (req: Request, res: Response) => {
 
 const getRecentChats = async (req: Request, res: Response) => {
   const { id } = req.params;
-  console.log(id, 'getRecentChats');
+  // console.log(id, 'getRecentChats');
   
   const chats = await ChatServices.getRecentChatsFromDB(id);
 

@@ -4,8 +4,10 @@ import { Model, Types } from 'mongoose';
 export type TInvoice = {
   jobId: Types.ObjectId;
   clientAdminName: string;
-  serviceName: string;
-  servicePrice: string;
+  services: {
+    serviceName: string;
+    serviceCost: number;
+  }[];
   paymentStatus: string;
   totalCost: string;
   isDeleted: boolean;
