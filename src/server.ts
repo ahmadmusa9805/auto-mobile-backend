@@ -1,6 +1,7 @@
 import http from "http";
 import { Server } from "socket.io";
-import app from "./app"; 
+// import app from "./app.ts"; 
+import app from "./app.js";
 import { initializeChatSocket } from './app/modules/Chat/chat.socket.js';
 import mongoose from 'mongoose';
 import config from './app/config/index.js';
