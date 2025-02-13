@@ -20,6 +20,10 @@ router.get(
   '/user/:id',
   JobControllers.getAllJobsWithUserId,
 );
+router.get(
+  '/grand/:id',
+  JobControllers.getAllJobsByGrandIdId,
+);
 
 
 router.get(

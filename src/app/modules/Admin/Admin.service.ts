@@ -2,7 +2,7 @@
 import httpStatus from 'http-status';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
-import { AdminSearchableFields } from './Admin.constant';
+import { ADMIN_SEARCHABLE_FIELDS } from './Admin.constant';
 import mongoose from 'mongoose';
 import { TAdmin } from './Admin.interface';
 import { Admin } from './Admin.model';
@@ -24,7 +24,7 @@ const getAllAdminsFromDB = async (query: Record<string, unknown>) => {
     Admin.find(),
     query,
   )
-    .search(AdminSearchableFields)
+    .search(ADMIN_SEARCHABLE_FIELDS)
     .filter()
     .sort()
     .paginate()

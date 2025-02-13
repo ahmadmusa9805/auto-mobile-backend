@@ -38,6 +38,28 @@ const getAllNotifications = catchAsync(async (req, res) => {
     data: result.result,
   });
 });
+const getAllNotificationsAssigned = catchAsync(async (req, res) => {
+  const result = await NotificationServices.getAllNotificationsAssignedFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Notifications are retrieved successfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
+const getAllNotificationsRaised = catchAsync(async (req, res) => {
+  const result = await NotificationServices.getAllNotificationsRaisedFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Notifications are retrieved successfully',
+    meta: result.meta,
+    data: result.result,
+  });
+});
 const getAllNotificationsAndReadAll = catchAsync(async (req, res) => {
   const result = await NotificationServices.getAllNotificationsAndReadAllFromDB(req.query);
 
@@ -81,5 +103,7 @@ export const NotificationControllers = {
   getAllNotifications,
   updateNotification,
   deleteNotification,
-  getAllNotificationsAndReadAll
+  getAllNotificationsAndReadAll,
+  getAllNotificationsAssigned,
+  getAllNotificationsRaised
 };

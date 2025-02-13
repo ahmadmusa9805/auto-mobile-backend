@@ -4,6 +4,7 @@ import { Model, Types } from 'mongoose';
 export type TJob = {
   regName: string;
   userId: Types.ObjectId;
+  grandId?: Types.ObjectId;
   jobId: string
   raisedId?: Types.ObjectId;
   make: string;
