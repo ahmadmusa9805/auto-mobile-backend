@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export type TNotification = {
   message: string;
-  jobId: string;
-  userId: string;
+  jobId: Types.ObjectId;
+  userId?: Types.ObjectId;
   isRead: boolean;
+  status: 'created' | 'assigned' | 'raised';	
   isDeleted: boolean;
 };
 

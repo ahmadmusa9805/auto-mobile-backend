@@ -2,14 +2,14 @@
   "name": "first-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "type": "module",
   "scripts": {
     "start:prod": "node ./dist/server.js",
-    "start:dev": "tsx watch src/server.ts",
+    "start": "tsx watch src/server.ts",
     "dev": "tsx watch src/server.ts",
     "create:module": "node create-module.js",
-    "build": "tsc",
+    "build": "tsc && tsc-esm",
     "lint": "eslint src --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npx eslint src --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
@@ -60,6 +60,7 @@
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.0",
     "prettier": "^3.1.0",
+    "tsc-esm": "^1.0.4",
     "tsx": "^4.19.2",
     "typescript": "^5.2.2"
   }
