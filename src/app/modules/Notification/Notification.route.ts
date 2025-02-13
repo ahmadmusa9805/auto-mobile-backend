@@ -15,7 +15,15 @@ router.get(
   '/read-all',
   NotificationControllers.getAllNotificationsAndReadAll,
 );
+router.get(
+  '/assigned/:id',
+  NotificationControllers.getAllNotificationsAssigned,
+);
 
+router.get(
+  '/raised/:id',
+  NotificationControllers.getAllNotificationsRaised,
+);
 router.get(
   '/:id',
   NotificationControllers.getSingleNotification,
@@ -36,6 +44,7 @@ router.get(
   '/',
   NotificationControllers.getAllNotifications,
 );
+
 router.get(
   '/read-all',
   NotificationControllers.getAllNotifications,

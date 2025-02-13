@@ -21,7 +21,43 @@ const createNotificationIntoDB = async (
 
 const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
-    Notification.find({ isDeleted: false }),
+    Notification.find({ status: 'created', isDeleted: false }),
+    query,
+  )
+    .search(NOTIFICATION_SEARCHABLE_FIELDS)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await NotificationQuery.modelQuery;
+  const meta = await NotificationQuery.countTotal();
+  return {
+    result,
+    meta,
+  };
+};
+const getAllNotificationsAssignedFromDB = async (query: Record<string, unknown>) => {
+  const NotificationQuery = new QueryBuilder(
+    Notification.find({ status: 'assigned', isDeleted: false }),
+    query,
+  )
+    .search(NOTIFICATION_SEARCHABLE_FIELDS)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await NotificationQuery.modelQuery;
+  const meta = await NotificationQuery.countTotal();
+  return {
+    result,
+    meta,
+  };
+};
+const getAllNotificationsRaisedFromDB = async (query: Record<string, unknown>) => {
+  const NotificationQuery = new QueryBuilder(
+    Notification.find({ status: 'raised', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -122,5 +158,7 @@ export const NotificationServices = {
   getSingleNotificationFromDB,
   updateNotificationIntoDB,
   deleteNotificationFromDB,
-  getAllNotificationsAndReadAllFromDB
+  getAllNotificationsAndReadAllFromDB,
+  getAllNotificationsAssignedFromDB,
+  getAllNotificationsRaisedFromDB
 };

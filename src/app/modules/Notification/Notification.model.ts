@@ -3,7 +3,10 @@ import { Schema, model } from 'mongoose';
       
       const NotificationSchema = new Schema<TNotification, NotificationModel>({
         message: { type: String, required: true },
+        userId: { type: Schema.Types.ObjectId, ref: 'User' },
+        jobId: { type: Schema.Types.ObjectId, ref: 'Job' },
         isRead: { type: Boolean, default: false },
+        status: { type: String, enum: ['created', 'assigned', 'raised'], required: true },
         isDeleted: { type: Boolean, default: false },
       },{
         timestamps: true,

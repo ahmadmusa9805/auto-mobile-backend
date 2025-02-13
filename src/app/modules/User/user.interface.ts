@@ -5,7 +5,7 @@ import { USER_ROLE } from './user.constant';
 export type  TUser = {
   fullName: string;
   userName?: string;
-  creatorId?: Types.ObjectId;
+  creatorId: Types.ObjectId;
   technicianJobs?: number;
   email: string;
   location?: string;
@@ -15,7 +15,7 @@ export type  TUser = {
   profileImg?: string;
   otpVerified: boolean;
   skills: string[];
-  adminClientEmail: string;
+  adminClientEmail?: string;
   dob?: string;
   role: 'client' | 'superAdmin' | 'admin' | 'supervisor' | 'technician';
   status?: 'active' | 'blocked';

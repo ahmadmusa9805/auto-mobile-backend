@@ -6,12 +6,12 @@ import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
 // import { createServer } from 'http';
-import notFound from './app/middlewares/notFound';
-import router from './app/routes';
+import router from './app/routes/index';
 import helmet from 'helmet';
-import path from 'path';
+// import path from 'path';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
+// import notFound from './app/middlewares/notFound';
 
 const app: Application = express();
 // const httpServer = createServer(app);
@@ -39,19 +39,19 @@ app.use('/api/v1', router);
 
 
 // Manually define __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-  // res.send('Welcome To Property API!');
+  // res.sendFile(path.join(__dirname, 'index.html'));
+  res.send('Welcome To Property API!');
 
 });
 
 
 
+// app.use(notFound);
 app.use(globalErrorHandler);
-app.use(notFound);
 
 
 
