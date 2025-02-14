@@ -98,32 +98,7 @@ const changeStatus = async (id: string, payload: { status: string }) => {
   const result = await User.findByIdAndUpdate(id, payload, {
     new: true,
   });
-    // if(result?.status === 'blocked'){
-    //   if(result?.role === 'client'){
-    //      await Client.findOneAndUpdate({userId: result?._id}, {status: 'blocked'}, {new: true}).populate('userId');
-    //    }
-       
-    //    if(result?.role === 'admin'){
-    //     await Admin.findOneAndUpdate({userId: result?._id}, {status: 'blocked'}, {new: true}).populate('userId');
-    //   }
-
-     
-    // }
-
-    // if(result?.status === 'active'){
-    //   if(result?.role === 'client'){
-    //      await Client.findOneAndUpdate({userId: result?._id}, {status: 'active'}, {new: true}).populate('userId');
-    //    }
-       
-    //    if(result?.role === 'admin'){
-    //     await Admin.findOneAndUpdate({userId: result?._id}, {status: 'active'}, {new: true}).populate('userId');
-    //   }
-
-     
-    // }
-
-
-
+    
 
   return result;
 };

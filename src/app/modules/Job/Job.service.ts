@@ -9,7 +9,6 @@ import { Job } from './Job.model';
 import { NotificationServices } from '../Notification/Notification.service';
 import generateUniqueJobId from './job.util';
 import { User } from '../User/user.model';
-// import { User } from '../User/user.model';
 
 const createJobIntoDB = async (
   payload: TJob,
@@ -28,7 +27,6 @@ const createJobIntoDB = async (
   await  NotificationServices.createNotificationIntoDB({
     message: 'New job Posted',
     jobId: result._id,
-    // userId: null,
     isRead: false,
     status: 'created',
     isDeleted: false
@@ -77,7 +75,6 @@ const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, u
 const getAllRaiedJobsByTechnicianIdFromDB = async (assignedTechnician: string, query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
     Job.find({assignedTechnician: assignedTechnician, isDeleted: false}),
-    // Job.find({raisedId,isDeleted: false}).populate('assignedTechnician'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
