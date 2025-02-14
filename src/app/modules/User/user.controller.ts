@@ -3,7 +3,6 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
-// import sendImageToCloudinary from '../../utils/cloudinary';
 
 const createClient = catchAsync(async (req, res) => {
   const { User: userData } = req.body;
@@ -52,10 +51,8 @@ const createSuperVisor = catchAsync(async (req, res) => {
 
 const getMe = catchAsync(async (req, res) => {
   const { userEmail } = req.user;
-  // const { userEmail, role } = req.user;
 
   const result = await UserServices.getMe(userEmail);
-  // const result = await UserServices.getMe(userEmail, role);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -66,10 +63,8 @@ const getMe = catchAsync(async (req, res) => {
 });
 const getSingleUser = catchAsync(async (req, res) => {
   const { id } = req.params;
-  // const { userEmail, role } = req.user;
 
   const result = await UserServices.getSingleUserIntoDB(id);
-  // const result = await UserServices.getMe(userEmail, role);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
