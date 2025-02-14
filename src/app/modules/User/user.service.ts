@@ -13,7 +13,6 @@ import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import { OtpServices } from '../Otp/otp.service';
 import { Job } from '../Job/Job.model';
-// import { OtpServices } from '../Otp/otp.service';
 
 export const createClientIntoDB = async (payload: TUser) => {
   payload.role = 'client'
@@ -24,69 +23,6 @@ export const createClientIntoDB = async (payload: TUser) => {
     return newClient;
 
 };
-// export const createClientIntoDB = async (payload: TUser) => {
-//   console.log('payload', payload);
-  
-//   const months = [
-//     { name: "January", month: 1 },
-//     { name: "February", month: 2 },
-//     { name: "March", month: 3 },
-//     { name: "April", month: 4 },
-//     { name: "May", month: 5 },
-//     { name: "June", month: 6 },
-//     { name: "July", month: 7 },
-//     { name: "August", month: 8 },
-//     { name: "September", month: 9 },
-//     { name: "October", month: 10 },
-//     { name: "November", month: 11 },
-//     { name: "December", month: 12 }
-//   ];
-
-//   // Realistic sample data for clients and technicians
-//   const names = ["John Doe", "Jane Smith", "Alice Brown", "Bob Johnson", "Charlie Davis"];
-//   const emails = ["john@example.com", "jane@example.com", "alice@example.com", "bob@example.com", "charlie@example.com"];
-//   const contactNos = ["+1234567890", "+0987654321", "+1122334455", "+2233445566", "+3344556677"];
-//   const defaultPassword = "password123"; // Dummy password for testing purposes
-
-//   // For each month, insert some users with realistic creation dates
-//   for (const month of months) {
-//     for (let i = 0; i < 10; i++) { // Insert 10 users per month for testing
-//       const randomName = names[Math.floor(Math.random() * names.length)];
-//       const randomEmail = emails[Math.floor(Math.random() * emails.length)];
-//       const randomContactNo = contactNos[Math.floor(Math.random() * contactNos.length)];
-//       const role = Math.random() > 0.5 ? "client" : "technician"; // Randomly assign 'client' or 'technician'
-
-//       // Create a random day in the month
-//       const randomDay = Math.floor(Math.random() * 28) + 1; // Ensure we get a valid day (1-28)
-
-//       // Create a valid Date object using Date(year, monthIndex, day)
-//       const createdAt = new Date(2025, month.month - 1, randomDay); // Month is 0-indexed, so subtract 1
-
-//       // Ensure the createdAt is valid
-//       if (isNaN(createdAt.getTime())) {
-//         console.error("Invalid Date generated:", createdAt);
-//         continue; // Skip this iteration if the date is invalid
-//       }
-
-//       const user = new User({
-//         fullName: randomName,
-//         contactNo: randomContactNo,
-//         email: randomEmail,
-//         password: defaultPassword, // Provide a password
-//         role: role,
-//         createdAt: createdAt, // Valid date object
-//       });
-
-//       try {
-//         await user.save();
-//       } catch (err) {
-//         console.error("Error saving user:", err);
-//       }
-//     }
-//   }
-
-//   return 'success';
-// };
 export const createTechnicianIntoDB = async (payload: TUser) => {
 
   payload.role = 'technician'
@@ -162,32 +98,7 @@ const changeStatus = async (id: string, payload: { status: string }) => {
   const result = await User.findByIdAndUpdate(id, payload, {
     new: true,
   });
-    // if(result?.status === 'blocked'){
-    //   if(result?.role === 'client'){
-    //      await Client.findOneAndUpdate({userId: result?._id}, {status: 'blocked'}, {new: true}).populate('userId');
-    //    }
-       
-    //    if(result?.role === 'admin'){
-    //     await Admin.findOneAndUpdate({userId: result?._id}, {status: 'blocked'}, {new: true}).populate('userId');
-    //   }
-
-     
-    // }
-
-    // if(result?.status === 'active'){
-    //   if(result?.role === 'client'){
-    //      await Client.findOneAndUpdate({userId: result?._id}, {status: 'active'}, {new: true}).populate('userId');
-    //    }
-       
-    //    if(result?.role === 'admin'){
-    //     await Admin.findOneAndUpdate({userId: result?._id}, {status: 'active'}, {new: true}).populate('userId');
-    //   }
-
-     
-    // }
-
-
-
+    
 
   return result;
 };

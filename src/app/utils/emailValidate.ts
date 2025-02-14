@@ -4,11 +4,7 @@ import config from "../config";
 
 
 export const emailValidate = async(email: string) => {
-     // Validate the email using MailboxLayer
-
 // console.log(process.env.MAILBOXLAYER_API_URL, "process.env.MAILBOXLAYER_API_URL")
-console.log(config.mailbox_layer_key, "process.env.MAILBOXLAYER_API_URL")
-console.log(config.mailbox_layer_url, "process.env.MAILBOXLAYER_API_URL")
 
      const emailValidationResponse = await axios.get(config.mailbox_layer_url as any, {
         params: {
