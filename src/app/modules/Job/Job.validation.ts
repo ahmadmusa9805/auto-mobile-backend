@@ -40,4 +40,3 @@ export const updateJobValidationSchema = z.object({
     }),
   }),
 });
-// job.validation.ts

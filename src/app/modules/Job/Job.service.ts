@@ -97,7 +97,7 @@ const getAllJobsByGrandIdIdFromDB = async (grandId: string, query: Record<string
         { userId: grandId, isDeleted: false },
         { grandId: grandId, isDeleted: false }
       ],
-    }),    // Job.find({raisedId,isDeleted: false}).populate('assignedTechnician'),
+    }),    
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
