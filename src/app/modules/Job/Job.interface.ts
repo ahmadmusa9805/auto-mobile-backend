@@ -27,5 +27,4 @@ export interface JobModel extends Model<TJob> {
 }
 
 
-// job.model.ts
 

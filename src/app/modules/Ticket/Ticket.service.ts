@@ -49,7 +49,6 @@ const updateTicketIntoDB = async (id: string, payload: any) => {
     .collection('tickets')
     .findOne(
       { _id: new mongoose.Types.ObjectId(id) },
-      // { projection: { isDeleted: 1, name: 1 } },
     );
 
   if (!isDeletedService) {

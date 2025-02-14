@@ -57,7 +57,6 @@ const refreshToken = catchAsync(async (req, res) => {
 const forgetPassword = catchAsync(async (req, res) => {
   const userEmail = req.body.email;
   const result = await AuthServices.forgetPassword(userEmail);
-    console.log(result, 'result');
   
   // const { message } = result;
   sendResponse(res, {

@@ -22,7 +22,6 @@ const getUnreadMessagesCount = async (req: Request, res: Response) => {
   const count = await ChatServices.getUnreadMessagesCountFromDB(id);
 
 
-  // res.json({ unreadMessages: count });
 
   sendResponse(res as any, {
     statusCode: httpStatus.OK,
@@ -47,7 +46,6 @@ const markAsRead = async (req: Request, res: Response) => {
 
 const getRecentChats = async (req: Request, res: Response) => {
   const { id } = req.params;
-  // console.log(id, 'getRecentChats');
   
   const chats = await ChatServices.getRecentChatsFromDB(id);
 
@@ -67,8 +65,6 @@ const getAllChats = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Chats are retrieved successfully',
-    // meta: result.meta,
-    // data: result.result,
     data: result,
   });
 });
