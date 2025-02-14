@@ -4,14 +4,11 @@ import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 import AppError from '../../errors/AppError';
-// import { sendEmail } from '../../utils/sendEmail';
 import { User } from '../User/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
 import { OtpServices } from '../Otp/otp.service';
-// import { OtpServices } from '../Otp/otp.service';
-// import { SendEmail } from '../../utils/sendEmail';
-// import { OtpServices } from '../Otp/otp.service'; 
+
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -193,7 +190,6 @@ const forgetPassword = async (userEmail: string) => {
   // If OTP is not verified, send OTP and return a specific message
   // if (!user.otpVerified) {
 
-  console.log('test', user, 'user', user.email, 'user.email');
 
 
 
