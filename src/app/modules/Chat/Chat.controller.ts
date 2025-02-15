@@ -16,6 +16,21 @@ const createChat = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const uploadFile = catchAsync(async (req, res) => {
+  console.log(req.file, "req.file");
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: "No file uploaded" });
+  }
+  const result = await ChatServices.uploadFiletoService(req.file as any);
+  console.log(result, "result");
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'File Upload is successful',
+    data: result,
+  });
+});
 
 const getUnreadMessagesCount = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -88,5 +103,6 @@ export const ChatControllers = {
   deleteChat,
   markAsRead,
   getUnreadMessagesCount,
-  getRecentChats
+  getRecentChats,
+  uploadFile
 };
