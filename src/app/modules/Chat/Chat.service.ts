@@ -18,6 +18,16 @@ const createChatIntoDB = async (payload: Partial<TChat>) => {
 
   return result;
 };
+// Create a chat message
+const uploadFiletoService = async (file: any) => {
+  const fileUrl = `/uploads/${file.filename}`;;
+
+  // if (!result) {
+  //   throw new AppError(httpStatus.BAD_REQUEST, "Failed to create Chat");
+  // }
+
+  return fileUrl;
+};
 
 // Get unread messages count
 const getUnreadMessagesCountFromDB = async (receiverId: string) => {
@@ -227,6 +237,7 @@ export const ChatServices = {
   createChatIntoDB,
   getAllChatsFromDB,
   deleteChatFromDB,
+  uploadFiletoService
 };
 ////////
 // const createChatIntoDB = async (

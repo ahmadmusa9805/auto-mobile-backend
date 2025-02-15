@@ -43,23 +43,36 @@ export const initializeChatSocket = (io: Server) => {
 
     socket.on("chatMessage", async (data) => {
       console.log("Message received from client:", data);
-      const { sender, receiver, message, image, regName } = data;
-      if (!sender || !receiver || !message) { 
+
+      const { sender, receiver, fileUrl, regName, message } = data;
+      console.log("sender", sender);
+      console.log("receiver", receiver);
+      console.log("fileUrl", fileUrl);
+      console.log("message", message);
+
+      // const { sender, receiver, fileUrl, fileType, regName, message } = data;
+      if (!sender || !receiver || !fileUrl) return;
+      // const { sender, receiver, message, image, regName } = data;
+      // if (!sender || !receiver || !message) { 
         
-        console.log("Invalid message data");
-          return;
+      //   console.log("Invalid message data");
+      //     return;
     
-      } 
-      const chatMessage = await ChatServices.createChatIntoDB({
+      // } 
+    
+            // Save message with file URL
+        const chatMessage = await ChatServices.createChatIntoDB({
         sender,
         receiver,
-        message,
-        image: image || null,
-        isRead: false,
-        regName ,
+        message, // No text, only file
+        image: fileUrl,
+        // fileType: fileType || "image",
+        //   image: image || null,
+        regName,
         createdAt: new Date(),
+        isRead: false,
         isDeleted: false,
-      });
+        });
     
       const roomId = [sender, receiver].sort().join("_");
       console.log(`📢 Room ID: ${roomId}`);
