@@ -10,6 +10,7 @@ import { Notification } from './Notification.model';
 const createNotificationIntoDB = async (
   payload: TNotification,
 ) => {
+
   const result = await Notification.create(payload);
   
   if (!result) {
