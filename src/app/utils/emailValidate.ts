@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "../config";
 
 
+
 export const emailValidate = async(email: string) => {
 // console.log(process.env.MAILBOXLAYER_API_URL, "process.env.MAILBOXLAYER_API_URL")
 

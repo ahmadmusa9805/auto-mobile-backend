@@ -1,11 +1,29 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { ChatControllers } from './Chat.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { createChatValidationSchema } from './Chat.validation';
+import { upload } from '../../utils/upload';
 
 
 
 const router = express.Router();
+
+router.get("/upload", upload.single("file"),
+
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.data) {
+      try {
+        req.body = JSON.parse(req.body.data);
+      } catch (error) {
+        next(error);
+      }
+    }
+    next();
+  },
+
+ChatControllers.uploadFile
+);
+
 
 router.get("/:id", ChatControllers.getRecentChats);
 

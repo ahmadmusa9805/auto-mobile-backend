@@ -34,6 +34,9 @@ app.use(
 
 app.use(express.json({ verify: (req: any, res, buf) => { req.rawBody = buf.toString(); } }));
 
+// Serve static files
+app.use("/uploads", express.static("uploads"));
+
 // Routes
 app.use('/api/v1', router);
 

@@ -8,8 +8,6 @@ import path from 'path';
 // import config from '../config';
 import { S3Client } from '@aws-sdk/client-s3';
 import config from '../config';
-
-
 const s3Config = new S3Client({
     region: config.s3.region as string,
     credentials: {
@@ -17,7 +15,6 @@ const s3Config = new S3Client({
         secretAccessKey: config.s3.secretAccessKey as string
     }
 })
-
 // Define the storage engine
 const fileLocalStorage: StorageEngine = multer.diskStorage({
     destination: (
@@ -61,7 +58,6 @@ const fileLocalStorage: StorageEngine = multer.diskStorage({
         cb(null, fileName + fileExt);
     },
 });
-
 // Define the S3 storage engine
 const fileS3Storage = multerS3({
     s3: s3Config,
@@ -75,7 +71,6 @@ const fileS3Storage = multerS3({
         cb(null, fileName);
     },
 });
-
 // Define the file filter function
 const fileFilterFun = (req: Request, file: any, cb: FileFilterCallback) => {
     const allowedMimeTypes = [
@@ -111,7 +106,6 @@ const fileFilterFun = (req: Request, file: any, cb: FileFilterCallback) => {
         );
     }
 };
-
 // Multer configuration with switchable storage
 // eslint-disable-next-line @typescript-eslint/no-inferrable-types
 export const uploadFileS3 = (useS3: boolean = false) =>

@@ -11,6 +11,7 @@ import { TermRoutes } from '../modules/Term/Term.route';
 import { PrivacyRoutes } from '../modules/Privacy/Privacy.route';
 import { ChatRoutes } from '../modules/Chat/Chat.route';
 import { DashboardRoutes } from '../modules/Dashboard/Dashboard.route';
+import { UploadRoutes } from '../modules/Upload/Upload.route';
 
 
 
@@ -64,6 +65,10 @@ const moduleRoutes = [
   {
     path: '/dashboards',
     route: DashboardRoutes,
+  },
+  {
+    path: '/upload',
+    route: UploadRoutes,
   },
 ];
 
