@@ -14,6 +14,17 @@ const createJobIntoDB = async (
   payload: TJob,
 ) => {
 
+ const user = await User.findById(payload.userId);
+
+ if (!user){
+  throw new AppError(httpStatus.BAD_REQUEST, 'User not found');
+ }
+ if (user.role === 'technician'){
+  payload.grandId = user.creatorId
+ }
+
+
+
   const id = await generateUniqueJobId();
   payload.jobId = id as string;
 
@@ -37,7 +48,10 @@ const createJobIntoDB = async (
 
 const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
-    Job.find({isDeleted: false}).populate('assignedTechnician'),
+    Job.find({ isDeleted: false })
+      .populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
+      .populate('userId', 'fullName profileImg role') // Selecting only name and image
+      .populate('grandId', 'fullName profileImg role'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -115,7 +129,9 @@ const getAllJobsByGrandIdIdFromDB = async (grandId: string, query: Record<string
 };
 
 const getSingleJobFromDB = async (id: string) => {
-  const result = await Job.findById(id, { isDeleted: false }).populate('assignedTechnician');
+  const result = await Job.findById(id, { isDeleted: false }).populate('assignedTechnician', 'fullName profileImg') // Selecting only name and image
+  .populate('userId', 'fullName profileImg') // Selecting only name and image
+  .populate('grandId' ,'fullName profileImg');
 
   return result;
 };
