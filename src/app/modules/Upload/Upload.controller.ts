@@ -6,9 +6,9 @@ import { UploadServices } from './Upload.service';
 
 const createUpload = catchAsync(async (req, res) => {
   // const { Upload: UploadData } = req.body;
-  if (!req.file) {
-    return res.status(400).json({ success: false, message: "No file uploaded" });
-  }
+  // if (!req.file) {
+  //   return res.status(400).json({ success: false, message: "No file uploaded" });
+  // }
   
   console.log(req.file, "req.file===");
 

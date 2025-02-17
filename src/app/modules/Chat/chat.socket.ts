@@ -44,14 +44,20 @@ export const initializeChatSocket = (io: Server) => {
     socket.on("chatMessage", async (data) => {
       console.log("Message received from client:", data);
 
-      const { sender, receiver, fileUrl, regName, message } = data;
+      const { sender, receiver, fileUrl, regName, message, fileType } = data;
       console.log("sender", sender);
       console.log("receiver", receiver);
       console.log("fileUrl", fileUrl);
       console.log("message", message);
+      console.log("fileType", fileType);
 
       // const { sender, receiver, fileUrl, fileType, regName, message } = data;
-      if (!sender || !receiver || !fileUrl) return;
+      if (!sender || !receiver || !fileUrl){
+        console.log("inside", fileType);
+
+      return;
+      }
+        
       // const { sender, receiver, message, image, regName } = data;
       // if (!sender || !receiver || !message) { 
         
