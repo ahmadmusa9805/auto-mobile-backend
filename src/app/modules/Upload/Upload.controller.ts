@@ -5,15 +5,9 @@ import sendResponse from '../../utils/sendResponse';
 import { UploadServices } from './Upload.service';
 
 const createUpload = catchAsync(async (req, res) => {
-  // const { Upload: UploadData } = req.body;
-  // if (!req.file) {
-  //   return res.status(400).json({ success: false, message: "No file uploaded" });
-  // }
-  
-  console.log(req.file, "req.file===");
+
 
   const result = await UploadServices.createUploadIntoDB(req.file as any);
-  console.log(result , "result======");
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
