@@ -10,12 +10,9 @@ import { Upload } from './Upload.model';
 const createUploadIntoDB = async (
   file: any,
 ) => {
-
   const fileUrl = `/uploads/${file.filename}`;  
   const result = fileUrl;  
-  // if (!result) {
-  //   throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create Upload');
-  // }
+
 
   return result;
 };
