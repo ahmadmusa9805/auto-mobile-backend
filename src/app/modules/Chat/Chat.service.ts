@@ -10,6 +10,7 @@ import { Types } from "mongoose";  // Make sure to import this
 
 // Create a chat message
 const createChatIntoDB = async (payload: Partial<TChat>) => {
+  console.log(payload, "payload-from chjat service");
   const result = await Chat.create(payload);
 
   if (!result) {

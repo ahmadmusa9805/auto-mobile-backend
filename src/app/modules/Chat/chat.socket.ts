@@ -11,7 +11,6 @@ export const initializeChatSocket = (io: Server) => {
     // Register user
     socket.on("register", ({ userId, name, image }) => {
       if (!userId) return;
-
       connectedUsers[userId] = socket.id;
       socket.data = { userId, name, image }; // Store user details in socket
       console.log(`User ${userId} registered with socket ${socket.id}`);
@@ -37,37 +36,28 @@ export const initializeChatSocket = (io: Server) => {
     
       const roomId = [userId, otherUserId].sort().join("_"); // Unique room ID
       socket.join(roomId);
-      console.log(`✅ User ${userId} joined room ${roomId}`);
-      console.log("🔍 Current rooms:", socket.rooms); // Debug: Check which rooms this socket has joined
+      console.log(`✅ User ${userId} joined room ${roomId} Current rooms:  ${socket.rooms}`); // Debug: Check which rooms this socket has joined
     });
 
     socket.on("chatMessage", async (data) => {
       console.log("Message received from client:", data);
 
-      const { sender, receiver, fileUrl, regName, message } = data;
-      console.log("sender", sender);
-      console.log("receiver", receiver);
-      console.log("fileUrl", fileUrl);
-      console.log("message", message);
+      const { sender, receiver, fileUrl, regName, message, fileType } = data;
 
       // const { sender, receiver, fileUrl, fileType, regName, message } = data;
-      if (!sender || !receiver || !fileUrl) return;
-      // const { sender, receiver, message, image, regName } = data;
-      // if (!sender || !receiver || !message) { 
-        
-      //   console.log("Invalid message data");
-      //     return;
+      if (!sender || !receiver || !fileUrl){
+        console.log("inside", fileType);
+
+      return;
+      }
     
-      // } 
-    
-            // Save message with file URL
+         // Save message with file URL
         const chatMessage = await ChatServices.createChatIntoDB({
         sender,
         receiver,
         message, // No text, only file
         image: fileUrl,
         // fileType: fileType || "image",
-        //   image: image || null,
         regName,
         createdAt: new Date(),
         isRead: false,
@@ -79,8 +69,6 @@ export const initializeChatSocket = (io: Server) => {
       console.log("📤 Sending message to frontend:", chatMessage.toObject());
 
       io.to(roomId).emit("receiveMessage", chatMessage.toObject());
-    
-      console.log(`Message sent:`, chatMessage);
     });
 
     socket.on("markAsRead", async ({ sender, receiver }) => {
