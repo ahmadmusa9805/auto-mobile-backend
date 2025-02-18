@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { UserServices } from './user.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { UserServices } from './user.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 const createClient = catchAsync(async (req, res) => {
   const { User: userData } = req.body;

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { UploadServices } from './Upload.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { UploadServices } from './Upload.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 const createUpload = catchAsync(async (req, res) => {
   const result = await UploadServices.createUploadIntoDB(req.file as any);

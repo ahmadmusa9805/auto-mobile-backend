@@ -1,9 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { UploadControllers } from './Upload.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import {  updateUploadValidationSchema } from './Upload.validation';
-import { uploadFileS3 } from '../../utils/UploaderS3';
-// import { upload } from '../../utils/upload';
+import { uploadFileS3 } from '../../utils/UploaderS3.ts';
+import { UploadControllers } from './Upload.controller.ts';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { updateUploadValidationSchema } from './Upload.validation.ts';
+
+// import { upload } from '..\..\utils\upload';
 
 const router = express.Router();
 

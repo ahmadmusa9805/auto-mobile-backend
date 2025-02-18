@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
-import { SERVICE_SEARCHABLE_FIELDS } from './Service.constant';
+// import QueryBuilder from '..\..\builder\QueryBuilder';
+// import AppError from \index.ts'../../errors/AppError';
+// import { SERVICE_SEARCHABLE_FIELDS } from 'Service.constant';
 import mongoose from 'mongoose';
-import { TService } from './Service.interface';
-import { Service } from './Service.model';
+import { TService } from './Service.interface.ts';
+import { Service } from './Service.model.ts';
+import AppError from '../../errors/AppError.ts';
+import QueryBuilder from '../../builder/QueryBuilder.ts';
+import { SERVICE_SEARCHABLE_FIELDS } from './Service.constant.ts';
+// import { TService } from \index.ts'./Service.interface';
+// import { Service } from 'Service.model';
 
 const createServiceIntoDB = async (
   payload: TService,

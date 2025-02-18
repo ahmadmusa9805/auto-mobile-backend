@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-      import { TPrivacy, PrivacyModel } from './Privacy.interface';
+import { PrivacyModel, TPrivacy } from './Privacy.interface.ts';
       
       const PrivacySchema = new Schema<TPrivacy, PrivacyModel>({
         message: { type: String, required: true },

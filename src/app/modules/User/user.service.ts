@@ -4,15 +4,17 @@
 // import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb'; // Import ObjectId
 
-import { TUser } from './user.interface';
-import { User } from './user.model';
-import QueryBuilder from '../../builder/QueryBuilder';
-import { usersSearchableFields } from './user.constant';
-import AppError from '../../errors/AppError';
+
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
-import { OtpServices } from '../Otp/otp.service';
-import { Job } from '../Job/Job.model';
+import { TUser } from './user.interface.ts';
+import { User } from './user.model.ts';
+import { OtpServices } from '../Otp/otp.service.ts';
+import QueryBuilder from '../../builder/QueryBuilder.ts';
+import { usersSearchableFields } from './user.constant.ts';
+import AppError from '../../errors/AppError.ts';
+import { Job } from '../Job/Job.model.ts';
+
 
 export const createClientIntoDB = async (payload: TUser) => {
   payload.role = 'client'

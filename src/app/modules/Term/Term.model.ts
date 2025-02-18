@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-      import { TTerm, TermModel } from './Term.interface';
+import { TermModel, TTerm } from './Term.interface';
       
       const TermSchema = new Schema<TTerm, TermModel>({
         message: { type: String, required: true },

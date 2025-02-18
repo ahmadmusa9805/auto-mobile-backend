@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-      import { TInvoice, InvoiceModel } from './Invoice.interface';
+import { InvoiceModel, TInvoice } from './Invoice.interface.ts';
 
       const InvoiceSchema = new Schema<TInvoice, InvoiceModel>({
         jobId: { type: Schema.Types.ObjectId, ref: 'Job' },

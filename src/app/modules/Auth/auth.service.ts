@@ -2,12 +2,13 @@
 import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import config from '../../config';
-import AppError from '../../errors/AppError';
-import { User } from '../User/user.model';
-import { TLoginUser } from './auth.interface';
-import { createToken, verifyToken } from './auth.utils';
-import { OtpServices } from '../Otp/otp.service';
+import { TLoginUser } from './auth.interface.ts';
+import { User } from '../User/user.model.ts';
+import AppError from '../../errors/AppError.ts';
+import { OtpServices } from '../Otp/otp.service.ts';
+import { createToken, verifyToken } from './auth.utils.ts';
+import config from '../../config/index.ts';
+
 
 
 const loginUser = async (payload: TLoginUser) => {
@@ -27,11 +28,11 @@ const loginUser = async (payload: TLoginUser) => {
 
   // checking if the user is blocked
 
-  const userStatus = user?.status;
+  // const userStatus = user?.status;
 
-  if (userStatus === 'blocked') {
-    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
-  }
+  // if (userStatus === 'blocked') {
+  //   throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+  // }
 
   //checking if the password is correct
 
@@ -135,11 +136,11 @@ const refreshToken = async (token: string) => {
   }
 
   // checking if the user is blocked
-  const userStatus = user?.status;
+  // const userStatus = user?.status;
 
-  if (userStatus === 'blocked') {
-    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
-  }
+  // if (userStatus === 'blocked') {
+  //   throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+  // }
 
   if (
     user.passwordChangedAt &&
@@ -180,11 +181,11 @@ const forgetPassword = async (userEmail: string) => {
   }
 
   // checking if the user is blocked
-  const userStatus = user?.status;
+  // const userStatus = user?.status;
 
-  if (userStatus === 'blocked') {
-    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
-  }
+  // if (userStatus === 'blocked') {
+  //   throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+  // }
   
   // const otp = await OtpServices.generateAndSendOTP(user.email);
   // If OTP is not verified, send OTP and return a specific message
@@ -250,12 +251,12 @@ const resetPassword = async (
     throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
   }
 
-  // checking if the user is blocked
-  const userStatus = user?.status;
+  // // checking if the user is blocked
+  // const userStatus = user?.status;
 
-  if (userStatus === 'blocked') {
-    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
-  }
+  // if (userStatus === 'blocked') {
+  //   throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+  // }
 
   const decoded = jwt.verify(
     token,

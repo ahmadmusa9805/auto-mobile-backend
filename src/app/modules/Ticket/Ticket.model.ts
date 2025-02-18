@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-      import { TTicket, TicketModel } from './Ticket.interface';
+import { TicketModel, TTicket } from './Ticket.interface.ts';
       
       const TicketSchema = new Schema<TTicket, TicketModel>({
         jobId: { type: Schema.Types.ObjectId, ref: 'Job' },

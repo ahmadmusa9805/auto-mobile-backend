@@ -1,7 +1,8 @@
 import express from 'express';
-import { InvoiceControllers } from './Invoice.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createInvoiceValidationSchema, updateInvoiceValidationSchema } from './Invoice.validation';
+import { createInvoiceValidationSchema, updateInvoiceValidationSchema } from './Invoice.validation.ts';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { InvoiceControllers } from './Invoice.controller.ts';
+
 
 const router = express.Router();
 

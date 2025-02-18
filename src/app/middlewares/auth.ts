@@ -1,11 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import config from '../config';
-import AppError from '../errors/AppError';
-import { TUserRole } from '../modules/User/user.interface';
-import { User } from '../modules/User/user.model';
+import { TUserRole } from '../modules/User/user.interface.ts';
 import catchAsync from '../utils/catchAsync';
+import AppError from '../errors/AppError.ts';
+import config from '../config/index.ts';
+import { User } from '../modules/User/user.model.ts';
+// import { UserStatus } from '../modules/User/user.constant';
+// import config from '..\config';
+// import AppError from \index.ts'../errors/AppError';
+// import { TUserRole } from '..\modules\User\user.interface';
+// import { User } from \index.ts'../modules/User/user.model';
+// import catchAsync from '..\utils\catchAsync\index.ts';
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -40,11 +46,11 @@ const auth = (...requiredRoles: TUserRole[]) => {
     // console.log(user, 'user');
 
     // checking if the user is blocked
-    const userStatus = user?.status;
+    // const userStatus = user?.status;
 
-    if (userStatus === 'blocked') {
-      throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
-    }
+    // if (UserStatus === 'blocked') {
+    //   throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+    // }
 
     if (
       user.passwordChangedAt &&

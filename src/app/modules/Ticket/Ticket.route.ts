@@ -1,12 +1,13 @@
 import express from 'express';
-import { TicketControllers } from './Ticket.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createTicketValidationSchema, updateTicketValidationSchema } from './Ticket.validation';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { createTicketValidationSchema, updateTicketValidationSchema } from './Ticket.validation.ts';
+import { TicketControllers } from './Ticket.controller.ts';
+
 
 const router = express.Router();
 
 router.post(
-  '/create-Ticket',
+ '/create-Ticket',
   validateRequest(createTicketValidationSchema),
   TicketControllers.createTicket,
 );

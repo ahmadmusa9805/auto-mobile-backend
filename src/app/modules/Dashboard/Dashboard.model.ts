@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-      import { TDashboard, DashboardModel } from './Dashboard.interface';
+import { DashboardModel, TDashboard } from './Dashboard.interface.ts';
       
       const DashboardSchema = new Schema<TDashboard, DashboardModel>({
         name: { type: String, required: true },

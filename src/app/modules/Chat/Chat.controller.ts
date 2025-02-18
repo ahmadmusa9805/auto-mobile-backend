@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { ChatServices } from './Chat.service';
+
 import { Request, Response } from 'express';
+import catchAsync from '../../utils/catchAsync.ts';
+import { ChatServices } from './Chat.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
 
 const createChat = catchAsync(async (req, res) => {
   const { Chat: ChatData } = req.body;
@@ -17,12 +18,10 @@ const createChat = catchAsync(async (req, res) => {
   });
 });
 const uploadFile = catchAsync(async (req, res) => {
-  console.log(req.file, "req.file");
   if (!req.file) {
     return res.status(400).json({ success: false, message: "No file uploaded" });
   }
   const result = await ChatServices.uploadFiletoService(req.file as any);
-  console.log(result, "result");
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

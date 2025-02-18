@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
-import { ADMIN_SEARCHABLE_FIELDS } from './Admin.constant';
+
 import mongoose from 'mongoose';
-import { TAdmin } from './Admin.interface';
-import { Admin } from './Admin.model';
+import { TAdmin } from './Admin.interface.ts';
+import { Admin } from './Admin.model.ts';
+import AppError from '../../errors/AppError.ts';
+import QueryBuilder from '../../builder/QueryBuilder.ts';
+import { ADMIN_SEARCHABLE_FIELDS } from './Admin.constant.ts';
 
 const createAdminIntoDB = async (
   payload: TAdmin,

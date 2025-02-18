@@ -1,7 +1,8 @@
 import express from 'express';
-import { DashboardControllers } from './Dashboard.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createDashboardValidationSchema, updateDashboardValidationSchema } from './Dashboard.validation';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { createDashboardValidationSchema, updateDashboardValidationSchema } from './Dashboard.validation.ts';
+import { DashboardControllers } from './Dashboard.controller.ts';
+
 
 const router = express.Router();
 

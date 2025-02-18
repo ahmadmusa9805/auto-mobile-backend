@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { TicketServices } from './Ticket.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { TicketServices } from './Ticket.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 const createTicket = catchAsync(async (req, res) => {
   const { Ticket: TicketData } = req.body;

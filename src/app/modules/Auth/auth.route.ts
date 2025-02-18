@@ -1,9 +1,10 @@
 import express from 'express';
-import auth from '../../middlewares/auth';
-import validateRequest from '../../middlewares/validateRequest';
-import { USER_ROLE } from '../User/user.constant';
-import { AuthControllers } from './auth.controller';
-import { AuthValidation } from './auth.validation';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { AuthValidation } from './auth.validation.ts';
+import { AuthControllers } from './auth.controller.ts';
+import { USER_ROLE } from '../User/user.constant.ts';
+import auth from '../../middlewares/auth.ts';
+
 
 const router = express.Router();
 

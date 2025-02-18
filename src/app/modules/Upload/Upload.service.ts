@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
-import { UPLOAD_SEARCHABLE_FIELDS } from './Upload.constant';
+
 import mongoose from 'mongoose';
-import { Upload } from './Upload.model';
+import QueryBuilder from '../../builder/QueryBuilder.ts';
+import { Upload } from './Upload.model.ts';
+import { UPLOAD_SEARCHABLE_FIELDS } from './Upload.constant.ts';
+import AppError from '../../errors/AppError.ts';
 
 const createUploadIntoDB = async (
   file: any,

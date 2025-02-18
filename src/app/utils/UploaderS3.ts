@@ -3,11 +3,12 @@
 /* eslint-disable no-unused-vars */
 import multer, { StorageEngine, FileFilterCallback } from 'multer';
 import multerS3 from 'multer-s3';
-import { Request,Express } from 'express';
+import { Request } from 'express';
 import path from 'path';
-// import config from '../config';
 import { S3Client } from '@aws-sdk/client-s3';
-import config from '../config';
+import config from '../config/index.ts';
+// import config from '..\config';
+
 const s3Config = new S3Client({
     region: config.s3.region as string,
     credentials: {
