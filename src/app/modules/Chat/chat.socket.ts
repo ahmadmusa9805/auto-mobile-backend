@@ -16,21 +16,8 @@ export const initializeChatSocket = (io: Server) => {
       console.log(`User ${userId} registered with socket ${socket.id}`);
     });
 
-    // // Join private chat room
-    // socket.on("joinChat", ({ userId, otherUserId }) => {
-    //   if (!userId || !otherUserId) return;
 
-    //   const roomId = [userId, otherUserId].sort().join("_"); // Unique room ID
-    //   socket.join(roomId);
-    //   console.log(`User ${userId} joined room ${roomId}`);
-    // });
 
-    
-    // socket.on('joinRoom', ({ room }) => {
-    //   // const room = `${actorId}-${adminId}`; // Unique room
-    //   socket.join(room);
-    //   console.log(`${socket.id} joined room: ${room}`);
-    // });
     socket.on("joinChat", ({ userId, otherUserId }) => {
       if (!userId || !otherUserId) return;
     
@@ -42,12 +29,10 @@ export const initializeChatSocket = (io: Server) => {
     socket.on("chatMessage", async (data) => {
       console.log("Message received from client:", data);
 
-      const { sender, receiver, fileUrl, regName, message, fileType } = data;
+      const { sender, receiver, fileUrl, regName, message } = data;
 
       // const { sender, receiver, fileUrl, fileType, regName, message } = data;
-      if (!sender || !receiver || !fileUrl){
-        console.log("inside", fileType);
-
+      if (!sender || !receiver){
       return;
       }
     

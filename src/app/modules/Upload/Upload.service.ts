@@ -10,9 +10,9 @@ import { Upload } from './Upload.model';
 const createUploadIntoDB = async (
   file: any,
 ) => {
-  const fileUrl = `/uploads/${file.filename}`;  
-  const result = fileUrl;  
-
+  // const fileUrl = `/uploads/${file.filename}`;  
+  // const result = fileUrl;  
+ const result = file.location;
 
   return result;
 };

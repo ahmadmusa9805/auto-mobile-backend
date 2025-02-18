@@ -2,14 +2,15 @@ import express, { NextFunction, Request, Response } from 'express';
 import { UploadControllers } from './Upload.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import {  updateUploadValidationSchema } from './Upload.validation';
-import { upload } from '../../utils/upload';
+import { uploadFileS3 } from '../../utils/UploaderS3';
+// import { upload } from '../../utils/upload';
 
 const router = express.Router();
 
 router.post(
   '/',
-  upload.single("file"),
-  // uploadFileS3(true).single('file'),
+  // upload.single("file"),
+  uploadFileS3(true).single('file'),
   (req: Request, res: Response, next: NextFunction) => {
     if (req.body.data) {
       try {
