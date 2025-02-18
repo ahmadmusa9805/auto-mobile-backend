@@ -10,7 +10,7 @@ export type TChat = {
   isRead: boolean;
   createdAt: Date;
   isDeleted: boolean;
-};
+}
 
 export interface ChatModel extends Model<TChat> {
   isChatExists(id: string): Promise<TChat | null>;
