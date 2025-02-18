@@ -1,5 +1,5 @@
 import mongoose, {  Schema } from 'mongoose';
-import { TOtp } from './otp.interface';
+import { TOtp } from './otp.interface.ts';
 
 
 

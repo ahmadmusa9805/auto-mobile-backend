@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { JobServices } from './Job.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { JobServices } from './Job.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
 
 const createJob = catchAsync(async (req, res) => {
   const { Job: JobData } = req.body;
@@ -95,7 +95,7 @@ const deleteJob = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Job is deleted successfully',
+    message: 'Job is deleted successfully ',
     data: result,
   });
 });

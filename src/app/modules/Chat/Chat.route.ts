@@ -1,9 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { ChatControllers } from './Chat.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createChatValidationSchema } from './Chat.validation';
-import { upload } from '../../utils/upload';
-
+import { upload } from '../../utils/upload.ts';
+import { ChatControllers } from './Chat.controller.ts';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { createChatValidationSchema } from './Chat.validation.ts';
 
 
 const router = express.Router();

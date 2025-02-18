@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import nodemailer from 'nodemailer';
-import config from '../config';
+import config from '../config/index.ts';
 
 
 export class SendEmail {

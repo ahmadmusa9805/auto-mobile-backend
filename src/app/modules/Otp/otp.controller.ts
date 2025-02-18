@@ -1,8 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { OtpServices } from './otp.service';
-
+import catchAsync from '../../utils/catchAsync.ts';
+import { OtpServices } from './otp.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
 
 
 const otpVeryfy = catchAsync(async (req, res) => {
@@ -23,7 +22,7 @@ const otpVeryfyForgetPassword = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'OTP verified successfully.',
+    message: 'OTP verified successfully. ',
     data: result,
   });
 });

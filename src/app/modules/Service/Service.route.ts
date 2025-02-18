@@ -1,7 +1,8 @@
 import express from 'express';
-import { ServiceControllers } from './Service.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createServiceValidationSchema, updateServiceValidationSchema } from './Service.validation';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { createServiceValidationSchema, updateServiceValidationSchema } from './Service.validation.ts';
+import { ServiceControllers } from './Service.controller.ts';
+
 
 const router = express.Router();
 

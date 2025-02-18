@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import AppError from '../../errors/AppError';
-import { monthNamesShortForm } from './Dashboard.constant';
+
 import mongoose from 'mongoose';
-import { TDashboard } from './Dashboard.interface';
-import { Dashboard } from './Dashboard.model';
-import { User } from '../User/user.model';
-import { Job } from '../Job/Job.model';
+import { TDashboard } from './Dashboard.interface.ts';
+import { Dashboard } from './Dashboard.model.ts';
+import AppError from '../../errors/AppError.ts';
+import { User } from '../User/user.model.ts';
+import { monthNamesShortForm } from './Dashboard.constant.ts';
+import { Job } from '../Job/Job.model.ts';
+
 
 const createDashboardIntoDB = async (
   payload: TDashboard,
@@ -106,7 +108,7 @@ const jobGrowthMonthlyFromDB = async () => {
     // Format the result to map each month to the corresponding user count
     const monthlyGrowth = Array.from({ length: 12 }, (_, index) => {
       const monthData = userGrowthData.find(
-        (data) => data.month === index + 1
+        (data: any) => data.month === index + 1
       );
       return {
         month: monthNamesShortForm[index],  // Get the month name (January, February, etc.)
@@ -164,7 +166,7 @@ const getAlljobCompletedMonthlyFromDB = async () => {
     // Format the result to map each month to the corresponding job count
     const monthlyGrowth = Array.from({ length: 12 }, (_, index) => {
       const monthData = userGrowthData.find(
-        (data) => data.month === index + 1
+        (data:any) => data.month === index + 1
       );
       return {
         month: monthNamesShortForm[index],  // Get the short month name

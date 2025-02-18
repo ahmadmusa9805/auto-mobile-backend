@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { AdminServices } from './Admin.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { AdminServices } from './Admin.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 
 

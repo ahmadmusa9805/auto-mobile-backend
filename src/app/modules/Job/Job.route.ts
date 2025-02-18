@@ -1,7 +1,10 @@
 import express from 'express';
-import { JobControllers } from './Job.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createJobValidationSchema, updateJobValidationSchema } from './Job.validation';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { createJobValidationSchema, updateJobValidationSchema } from './Job.validation.ts';
+import { JobControllers } from './Job.controller.ts';
+// import { JobControllers } from 'Job.controller';
+// import validateRequest from \index.ts'../../middlewares/validateRequest';
+// import { createJobValidationSchema, updateJobValidationSchema } from 'Job.validation.ts';
 
 const router = express.Router();
 

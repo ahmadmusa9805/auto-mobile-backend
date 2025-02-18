@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from "http-status";
-import AppError from "../../errors/AppError";
-import { Job } from "../Job/Job.model";
-import { monthNamesShortForm } from "./Dashboard.constant";
-import { User } from "../User/user.model";
+import AppError from "../../errors/AppError.ts";
+import { Job } from "../Job/Job.model.ts";
+import { monthNamesShortForm } from "./Dashboard.constant.ts";
+import { User } from "../User/user.model.ts";
 
 export const AllCompletedjobMonthly = async () => {
     try {
@@ -44,7 +45,7 @@ export const AllCompletedjobMonthly = async () => {
       // Format the result to map each month to the corresponding job count
       const monthlyGrowth = Array.from({ length: 12 }, (_, index) => {
         const monthData = userGrowthData.find(
-          (data) => data.month === index + 1
+          (data:any) => data.month === index + 1
         );
         return {
           month: monthNamesShortForm[index],  // Get the short month name
@@ -138,7 +139,7 @@ export const AllCompletedjobMonthly = async () => {
       // Format the result to map each month to the corresponding user count
       const monthlyGrowth = Array.from({ length: 12 }, (_, index) => {
         const monthData = userGrowthData.find(
-          (data) => data.month === index + 1
+          (data:any) => data.month === index + 1
         );
         return {
           month: monthNamesShortForm[index],  // Get the month name (January, February, etc.)

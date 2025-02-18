@@ -1,5 +1,5 @@
 import express from 'express';
-import { OtpControllers } from './otp.controller';
+import { OtpControllers } from './otp.controller.ts';
 
 const router = express.Router();
 

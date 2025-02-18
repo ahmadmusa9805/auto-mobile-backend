@@ -5,13 +5,16 @@
 import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
-// import { createServer } from 'http';
-import router from './app/routes/index';
 import helmet from 'helmet';
+import router from './app/routes/index.ts';
+import globalErrorHandler from './app/middlewares/globalErrorhandler.ts';
+// import { createServer } from 'http';
+// import router from 'app\routes\index.ts';
+// import helmet from 'helmet\index.ts';
 // import path from 'path';
-import globalErrorHandler from './app/middlewares/globalErrorhandler';
+// import globalErrorHandler from 'app\middlewares\globalErrorhandler\index.ts';
 // import { fileURLToPath } from 'url';
-// import notFound from './app/middlewares/notFound';
+// import notFound from 'app\middlewares\notFound\index.ts';
 
 const app: Application = express();
 // const httpServer = createServer(app);

@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { InvoiceServices } from './Invoice.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { InvoiceServices } from './Invoice.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 const createInvoice = catchAsync(async (req, res) => {
   const { Invoice: InvoiceData } = req.body;

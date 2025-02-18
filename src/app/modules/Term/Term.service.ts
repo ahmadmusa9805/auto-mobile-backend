@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import AppError from '../../errors/AppError';
-import { Term } from './Term.model';
+import { Term } from './Term.model.ts';
+import AppError from '../../errors/AppError.ts';
 
 const createTermIntoDB = async (payload: any) => {
   // Check if a term already exists based on a unique field (e.g., term name or code)

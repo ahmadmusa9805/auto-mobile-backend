@@ -1,7 +1,8 @@
 import express from 'express';
-import { PrivacyControllers } from './Privacy.controller';
-import validateRequest from '../../middlewares/validateRequest';
-import { createPrivacyValidationSchema } from './Privacy.validation';
+import validateRequest from '../../middlewares/validateRequest.ts';
+import { createPrivacyValidationSchema } from './Privacy.validation.ts';
+import { PrivacyControllers } from './Privacy.controller.ts';
+
 
 const router = express.Router();
 

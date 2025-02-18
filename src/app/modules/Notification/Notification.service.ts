@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
-import { NOTIFICATION_SEARCHABLE_FIELDS } from './Notification.constant';
+
 import mongoose from 'mongoose';
-import { TNotification } from './Notification.interface';
-import { Notification } from './Notification.model';
+import { TNotification } from './Notification.interface.ts';
+import { Notification } from './Notification.model.ts';
+import AppError from '../../errors/AppError.ts';
+import QueryBuilder from '../../builder/QueryBuilder.ts';
+import { NOTIFICATION_SEARCHABLE_FIELDS } from './Notification.constant.ts';
+
 
 const createNotificationIntoDB = async (
   payload: TNotification,

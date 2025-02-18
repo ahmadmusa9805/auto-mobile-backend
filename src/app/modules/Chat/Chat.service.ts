@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-// import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
-import { Chat } from './Chat.model';
-import { TChat } from './Chat.interface';
-// import { CHAT_SEARCHABLE_FIELDS } from './Chat.constant';
+// import QueryBuilder from '..\..\builder\QueryBuilder';
+// import AppError from \index.ts'../../errors/AppError';
+// import { Chat } from 'Chat.model';
+// import { TChat } from \index.ts'./Chat.interface';
+// import { CHAT_SEARCHABLE_FIELDS } from 'Chat.constant\index.ts';
 import { Types } from "mongoose";  // Make sure to import this
+import { TChat } from './Chat.interface.ts';
+import { Chat } from './Chat.model.ts';
+import AppError from '../../errors/AppError.ts';
 
 
 // Create a chat message
 const createChatIntoDB = async (payload: Partial<TChat>) => {
-  console.log(payload, "payload-from chjat service");
   const result = await Chat.create(payload);
 
   if (!result) {
@@ -220,7 +222,6 @@ const getRecentChatsFromDB = async (userId: string) => {
   ]);
 };
 
-
 // Delete chat (soft delete)
 const deleteChatFromDB = async (id: string) => {
   const deletedChat = await Chat.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
@@ -231,6 +232,7 @@ const deleteChatFromDB = async (id: string) => {
 
   return deletedChat;
 };
+
 export const ChatServices = {
   getUnreadMessagesCountFromDB,
   markMessagesAsReadIntoDB,

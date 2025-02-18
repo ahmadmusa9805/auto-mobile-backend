@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import QueryBuilder from '../../builder/QueryBuilder';
-import AppError from '../../errors/AppError';
-import { JOB_SEARCHABLE_FIELDS } from './Job.constant';
+
 import mongoose from 'mongoose';
-import { TJob } from './Job.interface';
-import { Job } from './Job.model';
-import { NotificationServices } from '../Notification/Notification.service';
-import generateUniqueJobId from './job.util';
-import { User } from '../User/user.model';
+import { TJob } from './Job.interface.ts';
+import { User } from '../User/user.model.ts';
+import AppError from '../../errors/AppError.ts';
+import generateUniqueJobId from './job.util.ts';
+import { Job } from './Job.model.ts';
+import { NotificationServices } from '../Notification/Notification.service.ts';
+import QueryBuilder from '../../builder/QueryBuilder.ts';
+import { JOB_SEARCHABLE_FIELDS } from './Job.constant.ts';
+
 
 const createJobIntoDB = async (
   payload: TJob,

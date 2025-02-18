@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { PrivacyServices } from './Privacy.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { PrivacyServices } from './Privacy.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 const createPrivacy = catchAsync(async (req, res) => {
   const { Privacy: PrivacyData } = req.body;

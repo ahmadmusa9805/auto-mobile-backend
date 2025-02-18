@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-      import { TService, ServiceModel } from './Service.interface';
+import { ServiceModel, TService } from './Service.interface.ts';
       
       const ServiceSchema = new Schema<TService, ServiceModel>({
         name: { type: String, required: true },

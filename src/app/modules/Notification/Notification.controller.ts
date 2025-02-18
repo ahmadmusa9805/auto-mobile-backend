@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
-import sendResponse from '../../utils/sendResponse';
-import { NotificationServices } from './Notification.service';
+import catchAsync from '../../utils/catchAsync.ts';
+import { NotificationServices } from './Notification.service.ts';
+import sendResponse from '../../utils/sendResponse.ts';
+
 
 const createNotification = catchAsync(async (req, res) => {
   const { Notification: NotificationData } = req.body;
