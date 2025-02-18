@@ -5,8 +5,6 @@ import sendResponse from '../../utils/sendResponse';
 import { UploadServices } from './Upload.service';
 
 const createUpload = catchAsync(async (req, res) => {
-
-
   const result = await UploadServices.createUploadIntoDB(req.file as any);
 
   sendResponse(res, {
