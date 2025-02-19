@@ -118,17 +118,20 @@ const otpVeryfyForgetPasswordIntoDB = async ( payload : any) => {
 
   // // OTP is valid
   await Otp.deleteOne({ _id: record._id }); // Remove used OTP
-
+ 
+  if(!user) {
+    throw new AppError(httpStatus.BAD_REQUEST, "User not found.");
+  }
 
   const jwtPayload:any = {
-    userEmail: user?.email,
-    role: user?.role,
+    userEmail: user.email,
+    role: user.role,
   };
 
   const resetToken = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
-    '5m',
+    '10m',
   );
     
   return {resetToken};
