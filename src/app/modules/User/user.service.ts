@@ -257,7 +257,7 @@ const getAllTechniciansFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getAllSuperVisorsFromDB = async (query: Record<string, unknown>) => {
-  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'supervisor', isDeleted: false}), query)
+  const studentQuery = new QueryBuilder(User.find({status: 'active',role: 'supervisor', isDeleted: false}).populate('creatorId', 'fullName'), query)
     .search(usersSearchableFields)
     .filter()
     .sort()
