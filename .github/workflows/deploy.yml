@@ -53,26 +53,26 @@ jobs:
     - name: Add EC2 Host to known_hosts
       run: |
         mkdir -p ~/.ssh
-        ssh-keyscan -H 35.174.33.148 >> ~/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
   
     # Step 4: Ensure EC2 Permissions
     - name: Ensure EC2 Permissions
       run: |
-        ssh -i /tmp/pro-key.pem ubuntu@ec2-35-174-33-148.compute-1.amazonaws.com << 'EOF'
-        sudo chown -R ubuntu:ubuntu /application/zubeiri-backend
-        sudo chmod -R 755 /application/zubeiri-backend
+        ssh -i /tmp/pro-key.pem ubuntu@35.174.33.148 << 'EOF'
+        sudo chown -R ubuntu:ubuntu application/zubeiri-backend
+        sudo chmod -R 755 application/zubeiri-backend
         EOF
     
     # Step 5: Copy Files to EC2
     - name: Copy Files to EC2
       run: |
-        scp -i /tmp/pro-key.pem -r . ubuntu@ec2-35-174-33-148.compute-1.amazonaws.com:/application/zubeiri-backend
+        scp -i /tmp/pro-key.pem -r . ubuntu@35.174.33.148:application/zubeiri-backend
     
     # Step 6: Deploy Application
     - name: Deploy Application
       run: |
-        ssh -i /tmp/pro-key.pem ubuntu@ec2-35-174-33-148.compute-1.amazonaws.com << 'EOF'
-        cd /application/zubeiri-backend
+        ssh -i /tmp/pro-key.pem ubuntu@35.174.33.148 << 'EOF'
+        cd application/zubeiri-backend
         # docker compose down || true
         docker compose up -d --build
         EOF
