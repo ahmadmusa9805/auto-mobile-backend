@@ -29,6 +29,7 @@ const getSingleNotification = catchAsync(async (req, res) => {
 });
 
 const getAllNotifications = catchAsync(async (req, res) => {
+  
   const result = await NotificationServices.getAllNotificationsFromDB(req.query);
 
   sendResponse(res, {
@@ -40,7 +41,9 @@ const getAllNotifications = catchAsync(async (req, res) => {
   });
 });
 const getAllNotificationsAssigned = catchAsync(async (req, res) => {
-  const result = await NotificationServices.getAllNotificationsAssignedFromDB(req.query);
+  const { id } = req.params;
+
+  const result = await NotificationServices.getAllNotificationsAssignedFromDB(id, req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -51,7 +54,9 @@ const getAllNotificationsAssigned = catchAsync(async (req, res) => {
   });
 });
 const getAllNotificationsRaised = catchAsync(async (req, res) => {
-  const result = await NotificationServices.getAllNotificationsRaisedFromDB(req.query);
+  const { id } = req.params;
+
+  const result = await NotificationServices.getAllNotificationsRaisedFromDB(id, req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -40,9 +40,9 @@ const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
     meta,
   };
 };
-const getAllNotificationsAssignedFromDB = async (query: Record<string, unknown>) => {
+const getAllNotificationsAssignedFromDB = async (id: string,query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
-    Notification.find({ status: 'assigned', isDeleted: false }),
+    Notification.find({userId: id, status: 'assigned', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -58,9 +58,10 @@ const getAllNotificationsAssignedFromDB = async (query: Record<string, unknown>)
     meta,
   };
 };
-const getAllNotificationsRaisedFromDB = async (query: Record<string, unknown>) => {
+
+const getAllNotificationsRaisedFromDB = async (id: string,query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
-    Notification.find({ status: 'raised', isDeleted: false }),
+    Notification.find({userId: id, status: 'raised', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -76,6 +77,9 @@ const getAllNotificationsRaisedFromDB = async (query: Record<string, unknown>) =
     meta,
   };
 };
+
+
+
 const getAllNotificationsAndReadAllFromDB = async (query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
     Notification.find({ isDeleted: false }),
