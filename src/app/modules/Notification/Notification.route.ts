@@ -1,7 +1,7 @@
 import express from 'express';
-import validateRequest from '../../middlewares/validateRequest.ts';
-import { createNotificationValidationSchema, updateNotificationValidationSchema } from './Notification.validation.ts';
-import { NotificationControllers } from './Notification.controller.ts';
+import validateRequest from '../../middlewares/validateRequest';
+import { createNotificationValidationSchema, updateNotificationValidationSchema } from './Notification.validation';
+import { NotificationControllers } from './Notification.controller';
 
 
 const router = express.Router();

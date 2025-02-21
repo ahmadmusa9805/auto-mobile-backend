@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { TUserRole } from '../modules/User/user.interface.ts';
+import { TUserRole } from '../modules/User/user.interface';
 import catchAsync from '../utils/catchAsync';
-import AppError from '../errors/AppError.ts';
-import config from '../config/index.ts';
-import { User } from '../modules/User/user.model.ts';
+import AppError from '../errors/AppError';
+import config from '../config/index';
+import { User } from '../modules/User/user.model';
 // import { UserStatus } from '../modules/User/user.constant';
 // import config from '..\config';
 // import AppError from \index.ts'../errors/AppError';

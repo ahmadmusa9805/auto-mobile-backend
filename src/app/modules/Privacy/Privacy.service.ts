@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import { TPrivacy } from './Privacy.interface.ts';
-import { Privacy } from './Privacy.model.ts';
-import AppError from '../../errors/AppError.ts';
+import { TPrivacy } from './Privacy.interface';
+import { Privacy } from './Privacy.model';
+import AppError from '../../errors/AppError';
 
 
 const createPrivacyIntoDB = async (

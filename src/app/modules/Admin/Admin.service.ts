@@ -2,11 +2,11 @@
 import httpStatus from 'http-status';
 
 import mongoose from 'mongoose';
-import { TAdmin } from './Admin.interface.ts';
-import { Admin } from './Admin.model.ts';
-import AppError from '../../errors/AppError.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { ADMIN_SEARCHABLE_FIELDS } from './Admin.constant.ts';
+import { TAdmin } from './Admin.interface';
+import { Admin } from './Admin.model';
+import AppError from '../../errors/AppError';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { ADMIN_SEARCHABLE_FIELDS } from './Admin.constant';
 
 const createAdminIntoDB = async (
   payload: TAdmin,

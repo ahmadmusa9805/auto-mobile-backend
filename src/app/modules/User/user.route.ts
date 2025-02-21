@@ -2,12 +2,12 @@
 // 
 // import express from 'express';
 import express, { NextFunction, Response, Request } from 'express';
-import { UserControllers } from './user.controller.ts';
-import validateRequest from '../../middlewares/validateRequest.ts';
-import { UserValidation } from './user.validation.ts';
-import { USER_ROLE } from './user.constant.ts';
-import auth from '../../middlewares/auth.ts';
-import { uploadFileS3 } from '../../utils/UploaderS3.ts';
+import { UserControllers } from './user.controller';
+import validateRequest from '../../middlewares/validateRequest';
+import { UserValidation } from './user.validation';
+import { USER_ROLE } from './user.constant';
+import auth from '../../middlewares/auth';
+import { uploadFileS3 } from '../../utils/UploaderS3';
 
 // import { upladFileS3 } from '..\..\utils\UploaderS3';
 

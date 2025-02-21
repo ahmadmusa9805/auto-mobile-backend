@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
-import config from "../config/index.ts";
+import config from "../config/index";
 
 
 

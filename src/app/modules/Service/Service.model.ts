@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
-import { ServiceModel, TService } from './Service.interface.ts';
-      
+import { ServiceModel, TService } from './Service.interface';
+    
       const ServiceSchema = new Schema<TService, ServiceModel>({
         name: { type: String, required: true },
         isDeleted: { type: Boolean, default: false },

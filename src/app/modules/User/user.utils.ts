@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { User } from "./user.model.ts";
+import { User } from "./user.model";
 
 // Admin ID
 export const findLastAdminId = async () => {

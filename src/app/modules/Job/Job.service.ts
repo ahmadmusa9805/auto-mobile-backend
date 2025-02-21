@@ -2,14 +2,14 @@
 import httpStatus from 'http-status';
 
 import mongoose from 'mongoose';
-import { TJob } from './Job.interface.ts';
-import { User } from '../User/user.model.ts';
-import AppError from '../../errors/AppError.ts';
-import generateUniqueJobId from './job.util.ts';
-import { Job } from './Job.model.ts';
-import { NotificationServices } from '../Notification/Notification.service.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { JOB_SEARCHABLE_FIELDS } from './Job.constant.ts';
+import { TJob } from './Job.interface';
+import { User } from '../User/user.model';
+import AppError from '../../errors/AppError';
+import generateUniqueJobId from './job.util';
+import { Job } from './Job.model';
+import { NotificationServices } from '../Notification/Notification.service';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { JOB_SEARCHABLE_FIELDS } from './Job.constant';
 
 
 const createJobIntoDB = async (

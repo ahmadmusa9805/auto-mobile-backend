@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import { UserRoutes } from '../modules/User/user.route.ts';
-import { AuthRoutes } from '../modules/Auth/auth.route.ts';
-import { OtpRoutes } from '../modules/Otp/otp.route.ts';
-import { ServiceRoutes } from '../modules/Service/Service.route.ts';
-import { JobRoutes } from '../modules/Job/Job.route.ts';
-import { TicketRoutes } from '../modules/Ticket/Ticket.route.ts';
-import { InvoiceRoutes } from '../modules/Invoice/Invoice.route.ts';
-import { NotificationRoutes } from '../modules/Notification/Notification.route.ts';
-import { TermRoutes } from '../modules/Term/Term.route.ts';
-import { PrivacyRoutes } from '../modules/Privacy/Privacy.route.ts';
-import { ChatRoutes } from '../modules/Chat/Chat.route.ts';
-import { DashboardRoutes } from '../modules/Dashboard/Dashboard.route.ts';
-import { UploadRoutes } from '../modules/Upload/Upload.route.ts';
+import { UserRoutes } from '../modules/User/user.route';
+import { AuthRoutes } from '../modules/Auth/auth.route';
+import { OtpRoutes } from '../modules/Otp/otp.route';
+import { ServiceRoutes } from '../modules/Service/Service.route';
+import { JobRoutes } from '../modules/Job/Job.route';
+import { TicketRoutes } from '../modules/Ticket/Ticket.route';
+import { InvoiceRoutes } from '../modules/Invoice/Invoice.route';
+import { NotificationRoutes } from '../modules/Notification/Notification.route';
+import { TermRoutes } from '../modules/Term/Term.route';
+import { PrivacyRoutes } from '../modules/Privacy/Privacy.route';
+import { ChatRoutes } from '../modules/Chat/Chat.route';
+import { DashboardRoutes } from '../modules/Dashboard/Dashboard.route';
+import { UploadRoutes } from '../modules/Upload/Upload.route';
 
 
 

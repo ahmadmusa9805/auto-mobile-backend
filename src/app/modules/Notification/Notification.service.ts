@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-
 import mongoose from 'mongoose';
-import { TNotification } from './Notification.interface.ts';
-import { Notification } from './Notification.model.ts';
-import AppError from '../../errors/AppError.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { NOTIFICATION_SEARCHABLE_FIELDS } from './Notification.constant.ts';
-
+import { TNotification } from './Notification.interface';
+import { Notification } from './Notification.model';
+import AppError from '../../errors/AppError';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { NOTIFICATION_SEARCHABLE_FIELDS } from './Notification.constant';
 
 const createNotificationIntoDB = async (
   payload: TNotification,
@@ -25,6 +23,7 @@ const createNotificationIntoDB = async (
 const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
     Notification.find({ status: 'created', isDeleted: false }),
+    // Notification.find({ status: 'created', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -77,8 +76,6 @@ const getAllNotificationsRaisedFromDB = async (id: string,query: Record<string, 
     meta,
   };
 };
-
-
 
 const getAllNotificationsAndReadAllFromDB = async (query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(

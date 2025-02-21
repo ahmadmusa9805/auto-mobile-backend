@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { AdminModel, TAdmin } from './Admin.interface.ts';
+import { AdminModel, TAdmin } from './Admin.interface';
       
       const AdminSchema = new Schema<TAdmin, AdminModel>({
         name: { type: String, required: true },

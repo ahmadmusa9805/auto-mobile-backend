@@ -1,15 +1,10 @@
 import http from "http";
 import { Server } from "socket.io";
-// import app from "./app.ts";
-import app from "./app.ts"; 
-// import { initializeChatSocket } from 'app\modules\Chat\chat.socket.ts';
+import app from "./app"; 
 import mongoose from 'mongoose';
-import seedSuperAdmin from "./app/DB/index.ts";
-import config from "./app/config/index.ts";
-import { initializeChatSocket } from "./app/modules/Chat/chat.socket.ts";
-// import config from \index.ts'./app/config/index.ts';
-// import seedSuperAdmin from 'app\DB\index.ts\index.ts';
-// let server = http.createServer(app);
+import seedSuperAdmin from "./app/DB/index";
+import config from "./app/config/index";
+import { initializeChatSocket } from "./app/modules/Chat/chat.socket";
 // let server: Server;
 const server = http.createServer(app);
 async function main() {
@@ -20,9 +15,7 @@ async function main() {
     // const port = config.port || 3000;  // Default to 3000 if undefined
 
     await seedSuperAdmin();
-
-   
-
+    
        // Initialize Socket.IO
        const io = new Server(server, {
         // cors: {

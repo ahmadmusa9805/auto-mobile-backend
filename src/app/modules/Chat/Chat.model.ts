@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { ChatModel, TChat } from './Chat.interface.ts';
+import { ChatModel, TChat } from './Chat.interface';
       
       const ChatSchema = new Schema<TChat, ChatModel>(
         {

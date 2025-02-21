@@ -3,10 +3,10 @@
 import httpStatus from 'http-status';
 
 import mongoose from 'mongoose';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { Upload } from './Upload.model.ts';
-import { UPLOAD_SEARCHABLE_FIELDS } from './Upload.constant.ts';
-import AppError from '../../errors/AppError.ts';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { Upload } from './Upload.model';
+import { UPLOAD_SEARCHABLE_FIELDS } from './Upload.constant';
+import AppError from '../../errors/AppError';
 
 const createUploadIntoDB = async (
   file: any,

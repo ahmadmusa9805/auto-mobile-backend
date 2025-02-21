@@ -6,7 +6,7 @@ import multerS3 from 'multer-s3';
 import { Request } from 'express';
 import path from 'path';
 import { S3Client } from '@aws-sdk/client-s3';
-import config from '../config/index.ts';
+import config from '../config/index';
 // import config from '..\config';
 
 const s3Config = new S3Client({

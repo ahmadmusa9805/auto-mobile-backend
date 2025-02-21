@@ -2,11 +2,11 @@
 import httpStatus from 'http-status';
 
 import mongoose from 'mongoose';
-import { TInvoice } from './Invoice.interface.ts';
-import { Invoice } from './Invoice.model.ts';
-import AppError from '../../errors/AppError.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { INVOICE_SEARCHABLE_FIELDS } from './Invoice.constant.ts';
+import { TInvoice } from './Invoice.interface';
+import { Invoice } from './Invoice.model';
+import AppError from '../../errors/AppError';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { INVOICE_SEARCHABLE_FIELDS } from './Invoice.constant';
 
 
 const createInvoiceIntoDB = async (

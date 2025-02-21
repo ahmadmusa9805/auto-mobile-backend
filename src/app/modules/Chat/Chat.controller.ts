@@ -2,9 +2,9 @@
 import httpStatus from 'http-status';
 
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync.ts';
-import { ChatServices } from './Chat.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { ChatServices } from './Chat.service';
+import sendResponse from '../../utils/sendResponse';
 
 const createChat = catchAsync(async (req, res) => {
   const { Chat: ChatData } = req.body;

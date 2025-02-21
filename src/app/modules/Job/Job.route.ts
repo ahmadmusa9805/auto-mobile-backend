@@ -1,7 +1,7 @@
 import express from 'express';
-import validateRequest from '../../middlewares/validateRequest.ts';
-import { createJobValidationSchema, updateJobValidationSchema } from './Job.validation.ts';
-import { JobControllers } from './Job.controller.ts';
+import validateRequest from '../../middlewares/validateRequest';
+import { createJobValidationSchema, updateJobValidationSchema } from './Job.validation';
+import { JobControllers } from './Job.controller';
 // import { JobControllers } from 'Job.controller';
 // import validateRequest from \index.ts'../../middlewares/validateRequest';
 // import { createJobValidationSchema, updateJobValidationSchema } from 'Job.validation.ts';

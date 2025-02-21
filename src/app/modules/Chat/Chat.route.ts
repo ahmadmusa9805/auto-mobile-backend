@@ -1,13 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { upload } from '../../utils/upload.ts';
-import { ChatControllers } from './Chat.controller.ts';
-import validateRequest from '../../middlewares/validateRequest.ts';
-import { createChatValidationSchema } from './Chat.validation.ts';
+// import { upload } from '../../utils/upload.ts';
+import { ChatControllers } from './Chat.controller';
+import validateRequest from '../../middlewares/validateRequest';
+import { createChatValidationSchema } from './Chat.validation';
 
 
 const router = express.Router();
 
-router.get("/upload", upload.single("file"),
+router.get("/upload", 
+  // upload.single("file"),
 
   (req: Request, res: Response, next: NextFunction) => {
     if (req.body.data) {
