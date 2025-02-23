@@ -1,1 +1,2 @@
-export const JOB_SEARCHABLE_FIELDS = ['name', 'description', 'atcCodes'];
+export const JOB_SEARCHABLE_FIELDS = ['regName', 'model', 'status', 'jobId'];
+ 

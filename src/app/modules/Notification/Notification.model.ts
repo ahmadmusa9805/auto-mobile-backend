@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { NotificationModel, TNotification } from './Notification.interface.ts';
+import { NotificationModel, TNotification } from './Notification.interface';
       
       const NotificationSchema = new Schema<TNotification, NotificationModel>({
         message: { type: String, required: true },

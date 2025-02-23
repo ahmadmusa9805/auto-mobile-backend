@@ -4,11 +4,11 @@ import httpStatus from 'http-status';
 // import AppError from \index.ts'../../errors/AppError';
 // import { SERVICE_SEARCHABLE_FIELDS } from 'Service.constant';
 import mongoose from 'mongoose';
-import { TService } from './Service.interface.ts';
-import { Service } from './Service.model.ts';
-import AppError from '../../errors/AppError.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { SERVICE_SEARCHABLE_FIELDS } from './Service.constant.ts';
+import { TService } from './Service.interface';
+import { Service } from './Service.model';
+import AppError from '../../errors/AppError';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { SERVICE_SEARCHABLE_FIELDS } from './Service.constant';
 // import { TService } from \index.ts'./Service.interface';
 // import { Service } from 'Service.model';
 

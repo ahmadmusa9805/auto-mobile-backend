@@ -6,9 +6,9 @@ import httpStatus from 'http-status';
 // import { TChat } from \index.ts'./Chat.interface';
 // import { CHAT_SEARCHABLE_FIELDS } from 'Chat.constant\index.ts';
 import { Types } from "mongoose";  // Make sure to import this
-import { TChat } from './Chat.interface.ts';
-import { Chat } from './Chat.model.ts';
-import AppError from '../../errors/AppError.ts';
+import { TChat } from './Chat.interface';
+import { Chat } from './Chat.model';
+import AppError from '../../errors/AppError';
 
 
 // Create a chat message

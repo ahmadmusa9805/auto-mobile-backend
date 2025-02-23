@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import { TTicket } from './Ticket.interface.ts';
-import { Ticket } from './Ticket.model.ts';
-import AppError from '../../errors/AppError.ts';
+import { TTicket } from './Ticket.interface';
+import { Ticket } from './Ticket.model';
+import AppError from '../../errors/AppError';
 import mongoose from 'mongoose';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { TICKET_SEARCHABLE_FIELDS } from './Ticket.constant.ts';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { TICKET_SEARCHABLE_FIELDS } from './Ticket.constant';
 
 
 const createTicketIntoDB = async (

@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { UserServices } from './user.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { UserServices } from './user.service';
+import sendResponse from '../../utils/sendResponse';
 
 
 const createClient = catchAsync(async (req, res) => {
@@ -123,7 +123,6 @@ const getUsersMonthly = catchAsync(async (req, res) => {
 const updateUser = catchAsync(async (req, res) => {
   const { id } = req.params;
   const { User } = req.body;
-
   const result = await UserServices.updateUserIntoDB(id, User, req.file);
 
   sendResponse(res, {

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from "http-status";
-import AppError from "../../errors/AppError.ts";
-import { Job } from "../Job/Job.model.ts";
-import { monthNamesShortForm } from "./Dashboard.constant.ts";
-import { User } from "../User/user.model.ts";
+import AppError from "../../errors/AppError";
+import { Job } from "../Job/Job.model";
+import { monthNamesShortForm } from "./Dashboard.constant";
+import { User } from "../User/user.model";
 
 export const AllCompletedjobMonthly = async () => {
     try {

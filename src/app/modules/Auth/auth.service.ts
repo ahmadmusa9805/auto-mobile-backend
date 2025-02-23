@@ -2,12 +2,12 @@
 import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { TLoginUser } from './auth.interface.ts';
-import { User } from '../User/user.model.ts';
-import AppError from '../../errors/AppError.ts';
-import { OtpServices } from '../Otp/otp.service.ts';
-import { createToken, verifyToken } from './auth.utils.ts';
-import config from '../../config/index.ts';
+import { TLoginUser } from './auth.interface';
+import { User } from '../User/user.model';
+import AppError from '../../errors/AppError';
+import { OtpServices } from '../Otp/otp.service';
+import { createToken, verifyToken } from './auth.utils';
+import config from '../../config/index';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist

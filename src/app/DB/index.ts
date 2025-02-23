@@ -1,8 +1,8 @@
 
 
-import config from "../config/index.ts";
-import { USER_ROLE } from "../modules/User/user.constant.ts";
-import { User } from "../modules/User/user.model.ts";
+import config from "../config/index";
+import { USER_ROLE } from "../modules/User/user.constant";
+import { User } from "../modules/User/user.model";
 
 const superUser = {
   fullName: 'Super Admin',

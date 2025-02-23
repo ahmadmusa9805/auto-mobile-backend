@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { DashboardServices } from './Dashboard.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { DashboardServices } from './Dashboard.service';
+import sendResponse from '../../utils/sendResponse';
 
 
 const createDashboard = catchAsync(async (req, res) => {

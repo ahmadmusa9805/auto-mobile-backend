@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-
 import mongoose from 'mongoose';
-import { TNotification } from './Notification.interface.ts';
-import { Notification } from './Notification.model.ts';
-import AppError from '../../errors/AppError.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { NOTIFICATION_SEARCHABLE_FIELDS } from './Notification.constant.ts';
-
+import { TNotification } from './Notification.interface';
+import { Notification } from './Notification.model';
+import AppError from '../../errors/AppError';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { NOTIFICATION_SEARCHABLE_FIELDS } from './Notification.constant';
 
 const createNotificationIntoDB = async (
   payload: TNotification,
@@ -25,6 +23,7 @@ const createNotificationIntoDB = async (
 const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
     Notification.find({ status: 'created', isDeleted: false }),
+    // Notification.find({ status: 'created', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -40,9 +39,9 @@ const getAllNotificationsFromDB = async (query: Record<string, unknown>) => {
     meta,
   };
 };
-const getAllNotificationsAssignedFromDB = async (query: Record<string, unknown>) => {
+const getAllNotificationsAssignedFromDB = async (id: string,query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
-    Notification.find({ status: 'assigned', isDeleted: false }),
+    Notification.find({userId: id, status: 'assigned', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -58,9 +57,10 @@ const getAllNotificationsAssignedFromDB = async (query: Record<string, unknown>)
     meta,
   };
 };
-const getAllNotificationsRaisedFromDB = async (query: Record<string, unknown>) => {
+
+const getAllNotificationsRaisedFromDB = async (id: string,query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
-    Notification.find({ status: 'raised', isDeleted: false }),
+    Notification.find({userId: id, status: 'raised', isDeleted: false }),
     query,
   )
     .search(NOTIFICATION_SEARCHABLE_FIELDS)
@@ -76,6 +76,7 @@ const getAllNotificationsRaisedFromDB = async (query: Record<string, unknown>) =
     meta,
   };
 };
+
 const getAllNotificationsAndReadAllFromDB = async (query: Record<string, unknown>) => {
   const NotificationQuery = new QueryBuilder(
     Notification.find({ isDeleted: false }),

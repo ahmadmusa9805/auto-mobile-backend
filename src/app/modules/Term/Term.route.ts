@@ -1,7 +1,7 @@
 import express from 'express';
-import validateRequest from '../../middlewares/validateRequest.ts';
-import { createTermValidationSchema } from './Term.validation.ts';
-import { TermControllers } from './Term.controller.ts';
+import validateRequest from '../../middlewares/validateRequest';
+import { createTermValidationSchema } from './Term.validation';
+import { TermControllers } from './Term.controller';
 
 
 const router = express.Router();

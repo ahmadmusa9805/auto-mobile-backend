@@ -7,13 +7,13 @@ import { ObjectId } from 'mongodb'; // Import ObjectId
 
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
-import { TUser } from './user.interface.ts';
-import { User } from './user.model.ts';
-import { OtpServices } from '../Otp/otp.service.ts';
-import QueryBuilder from '../../builder/QueryBuilder.ts';
-import { usersSearchableFields } from './user.constant.ts';
-import AppError from '../../errors/AppError.ts';
-import { Job } from '../Job/Job.model.ts';
+import { TUser } from './user.interface';
+import { User } from './user.model';
+import { OtpServices } from '../Otp/otp.service';
+import QueryBuilder from '../../builder/QueryBuilder';
+import { usersSearchableFields } from './user.constant';
+import AppError from '../../errors/AppError';
+import { Job } from '../Job/Job.model';
 
 
 export const createClientIntoDB = async (payload: TUser) => {
@@ -104,12 +104,14 @@ const changeStatus = async (id: string, payload: { status: string }) => {
 
   return result;
 };
-const updateUserIntoDB = async (id: string, payload: Partial<TUser>, file?: any) => {
-
-  const {  ...userData } = payload;
+const updateUserIntoDB = async (id: string, payload?: Partial<TUser>, file?: any) => {
+ let modifiedUpdatedData: Record<string, unknown> = {};
+ if(payload) {
+  const {  ...userData } = payload ;
+    modifiedUpdatedData = { ...userData };
+ } 
   // const { fullName, ...userData } = payload;
-  
-  const modifiedUpdatedData: Record<string, unknown> = { ...userData };
+
 
   // if (name && Object.keys(name).length) {
   //   for (const [key, value] of Object.entries(name)) {

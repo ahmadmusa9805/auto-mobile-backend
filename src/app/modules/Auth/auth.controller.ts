@@ -1,9 +1,9 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { AuthServices } from './auth.service.ts';
-import config from '../../config/index.ts';
-import sendResponse from '../../utils/sendResponse.ts';
-import AppError from '../../errors/AppError.ts';
+import catchAsync from '../../utils/catchAsync';
+import { AuthServices } from './auth.service';
+import config from '../../config/index';
+import sendResponse from '../../utils/sendResponse';
+import AppError from '../../errors/AppError';
 
 
 const loginUser = catchAsync(async (req, res) => {

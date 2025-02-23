@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TUpload, UploadModel } from './Upload.interface.ts';
+import { TUpload, UploadModel } from './Upload.interface';
       
       const UploadSchema = new Schema<TUpload, UploadModel>({
         name: { type: String, required: true },

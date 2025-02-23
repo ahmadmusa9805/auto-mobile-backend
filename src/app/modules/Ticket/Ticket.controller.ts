@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { TicketServices } from './Ticket.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { TicketServices } from './Ticket.service';
+import sendResponse from '../../utils/sendResponse';
 
 
 const createTicket = catchAsync(async (req, res) => {

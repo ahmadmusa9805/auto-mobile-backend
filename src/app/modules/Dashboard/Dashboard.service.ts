@@ -2,12 +2,12 @@
 import httpStatus from 'http-status';
 
 import mongoose from 'mongoose';
-import { TDashboard } from './Dashboard.interface.ts';
-import { Dashboard } from './Dashboard.model.ts';
-import AppError from '../../errors/AppError.ts';
-import { User } from '../User/user.model.ts';
-import { monthNamesShortForm } from './Dashboard.constant.ts';
-import { Job } from '../Job/Job.model.ts';
+import { TDashboard } from './Dashboard.interface';
+import { Dashboard } from './Dashboard.model';
+import AppError from '../../errors/AppError';
+import { User } from '../User/user.model';
+import { monthNamesShortForm } from './Dashboard.constant';
+import { Job } from '../Job/Job.model';
 
 
 const createDashboardIntoDB = async (

@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { TermServices } from './Term.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { TermServices } from './Term.service';
+import sendResponse from '../../utils/sendResponse';
 
 
 const createTerm = catchAsync(async (req, res) => {

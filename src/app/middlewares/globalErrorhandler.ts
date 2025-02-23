@@ -2,13 +2,13 @@
 /* eslint-disable no-unused-vars */
 import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
-import { TErrorSources } from '../interface/error.ts';
-import handleZodError from '../errors/handleZodError.ts';
-import handleValidationError from '../errors/handleValidationError.ts';
-import handleCastError from '../errors/handleCastError.ts';
-import handleDuplicateError from '../errors/handleDuplicateError.ts';
-import AppError from '../errors/AppError.ts';
-import config from '../config/index.ts';
+import { TErrorSources } from '../interface/error';
+import handleZodError from '../errors/handleZodError';
+import handleValidationError from '../errors/handleValidationError';
+import handleCastError from '../errors/handleCastError';
+import handleDuplicateError from '../errors/handleDuplicateError';
+import AppError from '../errors/AppError';
+import config from '../config/index';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.log(err.statusCode);

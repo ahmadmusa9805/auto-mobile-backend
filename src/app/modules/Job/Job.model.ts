@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { JobModel, TJob } from './Job.interface.ts';
+import { JobModel, TJob } from './Job.interface';
       
       const JobSchema = new Schema<TJob, JobModel>({
         regName: { type: String, required: true },

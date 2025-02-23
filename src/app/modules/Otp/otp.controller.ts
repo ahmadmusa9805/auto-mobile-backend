@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { OtpServices } from './otp.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { OtpServices } from './otp.service';
+import sendResponse from '../../utils/sendResponse';
 
 
 const otpVeryfy = catchAsync(async (req, res) => {

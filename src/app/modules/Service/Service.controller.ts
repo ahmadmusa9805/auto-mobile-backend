@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync.ts';
-import { ServiceServices } from './Service.service.ts';
-import sendResponse from '../../utils/sendResponse.ts';
+import catchAsync from '../../utils/catchAsync';
+import { ServiceServices } from './Service.service';
+import sendResponse from '../../utils/sendResponse';
 
 
 const createService = catchAsync(async (req, res) => {
