@@ -9,7 +9,6 @@ export const createInvoiceValidationSchema = z.object({
       services: z.object({
         serviceName: z.string().min(1, "Service name is required"),
         serviceCost: z.number().positive("Service cost must be a positive number"),
-        quantity: z.number().int().positive("Quantity must be a positive integer"),
       }).array(),
       paymentStatus: z.string().min(1),
       totalCost: z.string().min(1),

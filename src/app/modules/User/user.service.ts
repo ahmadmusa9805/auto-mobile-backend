@@ -104,12 +104,14 @@ const changeStatus = async (id: string, payload: { status: string }) => {
 
   return result;
 };
-const updateUserIntoDB = async (id: string, payload: Partial<TUser>, file?: any) => {
-
-  const {  ...userData } = payload;
+const updateUserIntoDB = async (id: string, payload?: Partial<TUser>, file?: any) => {
+ let modifiedUpdatedData: Record<string, unknown> = {};
+ if(payload) {
+  const {  ...userData } = payload ;
+    modifiedUpdatedData = { ...userData };
+ } 
   // const { fullName, ...userData } = payload;
-  
-  const modifiedUpdatedData: Record<string, unknown> = { ...userData };
+
 
   // if (name && Object.keys(name).length) {
   //   for (const [key, value] of Object.entries(name)) {
