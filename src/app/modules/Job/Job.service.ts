@@ -72,7 +72,9 @@ const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
 };
 const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
-    Job.find({userId, isDeleted: false}).populate('userId'),
+    Job.find({userId, isDeleted: false}).populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
+    .populate('userId', 'fullName profileImg role') // Selecting only name and image
+    .populate('grandId', 'fullName profileImg role'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -88,9 +90,12 @@ const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, u
     meta,
   };
 };
-const getAllRaiedJobsByTechnicianIdFromDB = async (assignedTechnician: string, query: Record<string, unknown>) => {
+// const getAllRaiedJobsByTechnicianIdFromDB = async (assignedTechnician: string, query: Record<string, unknown>) => {
+const getAllJobsByTechnicianIdFromDB = async (assignedTechnician: string, query: Record<string, unknown>) => {
   const JobQuery = new QueryBuilder(
-    Job.find({assignedTechnician: assignedTechnician, isDeleted: false}),
+    Job.find({assignedTechnician: assignedTechnician, isDeleted: false}).populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
+    .populate('userId', 'fullName profileImg role') // Selecting only name and image
+    .populate('grandId', 'fullName profileImg role'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -113,7 +118,9 @@ const getAllJobsByGrandIdIdFromDB = async (grandId: string, query: Record<string
         { userId: grandId, isDeleted: false },
         { grandId: grandId, isDeleted: false }
       ],
-    }),    
+    }).populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
+    .populate('userId', 'fullName profileImg role') // Selecting only name and image
+    .populate('grandId', 'fullName profileImg role'),    
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -245,7 +252,7 @@ export const JobServices = {
   getSingleJobFromDB,
   updateJobIntoDB,
   deleteJobFromDB,
-  getAllRaiedJobsByTechnicianIdFromDB,
+  getAllJobsByTechnicianIdFromDB,
   getAllJobsWithUserIdFromDB,
   getAllJobsByGrandIdIdFromDB
 };
