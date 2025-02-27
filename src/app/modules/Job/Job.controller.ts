@@ -52,7 +52,8 @@ const getAllJobsWithUserId = catchAsync(async (req, res) => {
 });
 const getAllJobsByTechnicianId = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await JobServices.getAllRaiedJobsByTechnicianIdFromDB(id ,  req.query);
+  const result = await JobServices.getAllJobsByTechnicianIdFromDB(id ,  req.query);
+  // const result = await JobServices.getAllRaiedJobsByTechnicianIdFromDB(id ,  req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
