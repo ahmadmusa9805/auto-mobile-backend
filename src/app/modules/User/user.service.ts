@@ -16,8 +16,15 @@ import AppError from '../../errors/AppError';
 import { Job } from '../Job/Job.model';
 
 
-export const createClientIntoDB = async (payload: TUser) => {
+export const createClientIntoDB = async (payload: TUser, file: any) => {
   payload.role = 'client'
+
+  // Handle file upload if present
+  if (file) {
+    payload.profileImg = file?.location;
+  }
+
+
     const newClient = await User.create(payload);
     if (!newClient) throw new Error('Failed to create user');
     
@@ -25,9 +32,16 @@ export const createClientIntoDB = async (payload: TUser) => {
     return newClient;
 
 };
-export const createTechnicianIntoDB = async (payload: TUser) => {
+export const createTechnicianIntoDB = async (payload: TUser, file: any) => {
 
   payload.role = 'technician'
+
+  // Handle file upload if present
+  if (file) {
+    payload.profileImg = file?.location;
+  }
+
+
  const newTechnician = await User.create(payload);
  if (!newTechnician) throw new Error('Failed to create technician');
  await OtpServices.generateAndSendOTP(payload.email);
@@ -53,6 +67,8 @@ await OtpServices.generateAndSendOTP(payload.email);
 
      return newAdmin;
 };
+
+
 
 const getMe = async (userEmail: string) => {
   // const result = await User.findOne({ email: userEmail });
@@ -108,7 +124,7 @@ const changeStatus = async (id: string, payload: { status: string }) => {
 const updateUserIntoDB = async (id: string, payload?: Partial<TUser>, file?: any) => {
  let modifiedUpdatedData: Record<string, unknown> = {};
  if(payload) {
-  const {  ...userData } = payload ;
+  const {  ...userData } = payload;
     modifiedUpdatedData = { ...userData };
  } 
   // const { fullName, ...userData } = payload;
