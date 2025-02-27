@@ -55,7 +55,8 @@ await OtpServices.generateAndSendOTP(payload.email);
 };
 
 const getMe = async (userEmail: string) => {
-  const result = await User.findOne({ email: userEmail });
+  // const result = await User.findOne({ email: userEmail });
+  const result = await User.findOne({ email: userEmail }).populate('creatorId', 'fullName profileImg role');
 
   return result;
 };
