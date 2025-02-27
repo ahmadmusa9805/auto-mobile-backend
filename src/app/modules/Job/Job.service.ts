@@ -53,7 +53,8 @@ const getAllJobsFromDB = async ( query: Record<string, unknown>) => {
     Job.find({ isDeleted: false })
       .populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
       .populate('userId', 'fullName profileImg role') // Selecting only name and image
-      .populate('grandId', 'fullName profileImg role'),
+      .populate('grandId', 'fullName profileImg role')
+      .populate('raisedId', 'fullName profileImg role'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -74,7 +75,8 @@ const getAllJobsWithUserIdFromDB = async (userId: string,query: Record<string, u
   const JobQuery = new QueryBuilder(
     Job.find({userId, isDeleted: false}).populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
     .populate('userId', 'fullName profileImg role') // Selecting only name and image
-    .populate('grandId', 'fullName profileImg role'),
+    .populate('grandId', 'fullName profileImg role')
+    .populate('raisedId', 'fullName profileImg role'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -95,7 +97,8 @@ const getAllJobsByTechnicianIdFromDB = async (assignedTechnician: string, query:
   const JobQuery = new QueryBuilder(
     Job.find({assignedTechnician: assignedTechnician, isDeleted: false}).populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
     .populate('userId', 'fullName profileImg role') // Selecting only name and image
-    .populate('grandId', 'fullName profileImg role'),
+    .populate('grandId', 'fullName profileImg role')
+    .populate('raisedId', 'fullName profileImg role'),
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -120,7 +123,9 @@ const getAllJobsByGrandIdIdFromDB = async (grandId: string, query: Record<string
       ],
     }).populate('assignedTechnician', 'fullName profileImg role') // Selecting only name and image
     .populate('userId', 'fullName profileImg role') // Selecting only name and image
-    .populate('grandId', 'fullName profileImg role'),    
+    .populate('grandId', 'fullName profileImg role')  
+    .populate('raisedId', 'fullName profileImg role'),
+
     query,
   )
     .search(JOB_SEARCHABLE_FIELDS)
@@ -140,7 +145,8 @@ const getAllJobsByGrandIdIdFromDB = async (grandId: string, query: Record<string
 const getSingleJobFromDB = async (id: string) => {
   const result = await Job.findById(id, { isDeleted: false }).populate('assignedTechnician', 'fullName profileImg') // Selecting only name and image
   .populate('userId', 'fullName profileImg') // Selecting only name and image
-  .populate('grandId' ,'fullName profileImg');
+  .populate('grandId' ,'fullName profileImg')
+  .populate('raisedId', 'fullName profileImg role')
 
   return result;
 };
