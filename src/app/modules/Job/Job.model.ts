@@ -19,6 +19,7 @@ import { JobModel, TJob } from './Job.interface';
         assignedTechnician: { type: Schema.Types.ObjectId, ref: 'User', default: null	}, // Assuming it's a reference to a technician ID
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, default: Date.now },
+        invoiceRequest: { type: Boolean, default: false },
         isDeleted: { type: Boolean, default: false }
       });
       

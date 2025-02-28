@@ -11,6 +11,7 @@ export type TJob = {
   model: string;
   engine: string;
   power: string;
+  invoiceRequest: boolean;
   gearBox: string;
   services: string[];
   status: 'cancelled' | 'pending' | 'completed' | 'raised';

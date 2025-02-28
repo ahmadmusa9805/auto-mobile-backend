@@ -5,6 +5,7 @@ import { USER_ROLE } from './user.constant';
 export type  TUser = {
   fullName: string;
   userName?: string;
+  approvalStatus: boolean;
   creatorId: Types.ObjectId;
   technicianJobs?: number;
   email: string;
