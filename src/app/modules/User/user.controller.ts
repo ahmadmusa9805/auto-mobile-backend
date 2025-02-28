@@ -7,7 +7,7 @@ import sendResponse from '../../utils/sendResponse';
 
 const createClient = catchAsync(async (req, res) => {
   const { User: userData } = req.body;
-  const result = await UserServices.createClientIntoDB(userData);
+  const result = await UserServices.createClientIntoDB(userData ,req.file);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -18,7 +18,7 @@ const createClient = catchAsync(async (req, res) => {
 });
 const createTechnician = catchAsync(async (req, res) => {
   const { User: userData } = req.body;
-  const result = await UserServices.createTechnicianIntoDB(userData);
+  const result = await UserServices.createTechnicianIntoDB(userData, req.file);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -24,6 +24,9 @@ const loginUser = async (payload: TLoginUser) => {
   if (isDeleted) {
     throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
   }
+  if (user.approvalStatus === false) {
+    throw new AppError(httpStatus.FORBIDDEN, 'Admin Approval Pending !');
+  }
 
   // checking if the user is blocked
 

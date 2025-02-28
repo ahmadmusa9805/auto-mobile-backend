@@ -14,11 +14,33 @@ import { uploadFileS3 } from '../../utils/UploaderS3';
 const router = express.Router();
 router.post(
   '/create-client', //create client or technician
+  uploadFileS3(true).single('file'),
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.data) {
+      try {
+        req.body = JSON.parse(req.body.data);
+      } catch (error) {
+        next(error);
+      }
+    }
+    next();
+  },
   validateRequest(UserValidation.createUserValidationSchema),
     UserControllers.createClient,
 );
 router.post(
   '/create-technician', //create client or technician
+  uploadFileS3(true).single('file'),
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.data) {
+      try {
+        req.body = JSON.parse(req.body.data);
+      } catch (error) {
+        next(error);
+      }
+    }
+    next();
+  },
   validateRequest(UserValidation.createUserValidationSchema),
     UserControllers.createTechnician,
 );
